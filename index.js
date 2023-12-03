@@ -22,21 +22,21 @@ app.use(
 
 switch (process.env.PROJECT) {
   case 'francesca':
-    console.log('francesca project');
+    console.log('francesca project', process.env.PROJECT);
     app.use(express.static('./francesca/advent-calendar/'));
     app.get('/*', (req, res) =>
       res.sendFile('index.html', {root: './francesca/advent-calendar/'}),
     );
     break;
   case 'livia':
-    console.log('livia project');
+    console.log('livia project', process.env.PROJECT);
     app.use(express.static('./livia/html/'));
     app.get('/*', (req, res) =>
       res.sendFile('index.html', {root: './livia/html/'}),
     );
     break;
   default:
-    console.log('default project');
+    console.log('default project', process.env.PROJECT);
     app.get('/', (req, res) =>
       res.send(`<h3>Welcome friends!</h3>`),
     );

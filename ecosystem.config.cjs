@@ -10,11 +10,9 @@ module.exports = {
       max_memory_restart: '1G',
       env: {
         NODE_ENV: 'production',
-        PROJECT: ''
       },
       env_development: {
         NODE_ENV: 'development',
-        PROJECT: 'livia'
       },
     }
   ],

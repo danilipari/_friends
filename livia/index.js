@@ -4,10 +4,10 @@ const express = require('express');
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static('./livia/'));
+app.use(express.static('./livia/html/'));
 
 app.get('/*', (req, res) =>
-  res.sendFile('index.html', {root: './livia/'}),
+  res.sendFile('index.html', {root: './livia/html/'}),
 );
 
 // Start the app by listening on the default Heroku port

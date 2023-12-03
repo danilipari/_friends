@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "node": "node index.js",
-    "node:f": "node ./francesca/index.js",
-    "node:l": "node ./livia/index.js"
+    "node:f": "nodemon ./francesca/index.js",
+    "node:l": "nodemon ./livia/index.js"
   },
   "keywords": [],
   "author": "Dani Lipari",

@@ -22,27 +22,24 @@ app.use(
 
 switch (process.env.PROJECT) {
   case 'francesca':
-    console.log('francesca project', process.env.PROJECT);
     app.use(express.static('./francesca/advent-calendar/'));
     app.get('/*', (req, res) =>
       res.sendFile('index.html', {root: './francesca/advent-calendar/'}),
     );
     break;
   case 'livia':
-    console.log('livia project', process.env.PROJECT);
     app.use(express.static('./livia/html/'));
     app.get('/*', (req, res) =>
       res.sendFile('index.html', {root: './livia/html/'}),
     );
     break;
   default:
-    console.log('default project', process.env.PROJECT);
     app.get('/', (req, res) =>
-      res.send(`<h3>Welcome friends!</h3>`),
+      res.send(`<h3>Welcome!</h3>`),
     );
     break;
 }
 
 // Start the app by listening on the default Heroku port
 const port = process.env.PORT || 8000;
-app.listen(port, () => { console.log(`Project is running on port ${port}.`) });
+app.listen(port, () => { console.log(`Project ${process.env.PROJECT} is running on port ${port}.`) });

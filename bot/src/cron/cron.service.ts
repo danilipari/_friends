@@ -16,7 +16,6 @@ export class CronService {
   }
 
   async handleCronLogic(apiAction: boolean, print: boolean) {
-    console.log('handleCronLogic -->', apiAction, print, this.env);
     const token = this.configService.get<string>('GITHUB_TOKEN');
     const repo = `${this.configService.get<string>(
       'GITHUB_USERNAME',
@@ -37,7 +36,8 @@ export class CronService {
     const call = await this.githubService.updateFile(_payload);
 
     if (apiAction) {
-      console.log('updateFile response -->', call);
+      // console.log('updateFile response -->', call);
+      console.log('updateFile response -->', token, repo);
     }
 
     if (print) {
@@ -48,6 +48,7 @@ export class CronService {
     }
   }
 
+  // @Cron(CronExpression.EVERY_7_HOURS, { disabled: false })
   @Cron(CronExpression.EVERY_30_SECONDS, { disabled: false })
   async handleCron(env: any = this.env) {
     const isProd: boolean = env === 'production';

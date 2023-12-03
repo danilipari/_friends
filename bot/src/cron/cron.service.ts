@@ -16,6 +16,7 @@ export class CronService {
   }
 
   async handleCronLogic(apiAction: boolean, print: boolean) {
+    console.log('handleCronLogic -->', apiAction, print, this.env);
     const token = this.configService.get<string>('GITHUB_TOKEN');
     const repo = `${this.configService.get<string>(
       'GITHUB_USERNAME',

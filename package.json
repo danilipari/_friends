@@ -9,9 +9,17 @@
     "node:f": "node ./francesca/index.js",
     "node:l": "node ./livia/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danilipari/_friends.git"
+  },
   "keywords": [],
   "author": "Dani Lipari",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danilipari/_friends/issues"
+  },
+  "homepage": "https://github.com/danilipari/_friends#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

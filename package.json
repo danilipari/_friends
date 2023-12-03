@@ -11,7 +11,6 @@
     "node:lc": "NODE_ENV=production node index.js",
     "node:f": "PROJECT=francesca node index.js",
     "node:l": "PROJECT=livia node index.js",
-
     "//": "NestJS Scripts",
     "nest:install": "npm i -g @nestjs/cli && npm run --prefix bot/ nest:i",
     "nest:build:production": "npm run --prefix bot/ nest:build:production"
@@ -38,5 +37,8 @@
   "engines": {
     "node": "18.16.0",
     "npm": "9.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.3"
   }
 }

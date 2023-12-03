@@ -49,7 +49,7 @@ export class CronService {
   }
 
   @Cron(CronExpression.EVERY_30_SECONDS, { disabled: false })
-  async handleCron(env: any) {
+  async handleCron(env: any = this.env) {
     const isProd: boolean = env === 'production';
     await this.handleCronLogic(isProd, !isProd);
   }

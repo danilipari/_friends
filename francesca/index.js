@@ -19,7 +19,7 @@ app.use(
 
 app.use(express.static('./francesca/advent-calendar/'));
 
-app.get('/francesca/*', (req, res) =>
+app.get('/#/francesca/*', (req, res) =>
   res.sendFile('index.html', {root: './francesca/advent-calendar/'}),
 );
 

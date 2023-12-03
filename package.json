@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "node": "node index.js",
-    "node:f": "node ./francesca/index.js",
-    "node:l": "node ./livia/index.js"
+    "node:lc": "NODE_ENV=production node index.js",
+    "node:f": "PROJECT=francesca node index.js",
+    "node:l": "PROJECT=livia node index.js"
   },
   "repository": {
     "type": "git",

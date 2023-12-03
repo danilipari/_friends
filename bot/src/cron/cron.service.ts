@@ -36,8 +36,7 @@ export class CronService {
     const call = await this.githubService.updateFile(_payload);
 
     if (apiAction) {
-      // console.log('updateFile response -->', call);
-      console.log('updateFile response -->', token, repo);
+      console.log('updateFile response -->', call);
     }
 
     if (print) {

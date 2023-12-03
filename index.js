@@ -4,10 +4,10 @@ const express = require('express');
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static('./advent-calendar/'));
+app.use(express.static('./francesca/advent-calendar/'));
 
 app.get('/*', (req, res) =>
-  res.sendFile('index.html', {root: './advent-calendar/'}),
+  res.sendFile('index.html', {root: './francesca/advent-calendar/'}),
 );
 
 // Start the app by listening on the default Heroku port

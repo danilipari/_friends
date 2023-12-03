@@ -19,7 +19,7 @@ app.use(
 
 app.use(express.static('./livia/html/'));
 
-app.get('/livia/*', (req, res) =>
+app.get('/*', (req, res) =>
   res.sendFile('index.html', {root: './livia/html/'}),
 );
 

@@ -23,13 +23,13 @@ app.use(
 switch (process.env.PROJECT) {
   case 'francesca':
     app.use(express.static('./francesca/advent-calendar/'));
-    app.get('/francesca/*', (req, res) =>
+    app.get('/*', (req, res) =>
       res.sendFile('index.html', {root: './francesca/advent-calendar/'}),
     );
     break;
   case 'livia':
     app.use(express.static('./livia/html/'));
-    app.get('/livia/*', (req, res) =>
+    app.get('/*', (req, res) =>
       res.sendFile('index.html', {root: './livia/html/'}),
     );
     break;

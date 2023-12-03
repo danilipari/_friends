@@ -1,27 +1,15 @@
 {
-  "name": "mamy",
+  "name": "friends",
   "version": "1.0.0",
-  "description": "For Massa Project",
+  "description": "For Friends Project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/francescama2905/mamy.git"
-  },
-  "keywords": [
-    "Massa",
-    "Mamma",
-    "Mamy"
-  ],
+  "keywords": [],
   "author": "Dani Lipari",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/francescama2905/mamy/issues"
-  },
-  "homepage": "https://github.com/francescama2905/mamy#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

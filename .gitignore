@@ -1,6 +1,6 @@
 # dependencies
-/node_modules
-package-lock.json
-
-
-# test
+*node_modules
+*dist
+*package-lock.json
+.env*
+*.DS_Store

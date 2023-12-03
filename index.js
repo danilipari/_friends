@@ -20,25 +20,22 @@ app.use(
   }),
 );
 
-switch (process.env.PROJECT) {
-  case 'francesca':
-    app.use(express.static('./francesca/advent-calendar/'));
-    app.get('/*', (req, res) =>
-      res.sendFile('index.html', {root: './francesca/advent-calendar/'}),
-    );
-    break;
-  case 'livia':
-    app.use(express.static('./livia/html/'));
-    app.get('/*', (req, res) =>
-      res.sendFile('index.html', {root: './livia/html/'}),
-    );
-    break;
-  default:
-    app.get('/', (req, res) =>
-      res.send(`<h3>Welcome!</h3>`),
-    );
-    break;
-}
+// Francesca project
+app.use('/francesca', express.static('./francesca/advent-calendar/'));
+app.get('/francesca/*', (req, res) =>
+  res.sendFile('index.html', {root: './francesca/advent-calendar/'}),
+);
+
+// Livia project
+app.use('/livia', express.static('./livia/html/'));
+app.get('/livia/*', (req, res) =>
+  res.sendFile('index.html', {root: './livia/html/'}),
+);
+
+// Default route
+app.get('/', (req, res) =>
+  res.send(`<h3>Welcome!</h3>`),
+);
 
 // Start the app by listening on the default Heroku port
 const port = process.env.PORT || 8000;

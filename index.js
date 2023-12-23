@@ -3,12 +3,13 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const { middlewareReadFiles } = require('./middlewares.cjs');
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const app = express();
 app.use(cors());
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
@@ -21,16 +22,28 @@ app.use(
 );
 
 // Francesca project
-app.use('/francesca', express.static('./francesca/advent-calendar/'));
-app.get('/francesca/*', (req, res) =>
-  res.sendFile('index.html', {root: './francesca/advent-calendar/'}),
+const francescaPath = '/francesca';
+const francescaHtmlPath = './francesca/advent-calendar/';
+
+app.use(francescaPath, express.static(francescaHtmlPath));
+app.get(`${francescaPath}/*`, middlewareReadFiles(francescaHtmlPath), (req, res) =>
+  res.sendFile('index.html', {root: francescaHtmlPath}),
 );
 
 // Livia project
-app.use('/livia', express.static('./livia/html/'));
-app.get('/livia/*', (req, res) =>
-  res.sendFile('index.html', {root: './livia/html/'}),
-);
+const liviaPath = '/livia';
+const liviaHtmlPath = './livia/html/';
+
+app.use(liviaPath, express.static(liviaHtmlPath));
+app.get(`${liviaPath}/*`, middlewareReadFiles(liviaHtmlPath), (req, res) => {
+  const requestedPath = `${liviaPath}${req.path}`;
+  const canAccess = res.locals.readedFiles.includes(requestedPath);
+  if (canAccess) {
+    res.status(200).sendFile('index.html', { root: liviaHtmlPath });
+  } else {
+    res.status(404).sendFile('404.html', { root: liviaHtmlPath });
+  }
+});
 
 // Default route
 app.get('/', (req, res) =>

@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const { middlewareReadFiles } = require('./middlewares.cjs');
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+const isProd = process.env.NODE_ENV === 'production';
 
 const app = express();
 app.use(cors());
@@ -32,12 +33,12 @@ app.get(`${francescaPath}/*`, middlewareReadFiles(francescaHtmlPath), (req, res)
 
 // Livia project
 const liviaPath = '/livia';
-const liviaHtmlPath = './livia/html/';
+const liviaHtmlPath = isProd ? `.${liviaPath}/html/` : `.${liviaPath}/html-dev/`;
 
 app.use(liviaPath, express.static(liviaHtmlPath));
 app.get(`${liviaPath}/*`, middlewareReadFiles(liviaHtmlPath), (req, res) => {
   const requestedPath = `${liviaPath}${req.path}`;
-  const canAccess = res.locals.readedFiles.includes(requestedPath);
+  const canAccess = (res.locals.readedFiles || [])?.includes(requestedPath);
   if (canAccess) {
     res.status(200).sendFile('index.html', { root: liviaHtmlPath });
   } else {
@@ -52,4 +53,4 @@ app.get('/', (req, res) =>
 
 // Start the app by listening on the default Heroku port
 const port = process.env.PORT || 8000;
-app.listen(port, () => { console.log(`Project ${process.env.PROJECT} is running on port ${port}.`) });
+app.listen(port, () => { console.log(`Project is running on port ${port}.`) });

@@ -9,6 +9,8 @@ const htmlPath = `./${process.env.PROJECT}/html`;
 const langFilePath = `./${process.env.PROJECT}/translate/it.json`;
 const devHtmlPath = `${htmlPath}-dev`;
 
+console.log('translate envs -->', process.env.PROJECT, process.env.NODE_ENV);
+
 const copyFile = (source, target) => {
   readFile(source, (err, data) => {
     if (err) {

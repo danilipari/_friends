@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'main-app',
-      script: './translate.mjs && ./index.js',
+      script: './index.js',
       node_args: '--experimental-modules',
       instances: 1,
       autorestart: true,

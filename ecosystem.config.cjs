@@ -2,8 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'main-app',
-      script: 'sh',
-      args: '-c "node translate.mjs && node index.js"',
+      script: './index.js',
       node_args: '--experimental-modules',
       instances: 1,
       autorestart: true,

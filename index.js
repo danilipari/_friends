@@ -34,8 +34,9 @@ app.get(`${francescaPath}/*`, middlewareReadFiles(francescaHtmlPath), (req, res)
 // Livia project
 const liviaPath = '/livia';
 const liviaHtmlPath = isProd ? `.${liviaPath}/html/` : `.${liviaPath}/html-dev/`;
+const liviaTranslatePath = `.${liviaPath}/translate/`;
 
-app.use(liviaPath, express.static(liviaHtmlPath));
+app.use(liviaPath, express.static(liviaHtmlPath), express.static(liviaTranslatePath));
 app.get(`${liviaPath}/*`, middlewareReadFiles(liviaHtmlPath), (req, res) => {
   const requestedPath = `${liviaPath}${req.path}`;
   const canAccess = (res.locals.readedFiles || [])?.includes(requestedPath);

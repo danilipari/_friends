@@ -3,10 +3,10 @@ import { join } from 'path';
 import pkg from 'dotenv';
 
 pkg.config({ path: `.env.${process.env.NODE_ENV}` });
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.PROJECT === 'production';
 
-const htmlPath = './livia/html';
-const langFilePath = './livia/translate/it.json';
+const htmlPath = `./${process.env.PROJECT}/html`;
+const langFilePath = `./${process.env.PROJECT}/translate/it.json`;
 const devHtmlPath = `${htmlPath}-dev`;
 
 const copyFile = (source, target) => {

@@ -14,6 +14,7 @@ module.exports = {
       },
       env_development: {
         NODE_ENV: 'development',
+        PROJECT: 'livia',
       },
     },
     {

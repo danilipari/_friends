@@ -14,6 +14,23 @@
 		<link rel="stylesheet" href="assets/style/bootstrap-reboot.min.css">
 		<link rel="stylesheet" href="assets/style/jquery.fancybox.min.css">
 		<link rel="stylesheet" href="assets/style/style.css">
+		<style>
+			body {
+					font-family: 'Times New Roman', serif;
+					font-size: 16px;
+					line-height: 1.6;
+					margin: 0;
+					padding: 0;
+					background: #f5f5f5;
+			}
+			.indented {
+					text-indent: 50px;
+					margin-top: 0;
+			}
+			.indented + .indented {
+					text-indent: 0;
+			}
+	</style>
 	</head>
 	<body class="full-width-content">
 		<div class="page-loader"></div>
@@ -37,14 +54,14 @@
 							<a href="architettura.html">Architettura</a>
 							<a href="#" class="menu-expand"></a>
 							<ul class="sub-menu">
-								<li class="menu-item"><a href="architettura.html">Projects - Gallery</a></li>
+								<li class="menu-item"><a href="architettura.html">{{hover_architettura_menu}}</a></li>
 							</ul>
 						</li>
 						<li class="menu-item current-menu-item current-menu-parent menu-item-has-children">
 							<a href="fotografia.html">{{fotografia}}</a>
 							<a href="#" class="menu-expand"></a>
 							<ul class="sub-menu">
-								<li class="menu-item"><a href="fotografia.html">Product List</a></li>
+								<li class="menu-item"><a href="fotografia.html">{{hover_fotografia_menu}}</a></li>
 							</ul>
 						</li>
 						<li class="menu-item"><a href="info.html">Info</a></li>
@@ -56,96 +73,96 @@
 		</header>
 		<main id="content">
 			<div class="inner clearfix">
-				<div class="project-listing">
-					<div class="project-item">
-						<a href="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" class="main" data-fancybox="project1">
-							<img src="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" width="595" height="892" alt="">
-						</a>
-						<div class="secondary clearfix">
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" data-fancybox="project1">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" width="595" height="595" alt="">
-							</a>
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" data-fancybox="project1">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" width="595" height="595" alt="">
+				<div class="featured-area">
+					<div class="project-gallery-wrapper clearfix">
+						<div class="project-gallery-image">
+							<a href="http://via.placeholder.com/595x892/f1f1f1/aaa/?text=main1" data-fancybox="project-gallery" data-caption="">
+								<img src="assets/images/casa_albero/0.jpeg" width="595" height="892" alt="">
 							</a>
 						</div>
-						<div class="info clearfix">
-							<h5>{{fotografia}}</h5>
-							<h2><a href="project-single.html" class="custom-link">PROGETTI PERSONALI</a></h2>
-							<a href="project-single.html" class="button underline">Dettagli</a>
+						<div class="project-gallery-image">
+							<a href="http://via.placeholder.com/595x892/f1f1f1/aaa/?text=thumb" data-fancybox="project-gallery" data-caption="">
+								<img src="assets/images/casa_albero/1.jpeg" width="595" height="595" alt="">
+							</a>
 						</div>
+						<div class="project-gallery-image">
+							<a href="http://via.placeholder.com/595x892/f1f1f1/aaa/?text=thumb" data-fancybox="project-gallery" data-caption="">
+								<img src="assets/images/casa_albero/2.jpeg" width="595" height="595" alt="">
+							</a>
+						</div>
+						<div class="project-gallery-image">
+							<a href="http://via.placeholder.com/595x892/f1f1f1/aaa/?text=thumb" data-fancybox="project-gallery" data-caption="">
+								<img src="assets/images/casa_albero/3.jpeg" width="595" height="595" alt="">
+							</a>
+						</div>
+						<!-- <div class="project-gallery-image full-width">
+							<a href="http://via.placeholder.com/900x600/f1f1f1/aaa/?text=main2" data-fancybox="project-gallery" data-caption="">
+								<img src="http://via.placeholder.com/900x600/f1f1f1/aaa/?text=main2" width="900" height="600" alt="">
+							</a>
+						</div>
+						<div class="project-gallery-image">
+							<a href="http://via.placeholder.com/595x892/f1f1f1/aaa/?text=thumb" data-fancybox="project-gallery" data-caption="">
+								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=thumb" width="595" height="595" alt="">
+							</a>
+						</div>
+						<div class="project-gallery-image">
+							<a href="http://via.placeholder.com/595x892/f1f1f1/aaa/?text=thumb" data-fancybox="project-gallery" data-caption="">
+								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=thumb" width="595" height="595" alt="">
+							</a>
+						</div>
+						<div class="project-gallery-image">
+							<a href="http://via.placeholder.com/595x892/f1f1f1/aaa/?text=thumb" data-fancybox="project-gallery" data-caption="">
+								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=thumb" width="595" height="595" alt="">
+							</a>
+						</div> -->
 					</div>
-					<div class="project-item">
-						<a href="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" class="main" data-fancybox="project2">
-							<img src="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" width="595" height="892" alt="">
-						</a>
-						<div class="secondary clearfix">
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" data-fancybox="project2">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" width="595" height="595" alt="">
-							</a>
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" data-fancybox="project2">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" width="595" height="595" alt="">
-							</a>
-						</div>
-						<div class="info clearfix">
-							<h5>Category</h5>
-							<h2><a href="project-single.html" class="custom-link">Project 2</a></h2>
-							<a href="project-single.html" class="button underline">Browse Details</a>
-						</div>
-					</div>
-					<div class="project-item">
-						<a href="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" class="main" data-fancybox="project3">
-							<img src="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" width="595" height="892" alt="">
-						</a>
-						<div class="secondary clearfix">
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" data-fancybox="project3">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" width="595" height="595" alt="">
-							</a>
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" data-fancybox="project3">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" width="595" height="595" alt="">
-							</a>
-						</div>
-						<div class="info clearfix">
-							<h5>Category</h5>
-							<h2><a href="project-single.html" class="custom-link">Project 3</a></h2>
-							<a href="project-single.html" class="button underline">Browse Details</a>
-						</div>
-					</div>
-					<div class="project-item">
-						<a href="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" class="main" data-fancybox="project4">
-							<img src="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" width="595" height="892" alt="">
-						</a>
-						<div class="secondary clearfix">
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" data-fancybox="project4">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" width="595" height="595" alt="">
-							</a>
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" data-fancybox="project4">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" width="595" height="595" alt="">
-							</a>
-						</div>
-						<div class="info clearfix">
-							<h5>Category</h5>
-							<h2><a href="project-single.html" class="custom-link">Project 4</a></h2>
-							<a href="project-single.html" class="button underline">Browse Details</a>
-						</div>
-					</div>
-					<div class="project-item">
-						<a href="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" class="main" data-fancybox="project5">
-							<img src="http://via.placeholder.com/595x892/e5e5e5/aaa/?text=main" width="595" height="892" alt="">
-						</a>
-						<div class="secondary clearfix">
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" data-fancybox="project5">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=1" width="595" height="595" alt="">
-							</a>
-							<a href="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" data-fancybox="project5">
-								<img src="http://via.placeholder.com/595x595/f1f1f1/aaa/?text=2" width="595" height="595" alt="">
-							</a>
-						</div>
-						<div class="info clearfix">
-							<h5>Category</h5>
-							<h2><a href="project-single.html" class="custom-link">Project 5</a></h2>
-							<a href="project-single.html" class="button underline">Browse Details</a>
-						</div>
+				</div>
+				<div class="text-area">
+					<h2><ins>Un Esperimento di Architettura</ins></h2>
+					<table>
+						<tbody>
+							<tr>
+								<td>Client</td>
+								<td>Personal</td>
+							</tr>
+							<tr>
+								<td>Location</td>
+								<td><a href="#" rel="tag" class="custom-link">Fregene</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="container">
+						<p class="indented">Nascosto tra i filari della pineta e i viali delle case vacanze romane, tra qualche arbusto trasandato ed un albero lasciato libero di crescere, in un luogo dove non ci si aspetterebbe di trovare un edificio di vivo interesse culturale o architettonico, spunta un grigio volume, scultoreo, plastico, dalle geometrie poco chiare e ortodosse.</p>
+						<p class="indented">Un’abitazione in completa antitesi con ciò che la circonda. I molti che vi passano di fronte non ne conoscono la storia e la guardano interdetti, domandandosi che cosa possa essere e perché si trovi lì.</p>
+						<p class="indented">La casa albero di Perugini a Fregene è un esperimento architettonico, distante pochi chilometri dalla città eterna.</p>
+						<p class="indented">L’architetto, nato nel 1914 a Buenos Aires, si trasferì giovanissimo a Roma dove tra una scuola di scultura e qualche corso di disegno si innamorò della disciplina alla quale si dedicò fino alla morte nel 1995: l’architettura.</p>
+						<p class="indented">Si innamorò anche di Uga de Playsant, architetto e sua futura moglie, con la quale condivise i progetti, i pensieri e una vita dedita alla sperimentazione architettonica, frequentando e vivendo Fregene, città a cui Perugini si legò per moltissimi anni. È proprio qui, in un lotto nei pressi della pineta, che sorge il suo esperimento architettonico più emblematico e particolare; un progetto sull’abitare e sull’abitazione, svolto a sei mani con Uga, sua moglie, e Raynaldo, suo figlio, lavorando insieme sotto il nome di 3P.</p>
+						<p class="indented">Si tratta a tutti gli effetti di un modello a scala urbana di edifici sperimentali, che possiamo vivere appieno e fruire nella loro totalità. Nel lotto, infatti, si trovano ben tre volumi distinti e definiti gli uni dagli altri.</p>
+						<p class="indented">Il primo, “La casa albero”, è il vero fulcro del progetto. Rappresenta un’abitazione speciale che si pone come modello al vero di tutto il pensiero dei 3P: come un piccolo Weissenhof sulla costa laziale, cerca di esprimere sotto il grande rapporto dell’1:1 tutti i principi, i criteri e le idee che l’architetto aveva sull’abitare e sulla scala umana.</p>
+						<p class="indented">Il secondo, “La palla”, è lo studio di una piccola unità abitativa interamente attrezzata e indipendente, dalle forme non convenzionali.</p>
+						<p class="indented">Il terzo, “I cubetti”, è un modello composto da una sequenza di moduli e semi-moduli cubici tre per tre che vanno a comporre un’unità abitativa in meno di cinquanta metri quadrati.</p>
+						<p class="indented">I progetti, anche se apparentemente diversi, sono correlati tra loro non solo per la composizione materica ma anche concettualmente.Tutto il lotto ora versa in condizione di totale abbandono e negli anni è stato vittima di atti vandalici.</p>
+						<p class="indented">Per fortuna c’è chi è ancora legato fortemente a questa casa, al punto da emozionarsi passandole accanto con la bicicletta e ricordando con piacere quegli anni di grande innovazione, pensieri e sperimentazioni.</p>
+						<p class="indented">Proprio così abbiamo incontrato e conosciuto Angelo Bellotto, in sella alla sua bicicletta di fronte alla casa albero, mentre cercavamo un modo per entrare e scattare delle fotografie.</p>
+						<p class="indented">Accompagnò Perugini durante tutto l’arco temporale del progetto, divenendo il principale soggetto del cantiere. Dal primo pilastro gettato fino all’ultimo cubo di vetro, Angelo era sempre presente.</p>
+						<p class="indented">Gentilmente si è offerto di aprirci la casa e inaspettatamente ci ha accompagnato in un percorso labirintico fatto di storie, aneddoti di vita privata, costruzioni in calcestruzzo ed incontri con personalità eclettiche, il tutto nella cornice surreale di Fregene.</p>
+						<p class="indented">Abbiamo ascoltato, appreso e soprattutto fotografato tutto ciò che potevamo e lo abbiamo fatto nostro. Abbiamo deciso di raccogliere cinque delle molte domande fatte ad Angelo e di riportarvele qua, così che questo breve e fugace incontro possa essere di tutti. Ormai è in stato di abbandono, ma prima doveva essere un’abitazione particolare e appariscente.</p>
+						<p class="indented">LB: Com’era viverla e come la vedevano gli altri vicini di casa?</p>
+						<p class="indented">AB: Quando abbiamo iniziato a costruire, man mano che tiravamo su questi pilastri e questi travi di cemento, perché come sai poggia su plinti, non ha una fondazione continua questa casa, ma è raccordata solo al primo piano, al piano rialzato diciamo, le persone si dicevano: “ma com’è questa casa, così strana, particolare!”. Anche molti costruttori della zona passavano di fronte e guardavano con molta curiosità il cantiere che andava avanti. Tutti sapevamo che Perugini era una persona stravagante ma molto preparata e come ingegnere era incredibile.</p>
+						<p class="indented">Pensa che quando abbiamo fatto il cemento per i tamponamenti e il soffitto, i solai agli angoli si muovevano quando ci camminavi sopra, erano diciamo flessibili (ride), e le persone si domandavano come potesse stare in piedi questa struttura.</p>
+						<p class="indented">Poi invece quando è stato fatto l’assemblaggio, perché diciamo è stata costruita come un lego quindi univi i vari pezzi uno per uno seguendo le sigle che ci sono sui vari elementi, questa diventava solida. La chiamano Casa Albero ma per me è sbagliatissimo, io la chiamerei casa piuttosto casa esperimento o casa sperimentale.</p>
+						<p class="indented">LB: Ci ha detto che ha lavorato per tutto il tempo con Perugini, com’è stato lavorare con lui e con sua moglie?</p>
+						<p class="indented">AB: Lui era particolare, vedeva le cose prima degli altri e soprattutto a modo suo. Già aveva in mente il futuro. La moglie invece era una persona gentilissima, disponibile, sai era pittrice, architetto, scriveva, con la penna era bravissima, una donna di cultura.</p>
+						<p class="indented">Ho avuto il piacere di vedere il progetto del ponte sullo stretto di Messina ideato da Perugini, molto faraonico, bello, e strutturalmente era incredibile. Sai io lavoro con le strutture da moltissimi anni, ho viaggiato molto nel mondo ho visto l’Opera House di Sidney, che è un pezzo di ingegneria non da poco, e posso garantirti che i suoi progetti sono arrivati con 30 anni di anticipo.</p>
+						<p class="indented">Erano avveniristici e moderni. Pensa che aveva pensato a possibili furti in casa, cosa che non era pensabile all’epoca, e aveva creato la scala d’ingresso che si poteva alzare, premendo solo un bottone, così che c’erano 4 metri di vuoto e una piscina tra casa tua e qualsiasi malintenzionato (ride).</p>
+						<p class="indented">LB: Ha mai scattato fotografie durante i lavori? Se sì, ha mai pensato di pubblicarle?</p>
+						<p class="indented">AB: No, son sincero, non le ho mai fatte, perché sai cinquant’anni fa era diverso, manco avevo la macchina fotografica penso! (ride)</p>
+						<p class="indented">Ora per i nuovi cantieri invece c’è tutta una documentazione fotografica, perché i tempi son cambiati.</p>
+						<p class="indented">LB: Perché la casa versa in queste condizioni, come è cominciato il suo degrado?</p>
+						<p class="indented">AB: Sai lui veniva poco, poi è venuto a mancare, hanno smesso di venire la moglie e il figlio e alla fine è rimasta così, abbandonata a se stessa. Però ora si sta muovendo qualcosa sai? Abbiamo cominciato a sistemare con una società prima la Palla, poi l’ingresso alla proprietà e adesso stiamo sistemando i Cubetti, perché quelli possono diventare appartamenti funzionanti con poca manutenzione sai? Solo la porta di ingresso ha un meccanismo particolare, quindi è più complicata da mettere a posto. Poi ci sono un po’ di rami da tagliare e altre cose da fare, ma ci stiamo muovendo verso qualcosa.</p>
+						<p class="indented">LB: Per finire Angelo, cosa vede nel futuro di questa abitazione? Secondo lei si può salvare questo piccolo gioiello di architettura sperimentale?</p>
+						<p class="indented">AB: La casa strutturalmente è perfetta, la struttura sta benissimo, le fondazioni, essendo visibili perché fuori terra, si nota che sono in buone condizioni. Io son convinto che ci sia un futuro per la casa sperimentale, vedo tanto interesse da parte delle persone, soprattutto da fuori Fregene ma anche dall’estero, America, Giappone, Francia, Russia, sono tantissimi i ragazzi, studenti e non, passati di qui per vedere questo gioiello di architettura. Qua ci vorrebbe un gruppo di persone che con fatica, passione e sacrificio si metta a lavorare per questa casa, come ai vecchi tempi.</p>
+						<p class="indented">Salutiamo Angelo, ringraziandolo per la sua immensa disponibilità e andiamo via con la consapevolezza che un futuro per questo importante tassello dell’architettura contemporanea, vi sia, e che cominci proprio da qui.</p>
 					</div>
 				</div>
 			</div>
@@ -154,43 +171,47 @@
 		<footer id="footer">
 			<div class="inner widget-area clearfix">
 				<section class="widget widget_text">
-					<h2 class="widget-title">INFO</h2>
+					<h2 class="widget-title">About us</h2>
 					<div class="textwidget">
-						<p>Architettura residenziale e design degli interni.</p>
-						<p>{{fotografia}} d’architettura e di paesaggio.</p>
+						<p>Est nibh, ullamcorper eu viverra ultricie sesti bulum elementum, purus a tempus fringilla, tortor est ultricies.</p>
 					</div>
 				</section>
 				<section class="widget widget_text">
-					<h2 class="widget-title">CONTACTS</h2>
+					<h2 class="widget-title">Get in touch</h2>
 					<div class="textwidget">
-						<!-- <p><strong>Via XXX</strong> <br><strong>RM, ITA</strong></p> -->
-						<p>Mobile: +39 3920506755 <br> Email: <a href="mailto:leonardo.brancaleoni@gmail.com">leonardo.brancaleoni@gmail.com</a></p>
+						<p><strong>Papaia Street 45,</strong> <br><strong>NY, USA</strong></p>
+						<p>Phone: +123.456.789 <br>Mobile: +987.654.321 <br> Email: <a href="mailto:hi@papaia.com">hi@papaia.com</a></p>
 					</div>
 				</section>
 				<section class="widget widget_recent_entries">
-					<h2 class="widget-title">NEWS</h2>
+					<h2 class="widget-title">Recent posts</h2>
 					<ul>
 						<li>
-							<a href="pde.html">Premio Driving Energy – {{fotografia}} Contemporanea</a> <span class="post-date">2023</span>
+							<a href="single-post.html">Fishing in Alaska</a> <span class="post-date">2 January, 2018</span></li>
+						<li>
+							<a href="single-post.html">Everyday at a time</a> <span class="post-date">19 December, 2017</span>
 						</li>
 						<li>
-							<a href="fa.html">FA - {{fotografia}} dell’Architettura Sguardi Contemporanei</a> <span class="post-date">Edizione 2023</span>
+							<a href="single-post.html">The simple life</a> <span class="post-date">13 December, 2017</span>
 						</li>
 					</ul>
 				</section>
 				<section class="widget widget_nav_menu">
-					<h2 class="widget-title">Links</h2>
+					<h2 class="widget-title">Quick links</h2>
 					<div class="menu-footer-links-container">
 						<ul class="menu-list">
+							<li class="menu-item"><a href="#">Facebook</a></li>
+							<li class="menu-item"><a href="#">Twitter</a></li>
+							<li class="menu-item"><a href="#">Dribbble</a></li>
 							<li class="menu-item"><a href="#">Instagram</a></li>
-							<li class="menu-item"><a href="#">Linkedin</a></li>
-							<li class="menu-item"><a href="#">FA-FOTOGRAFIA</a></li>
+							<li class="menu-item"><a href="#">Terms &amp; Conditions</a></li>
+							<li class="menu-item"><a href="#">Privacy Policy</a></li>
 						</ul>
 					</div>
 				</section>
 				<div class="clear"></div>
 				<div class="copyright">
-					{{full_name}} | P.IVA 04945290239 | All rights reserved &copy; 2023 created with &hearts;
+					&copy; 2018 Papaia theme created with &hearts; in Europe. All Rights Reserved.
 				</div>
 			</div>
 		</footer>

@@ -47,6 +47,11 @@ app.get(`${liviaPath}/*`, middlewareReadFiles(liviaHtmlPath), (req, res) => {
   }
 });
 
+// Agnese
+app.get('/agnese', (req, res) =>
+  res.send(`<h3>Welcome agnese!</h3>`),
+);
+
 // Default route
 app.get('/', (req, res) =>
   res.send(`<h3>Welcome!</h3>`),

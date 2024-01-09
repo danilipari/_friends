@@ -12,7 +12,7 @@
     "nest:install": "npm i -g @nestjs/cli && npm run --prefix bot/ nest:i",
     "nest:build:production": "npm run --prefix bot/ nest:build:production",
     "//": "Py Scripts",
-    "pip:install": "sudo apt-get install python3-pip",
+    "pip:install": "apt-get install python3-pip",
     "pip:init": "pip3 install -r triggersignals/requirements.txt"
   },
   "repository": {

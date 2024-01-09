@@ -31,16 +31,5 @@ module.exports = {
         NODE_ENV: 'development',
       },
     },
-    {
-      name: 'triggersignals',
-      script: 'python3 triggersignals/main4.py',
-      interpreter: 'python',
-      watch: false,
-      env: {
-        API_ID: '22399344',
-        API_HASH: '7986073c692e810d359aed542a6ad08d',
-        USERNAME_SHARE: 'bot_lipari'
-      }
-    }
   ],
 };

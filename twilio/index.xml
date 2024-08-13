@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <!-- <Say>Hello! This is a test call from Twilio Dani App.</Say> -->
-    <Say>Ciao! Questa è una chiamata da parte di Twilio del server di Dani. Grazie per aver risposto!</Say>
+    <!-- <Say language="en-GB" voice="alice">Hello! This is a test call from Twilio Dani App.</Say> -->
+    <Say language="it-IT" voice="man" >Ciao! Questa è una chiamata da parte di Twilio del server di Dani. Grazie per aver risposto!</Say>
 </Response>

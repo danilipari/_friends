@@ -30,7 +30,7 @@ app.use(twilioPath, express.static(twilioXmlPath));
 app.get(`${twilioPath}/:lang`, middlewareReadFiles(twilioXmlPath), (req, res) => {
   const lang = req.params.lang || 'it';
   const fileName = `index-${lang}.xml`;
-  res.sendFile('index-it.xml', {root: twilioXmlPath});
+  res.sendFile(fileName, {root: twilioXmlPath});
 });
 
 // Livia project

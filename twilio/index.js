@@ -19,9 +19,11 @@ app.use(
 
 app.use(express.static('./twilio/'));
 
-app.get('/*', (req, res) =>
-  res.sendFile('index.xml', {root: './twilio/'}),
-);
+app.get('/:lang', (req, res) => {
+  const lang = req.params.lang || 'it';
+  const fileName = `index-${lang}.xml`;
+  res.sendFile(fileName, {root: './twilio/'});
+});
 
 // Start the app by listening on the default Heroku port
 const port = process.env.PORT || 8000;

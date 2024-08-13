@@ -27,9 +27,11 @@ const twilioPath = '/twilio';
 const twilioXmlPath = './twilio/';
 
 app.use(twilioPath, express.static(twilioXmlPath));
-app.get(`${twilioPath}/*`, middlewareReadFiles(twilioXmlPath), (req, res) =>
-  res.sendFile('index.xml', {root: twilioXmlPath}),
-);
+app.get(`${twilioPath}/:lang`, middlewareReadFiles(twilioXmlPath), (req, res) => {
+  const lang = req.params.lang || 'it';
+  const fileName = `index-${lang}.xml`;
+  res.sendFile('index-it.xml', {root: twilioXmlPath});
+});
 
 // Livia project
 const liviaPath = '/livia';

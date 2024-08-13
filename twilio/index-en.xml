@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Say language="en-GB" voice="alice">Hi! This is a test call from the Twilio Dani App. Thank you for answering!</Say>
+  <Say language="en-GB" voice="alice">Hello! This is a test call from Dani's server for Twilio calls. Thank you for answering!</Say>
 </Response>

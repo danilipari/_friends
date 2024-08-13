@@ -22,13 +22,13 @@ app.use(
   }),
 );
 
-// Francesca project
-const francescaPath = '/francesca';
-const francescaHtmlPath = './francesca/advent-calendar/';
+// Twilio project
+const twilioPath = '/twilio';
+const twilioXmlPath = './twilio/';
 
-app.use(francescaPath, express.static(francescaHtmlPath));
-app.get(`${francescaPath}/*`, middlewareReadFiles(francescaHtmlPath), (req, res) =>
-  res.sendFile('index.html', {root: francescaHtmlPath}),
+app.use(twilioPath, express.static(twilioXmlPath));
+app.get(`${twilioPath}/*`, middlewareReadFiles(twilioXmlPath), (req, res) =>
+  res.sendFile('index.xml', {root: twilioXmlPath}),
 );
 
 // Livia project
@@ -53,6 +53,15 @@ app.get('/agnese', (req, res) => {
     <iframe src="https://www.edusogno.com" width="100%" height="100%">
       <p>Il tuo browser non supporta gli iframe.</p>
     </iframe>
+  `);
+});
+
+app.get('/twilio/demo', (req, res) => {
+  res.send(`
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Response>
+        <Say>Hello! This is a test call from Twilio Dani App.</Say>
+    </Response>
   `);
 });
 

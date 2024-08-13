@@ -56,15 +56,6 @@ app.get('/agnese', (req, res) => {
   `);
 });
 
-app.get('/twilio/demo', (req, res) => {
-  res.send(`
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Response>
-        <Say>Hello! This is a test call from Twilio Dani App.</Say>
-    </Response>
-  `);
-});
-
 // Default route
 app.get('/', (req, res) =>
   res.send(`<h3>Welcome!</h3>`),

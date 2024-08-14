@@ -30,15 +30,6 @@ const twilioTemplate = {
       `,
 };
 
-app.use(express.static("./twilio/"));
-
-// app.post('/:lang', (req, res) => {
-//   console.log('body -->', req.body);
-//   const lang = req.params.lang || 'it';
-//   const fileName = `index-${lang}.xml`;
-//   res.sendFile(fileName, {root: './twilio/'});
-// });
-
 app.post("/:lang", (req, res) => {
   console.log("twilio body -->", req.body);
   const lang = req.params.lang || "it";

@@ -20,6 +20,7 @@ app.use(
 app.use(express.static('./twilio/'));
 
 app.get('/:lang', (req, res) => {
+  console.log('body -->', req.body);
   const lang = req.params.lang || 'it';
   const fileName = `index-${lang}.xml`;
   res.sendFile(fileName, {root: './twilio/'});

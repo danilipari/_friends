@@ -105,7 +105,7 @@ canvas.addEventListener("mouseout", stopDrawing);
 
 function make_base() {
   const base_image = new Image();
-  base_image.src = "./hbd-cake.png";
+  base_image.src = "./src/hbd-cake.png";
   base_image.onload = function () {
     ctx.drawImage(base_image, 0, canvas.height * 0.33, canvas.width, canvas.height * 0.33);
   };

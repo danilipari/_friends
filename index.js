@@ -3,8 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-const { middlewareReadFiles } = require("./middlewares.cjs");
-import * as biglietto from "./gaetana/biglietto.html";
+// const { middlewareReadFiles } = require("./middlewares.cjs");
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const isProd = process.env.NODE_ENV === "production";

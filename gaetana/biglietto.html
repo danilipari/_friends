@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biglietto</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        background-color: #d17b8f;
+        background-image: url(src/hbd-background.png);
+        background-repeat: repeat;
+      }
+
+      h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: 50px;
+        text-align: center;
+        letter-spacing:1px;
+        color: #ffffff;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px #af5e71;
+      }
+
+      #scratchCardContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      #scratchCard {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        min-width: 350px;
+        aspect-ratio: 500 / 500;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        box-sizing: border-box;
+        text-align: center;
+        z-index: 2;
+      }
+
+      .messageWord {
+        position: absolute;
+        font-size: 24px;
+        font-weight: bold;
+        color: #af5e71;
+        background-color: transparent;
+        white-space: nowrap;
+      }
+
+      .codeWord {
+        position: absolute;
+        font-size: 12px;
+        font-weight: bold;
+        color: #000000;
+        background-color: transparent;
+        right: 10px;
+        bottom: 10px;
+      }
+
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Buon Compleanno!</h1>
+
+    <div id="scratchCardContainer">
+      <div id="scratchCard">
+        <canvas id="canvas"></canvas>
+        <div class="codeWord" id="codeWord">CODE</div>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      const codeWordElement = document.getElementById("codeWord");
+      let isDrawing = false;
+      let lastX = 0;
+      let lastY = 0;
+      let hasScratchedCode = false;
+
+      // Ridimensiona il canvas in modo responsive
+      function resizeCanvas() {
+        const scratchCard = document.getElementById("scratchCard");
+        const rect = scratchCard.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        redraw(); // Ridisegna il contenuto
+      }
+
+      // Ridisegna il contenuto del canvas
+      function redraw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ffe2a3";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Ridisegna l'immagine
+        make_base();
+
+        ctx.globalCompositeOperation = "destination-out";
+      }
+
+      function getCoords(e) {
+        let x, y;
+        if (e.touches && e.touches.length > 0) {
+          const touch = e.touches[0];
+          x = touch.clientX - canvas.getBoundingClientRect().left;
+          y = touch.clientY - canvas.getBoundingClientRect().top;
+        } else {
+          x = e.offsetX;
+          y = e.offsetY;
+        }
+        return [x, y];
+      }
+
+      function isScratchOnCode(x, y) {
+        const codeRect = codeWordElement.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+
+        const codeX = codeRect.left - canvasRect.left;
+        const codeY = codeRect.top - canvasRect.top;
+        const codeWidth = codeRect.width;
+        const codeHeight = codeRect.height;
+
+        return (
+          x >= codeX &&
+          x <= codeX + codeWidth &&
+          y >= codeY &&
+          y <= codeY + codeHeight
+        );
+      }
+
+      function draw(e) {
+        if (!isDrawing) return;
+
+        const [x, y] = getCoords(e);
+
+        ctx.lineWidth = 30;
+        ctx.lineCap = "round";
+        ctx.strokeStyle = "rgba(0,0,0,0.5)";
+
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+
+        if (isScratchOnCode(x, y)) {
+          hasScratchedCode = true;
+        }
+
+        [lastX, lastY] = [x, y];
+        e.preventDefault();
+      }
+
+      function startDrawing(e) {
+        isDrawing = true;
+        [lastX, lastY] = getCoords(e);
+      }
+
+      function stopDrawing() {
+        isDrawing = false;
+        if (hasScratchedCode) {
+          alert("Hai rivelato il codice!");
+          hasScratchedCode = false;
+        }
+      }
+
+      canvas.addEventListener("mousedown", startDrawing);
+      canvas.addEventListener("touchstart", startDrawing);
+
+      canvas.addEventListener("mousemove", draw);
+      canvas.addEventListener("touchmove", draw);
+
+      canvas.addEventListener("mouseup", stopDrawing);
+      canvas.addEventListener("touchend", stopDrawing);
+
+      canvas.addEventListener("mouseout", stopDrawing);
+
+      function make_base() {
+        const base_image = new Image();
+        base_image.src = "src/hbd-cake.png";
+        base_image.onload = function () {
+          ctx.drawImage(base_image, 0, canvas.height * 0.33, canvas.width, canvas.height * 0.33);
+        };
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas(); // Inizializza con la dimensione corretta
+
+      // Aggiungi le parole mescolate alla pagina in posizioni casuali senza sovrapposizioni
+      const words = [
+        "Suka1",
+        "Suka2",
+        "Suka3",
+        "Suka4",
+        "Suka5",
+        "Suka11",
+        "Suka22",
+        "Suka33",
+        "Suka44",
+        "Suka55",
+      ];
+
+      // Funzione per mescolare l'array
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      shuffleArray(words);
+
+      // Funzione per verificare la collisione tra due elementi
+      function isOverlapping(element1, element2) {
+        const rect1 = element1.getBoundingClientRect();
+        const rect2 = element2.getBoundingClientRect();
+
+        return !(
+          rect1.right < rect2.left ||
+          rect1.left > rect2.right ||
+          rect1.bottom < rect2.top ||
+          rect1.top > rect2.bottom
+        );
+      }
+
+      // Funzione per trovare una posizione senza sovrapposizioni
+      function findPositionWithoutOverlap(
+        element,
+        container,
+        existingElements
+      ) {
+        let overlaps = true;
+        let attempts = 0;
+
+        while (overlaps && attempts < 100) {
+          const containerRect = container.getBoundingClientRect();
+          const elementRect = element.getBoundingClientRect();
+
+          const availableWidth = containerRect.width - elementRect.width;
+          const availableHeight = containerRect.height - elementRect.height;
+
+          const x = Math.random() * availableWidth;
+          const y = Math.random() * availableHeight;
+
+          element.style.left = `${x}px`;
+          element.style.top = `${y}px`;
+
+          overlaps = false;
+
+          for (let i = 0; i < existingElements.length; i++) {
+            if (isOverlapping(element, existingElements[i])) {
+              overlaps = true;
+              break;
+            }
+          }
+
+          attempts++;
+        }
+      }
+
+      const scratchCard = document.getElementById("scratchCard");
+      const existingElements = [];
+
+      words.forEach((word) => {
+        const wordElement = document.createElement("div");
+        wordElement.classList.add("messageWord");
+        wordElement.textContent = word;
+
+        scratchCard.appendChild(wordElement);
+        findPositionWithoutOverlap(wordElement, scratchCard, existingElements);
+
+        existingElements.push(wordElement);
+      });
+    </script>
+
+
+  </body>
+</html>

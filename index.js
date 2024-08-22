@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const { middlewareReadFiles } = require("./middlewares.cjs");
+import * as biglietto from "./gaetana/biglietto.html";
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const isProd = process.env.NODE_ENV === "production";
@@ -22,20 +23,20 @@ app.use(
   })
 );
 
-// Twilio project
-const twilioPath = "/twilio";
-const twilioXmlPath = "./twilio/";
+// // Twilio project
+// const twilioPath = "/twilio";
+// const twilioXmlPath = "./twilio/";
 
-app.use(twilioPath, express.static(twilioXmlPath));
-app.post(
-  `${twilioPath}/:lang`,
-  middlewareReadFiles(twilioXmlPath),
-  (req, res) => {
-    const lang = req.params.lang || "it";
-    const fileName = `index-${lang}.xml`;
-    res.sendFile(fileName, { root: twilioXmlPath });
-  }
-);
+// app.use(twilioPath, express.static(twilioXmlPath));
+// app.post(
+//   `${twilioPath}/:lang`,
+//   middlewareReadFiles(twilioXmlPath),
+//   (req, res) => {
+//     const lang = req.params.lang || "it";
+//     const fileName = `index-${lang}.xml`;
+//     res.sendFile(fileName, { root: twilioXmlPath });
+//   }
+// );
 
 // Livia project
 // const liviaPath = "/livia";
@@ -66,6 +67,14 @@ app.get("/agnese", (req, res) => {
       <p>Il tuo browser non supporta gli iframe.</p>
     </iframe>
   `);
+});
+
+// Gaetana
+const pathG = "/gaetana";
+const rootPathG = "/.gaetana/";
+app.use(pathG, express.static(rootPathG));
+app.get(pathG, (req, res) => {
+  res.sendFile("index.html", { root: rootPathG });
 });
 
 // Default route

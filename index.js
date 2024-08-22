@@ -71,10 +71,11 @@ app.get("/agnese", (req, res) => {
 
 // Gaetana
 const pathG = "/gaetana";
-const rootPathG = ".gaetana/";
-app.use(pathG, express.static(rootPathG));
+// const rootPathG = ".gaetana/";
+// app.use(pathG, express.static(rootPathG));
 app.get(pathG, (req, res) => {
-  res.sendFile("index.html", { root: rootPathG });
+  // res.sendFile("index.html", { root: rootPathG });
+  res.send(`<p>test</p>`);
 });
 
 // Default route

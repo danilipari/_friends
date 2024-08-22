@@ -22,20 +22,20 @@ app.use(
   })
 );
 
-// // Twilio project
-// const twilioPath = "/twilio";
-// const twilioXmlPath = "./twilio/";
+// Twilio project
+const twilioPath = "/twilio";
+const twilioXmlPath = "./twilio/";
 
-// app.use(twilioPath, express.static(twilioXmlPath));
-// app.post(
-//   `${twilioPath}/:lang`,
-//   middlewareReadFiles(twilioXmlPath),
-//   (req, res) => {
-//     const lang = req.params.lang || "it";
-//     const fileName = `index-${lang}.xml`;
-//     res.sendFile(fileName, { root: twilioXmlPath });
-//   }
-// );
+app.use(twilioPath, express.static(twilioXmlPath));
+app.post(
+  `${twilioPath}/:lang`,
+  middlewareReadFiles(twilioXmlPath),
+  (req, res) => {
+    const lang = req.params.lang || "it";
+    const fileName = `index-${lang}.xml`;
+    res.sendFile(fileName, { root: twilioXmlPath });
+  }
+);
 
 // Livia project
 // const liviaPath = "/livia";
@@ -69,11 +69,7 @@ app.get("/agnese", (req, res) => {
 });
 
 // Gaetana
-const pathG = "/gaetana";
-// const rootPathG = ".gaetana/";
-// app.use(pathG, express.static(rootPathG));
-app.get(pathG, (req, res) => {
-  // res.sendFile("index.html", { root: rootPathG });
+app.get("/gaetana", (req, res) => {
   res.send(`<p>test</p>`);
 });
 

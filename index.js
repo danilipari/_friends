@@ -69,9 +69,22 @@ app.get("/agnese", (req, res) => {
 });
 
 // Gaetana
-app.get("/gaetana", (req, res) => {
-  res.send(`<p>test</p>`);
-});
+// app.get("/gaetana", (req, res) => {
+//   res.send(`<p>test</p>`);
+// });
+
+const gaetanaPath = "/gaetana";
+const gaetanaPathRoot = "./gaetana/";
+
+app.use(gaetanaPath, express.static(gaetanaPathRoot));
+app.get(
+  `${gaetanaPath}`,
+  middlewareReadFiles(gaetanaPathRoot),
+  (req, res) => {
+    const fileName = `index.html`;
+    res.sendFile(fileName, { root: gaetanaPathRoot });
+  }
+);
 
 // Default route
 app.get("/", (req, res) => res.send(`<h3>Welcome!</h3>`));

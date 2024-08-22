@@ -70,6 +70,7 @@ function draw(e) {
   ctx.moveTo(lastX, lastY);
   ctx.lineTo(x, y);
   ctx.stroke();
+  codeWordElement.style.display = 'block';
 
   if (isScratchOnCode(x, y)) {
     hasScratchedCode = true;

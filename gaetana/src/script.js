@@ -88,7 +88,7 @@ function startDrawing(e) {
 function stopDrawing() {
   isDrawing = false;
   if (hasScratchedCode) {
-    alert("Hai rivelato il codice!");
+    alert("Buon viaggio dai 3 maschi di casa!");
     hasScratchedCode = false;
   }
 }
@@ -117,16 +117,12 @@ resizeCanvas(); // Inizializza con la dimensione corretta
 
 // Aggiungi le parole mescolate alla pagina in posizioni casuali senza sovrapposizioni
 const words = [
-  "Suka1",
-  "Suka2",
-  "Suka3",
-  "Suka4",
-  "Suka5",
-  "Suka11",
-  "Suka22",
-  "Suka33",
-  "Suka44",
-  "Suka55",
+  "'Non una borsa'",
+  "'Non una collana'",
+  "'Non un vestito'",
+  "'Non una cena'",
+  "'Non un bracciale'",
+  "'Non degli orecchini'"
 ];
 
 // Funzione per mescolare l'array

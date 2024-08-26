@@ -76,7 +76,7 @@ app.get("/agnese", (req, res) => {
 // Send SMS
 app.get("/gaetana-sms", (req, res) => {
   const from = "BROTHERS"
-  const to = "3888979545"
+  const to = "393888979545"
   const text = `Con l'augurio e la certezza che i prossimi anni siano i più pieni di avventure della tua vita!`;
 
   vonage.sms.send({

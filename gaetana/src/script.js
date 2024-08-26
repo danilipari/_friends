@@ -85,11 +85,30 @@ function startDrawing(e) {
   [lastX, lastY] = getCoords(e);
 }
 
+function fetchData(url) {
+  fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok: ' + response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+      console.error('There was a problem with your fetch operation:', error);
+  });
+}
+
 function stopDrawing() {
+  const url = "https://www.lipari.dev/gaetana-sms";
   isDrawing = false;
   if (hasScratchedCode) {
     alert("Buon viaggio dai 3 maschi di casa!");
     hasScratchedCode = false;
+
+    fetchData(url);
   }
 }
 

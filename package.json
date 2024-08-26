@@ -9,10 +9,9 @@
     "node": "node index.js",
     "//pip//heroku-postbuild": "npm run nest:install && npm run nest:build:production && npm run pip:install && npm run pip:init",
     "heroku-postbuild": "npm run nest:install && npm run nest:build:production",
-    "//": "NestJS Scripts",
+    "//": "Py Scripts",
     "nest:install": "npm i -g @nestjs/cli && npm run --prefix bot/ nest:i",
     "nest:build:production": "npm run --prefix bot/ nest:build:production",
-    "//": "Py Scripts",
     "pip:install": "apt-get install python3-pip",
     "pip:init": "pip3 install -r triggersignals/requirements.txt"
   },
@@ -28,6 +27,7 @@
   },
   "homepage": "https://github.com/danilipari/_friends#readme",
   "dependencies": {
+    "@vonage/server-sdk": "^3.16.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

@@ -4,6 +4,11 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const { middlewareReadFiles } = require("./middlewares.cjs");
+const { Vonage } = require('@vonage/server-sdk');
+const vonage = new Vonage({
+  apiKey: process.env.SECRET_KEY_NEXMO_API,
+  apiSecret: process.env.SECRET_KEY_NEXMO
+}, {});
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const isProd = process.env.NODE_ENV === "production";
@@ -68,10 +73,30 @@ app.get("/agnese", (req, res) => {
   `);
 });
 
-// Gaetana
-// app.get("/gaetana", (req, res) => {
-//   res.send(`<p>test</p>`);
-// });
+// Send SMS
+app.get("/gaetana-sms", (req, res) => {
+  const from = "BROTHERS"
+  const to = "3888979545"
+  const text = `Con l'augurio e la certezza che i prossimi anni siano i più pieni di avventure della tua vita!`;
+
+  vonage.sms.send({
+    to: to,
+    from: from,
+    text: text,
+  }).then(response => {
+    console.log('Message sent successfully');
+    console.log(response);
+    if (response.messages[0]['status'] === "0") {
+      console.log("Message sent successfully.");
+    }
+  }).catch(error => {
+    console.log('There was an error sending the messages.');
+    console.error(error);
+  });
+
+
+  res.status(200).json('Sms inviato con successo!!');
+});
 
 const gaetanaPath = "/gaetana";
 const gaetanaPathRoot = "./gaetana/";

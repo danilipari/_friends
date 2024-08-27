@@ -108,7 +108,7 @@ function stopDrawing() {
     alert("Buon viaggio dai 3 maschi di casa!");
     hasScratchedCode = false;
 
-    fetchData(url);
+    // fetchData(url);
   }
 }
 

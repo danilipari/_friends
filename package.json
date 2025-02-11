@@ -36,7 +36,8 @@
     "pm2": "^5.4.3"
   },
   "engines": {
-    "node": "22.x"
+    "node": "22.14.0",
+    "npm": "11.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.13.1"

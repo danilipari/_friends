@@ -5,3 +5,7 @@ export interface UpdateFilePayload {
   content: string;
   message: string;
 }
+
+export interface GitHubFileData {
+  sha: string;
+}

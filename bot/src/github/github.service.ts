@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import fetch from 'node-fetch';
-import { UpdateFilePayload } from './github.interface';
+import { GitHubFileData, UpdateFilePayload } from './github.interface';
 
 @Injectable()
 export class GithubService {
@@ -14,7 +14,7 @@ export class GithubService {
       },
     });
 
-    const getFileData = await getResponse.json();
+    const getFileData = await getResponse.json() as GitHubFileData;
     const sha = getFileData.sha;
 
     const base64Content = Buffer.from(content).toString('base64');

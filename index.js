@@ -59,40 +59,55 @@ app.use(
 // });
 
 // Send SMS
-app.get("/gaetana-sms", (req, res) => {
-  const from = "BROTHERS";
-  const to = `39${process.env.SMS_PHONE}`;
-  const text = `Con l'augurio e la certezza che i prossimi anni siano i più avventurosi della tua vita! Hai 1000€ di COUPON da riscattare a tuo piacimento su qualsiasi volo e/o albergo! Buon viaggio!`;
+// app.get("/gaetana-sms", (req, res) => {
+//   const from = "BROTHERS";
+//   const to = `39${process.env.SMS_PHONE}`;
+//   const text = `Con l'augurio e la certezza che i prossimi anni siano i più avventurosi della tua vita! Hai 1000€ di COUPON da riscattare a tuo piacimento su qualsiasi volo e/o albergo! Buon viaggio!`;
 
-  vonage.sms.send({
-    to: to,
-    from: from,
-    text: text,
-  }).then(response => {
-    console.log('Message sent successfully');
-    console.log(response);
-    if (response.messages[0]['status'] === "0") {
-      console.log("Message sent successfully.");
-    }
-  }).catch(error => {
-    console.log('There was an error sending the messages.');
-    console.error(error);
-  });
+//   vonage.sms.send({
+//     to: to,
+//     from: from,
+//     text: text,
+//   }).then(response => {
+//     console.log('Message sent successfully');
+//     console.log(response);
+//     if (response.messages[0]['status'] === "0") {
+//       console.log("Message sent successfully.");
+//     }
+//   }).catch(error => {
+//     console.log('There was an error sending the messages.');
+//     console.error(error);
+//   });
 
 
-  res.status(200).json('Sms inviato con successo!!');
-});
+//   res.status(200).json('Sms inviato con successo!!');
+// });
 
-const gaetanaPath = "/gaetana";
-const gaetanaPathRoot = "./gaetana/";
+// const gaetanaPath = "/gaetana";
+// const gaetanaPathRoot = "./gaetana/";
 
-app.use(gaetanaPath, express.static(gaetanaPathRoot));
+// app.use(gaetanaPath, express.static(gaetanaPathRoot));
+// app.get(
+//   `${gaetanaPath}`,
+//   middlewareReadFiles(gaetanaPathRoot),
+//   (req, res) => {
+//     const fileName = `index.html`;
+//     res.sendFile(fileName, { root: gaetanaPathRoot });
+//   }
+// );
+
+// https://www.lefrecce.it/Channels.Website.BFF.WEB/website/travel/recover
+
+const freccePath = "/lefrecce";
+const freccePathRoot = "./lefrecce/";
+
+app.use(freccePath, express.static(freccePathRoot));
 app.get(
-  `${gaetanaPath}`,
-  middlewareReadFiles(gaetanaPathRoot),
+  `${freccePath}`,
+  middlewareReadFiles(freccePathRoot),
   (req, res) => {
     const fileName = `index.html`;
-    res.sendFile(fileName, { root: gaetanaPathRoot });
+    res.sendFile(fileName, { root: freccePathRoot });
   }
 );
 

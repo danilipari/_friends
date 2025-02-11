@@ -17,23 +17,23 @@ module.exports = {
     //     PROJECT: 'livia',
     //   },
     // },
-    {
-      name: 'twilio-app',
-      script: 'sh',
-      args: '-c "node index.js"',
-      node_args: '--experimental-modules',
-      instances: 1,
-      autorestart: true,
-      watch: false,
-      max_memory_restart: '1G',
-      env: {
-        NODE_ENV: 'production',
-      },
-      env_development: {
-        NODE_ENV: 'development',
-        PROJECT: 'twilio',
-      },
-    },
+    // {
+    //   name: 'twilio-app',
+    //   script: 'sh',
+    //   args: '-c "node index.js"',
+    //   node_args: '--experimental-modules',
+    //   instances: 1,
+    //   autorestart: true,
+    //   watch: false,
+    //   max_memory_restart: '1G',
+    //   env: {
+    //     NODE_ENV: 'production',
+    //   },
+    //   env_development: {
+    //     NODE_ENV: 'development',
+    //     PROJECT: 'twilio',
+    //   },
+    // },
     {
       name: 'nest-app',
       script: './bot/dist/main.js',

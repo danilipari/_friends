@@ -27,21 +27,6 @@ app.use(
   })
 );
 
-// Twilio project
-const twilioPath = "/twilio";
-const twilioXmlPath = "./twilio/";
-
-app.use(twilioPath, express.static(twilioXmlPath));
-app.post(
-  `${twilioPath}/:lang`,
-  middlewareReadFiles(twilioXmlPath),
-  (req, res) => {
-    const lang = req.params.lang || "it";
-    const fileName = `index-${lang}.xml`;
-    res.sendFile(fileName, { root: twilioXmlPath });
-  }
-);
-
 // Livia project
 // const liviaPath = "/livia";
 // const liviaHtmlPath = isProd
@@ -65,13 +50,13 @@ app.post(
 // });
 
 // Agnese
-app.get("/agnese", (req, res) => {
-  res.send(`
-    <iframe src="https://www.edusogno.com" width="100%" height="100%">
-      <p>Il tuo browser non supporta gli iframe.</p>
-    </iframe>
-  `);
-});
+// app.get("/agnese", (req, res) => {
+//   res.send(`
+//     <iframe src="https://www.edusogno.com" width="100%" height="100%">
+//       <p>Il tuo browser non supporta gli iframe.</p>
+//     </iframe>
+//   `);
+// });
 
 // Send SMS
 app.get("/gaetana-sms", (req, res) => {

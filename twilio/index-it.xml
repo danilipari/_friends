@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Say language="it-IT" voice="alice">Ciao! Questa è una chiamata di test da parte del server di Dani per le chiamate di Twilio. Grazie per aver risposto!</Say>
-</Response>

@@ -3,14 +3,16 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+dotenv.config();
+// dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const { middlewareReadFiles } = require("./middlewares.cjs");
 const { Vonage } = require('@vonage/server-sdk');
+
 const vonage = new Vonage({
   apiKey: process.env.SECRET_KEY_NEXMO_API,
   apiSecret: process.env.SECRET_KEY_NEXMO
 }, {});
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const isProd = process.env.NODE_ENV === "production";
 
 const app = express();

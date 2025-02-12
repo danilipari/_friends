@@ -18,6 +18,7 @@ const isProd = process.env.NODE_ENV === "production";
 
 const app = express();
 app.use(cors());
+app.set('trust proxy', true);
 // app.use(morgan('combined'));
 app.use(
   helmet.contentSecurityPolicy({
@@ -118,6 +119,10 @@ app.get(`${freccePath}`, middlewareReadFiles(freccePathRoot), (req, res) => {
 
 // Default route
 app.get("/", (req, res) => {
+  const visitorIp = req.ip;
+  const clientIp = req.headers['x-forwarded-for']
+    ? req.headers['x-forwarded-for'].split(',')[0].trim()
+    : req.ip;
   const htmlEle = `<!DOCTYPE html>
   <html lang="it">
   <head>
@@ -228,6 +233,8 @@ app.get("/", (req, res) => {
     <div class="container">
       <h1>I'm Dani Lipari</h1>
       <p>Team Lead - Full Stack Developer (FE-Heavy) - Web3 - Blockchain - Node.js - Angular - Vue - Ionic - Flutter</p>
+      <p>Il tuo IP è: <strong>${visitorIp}</strong></p>
+      <p>Client IP è: <strong>${clientIp}</strong></p>
       <a class="github-link" href="https://github.com/danilipari" target="_blank">Visit my GitHub</a>
       <a class="linkedin-link" href="https://www.linkedin.com/in/dani-lipari-developer/" target="_blank">Visit my LinkedIn</a>
       <footer>

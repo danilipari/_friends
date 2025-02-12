@@ -1,1 +1,1 @@
-web: pm2-runtime start ecosystem.config.cjs
+worker: pm2-runtime start ecosystem.config.cjs

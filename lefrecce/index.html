@@ -3,12 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://www.trenitalia.com/etc.clientlibs/tcom/clientlibs/common/resources/immagini/favicon.ico">
     <title>Verifica le tue Frecce</title>
-    <!-- Includi Tailwind CSS -->
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <!-- Includi Vue.js -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Configurazione personalizzata di Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -27,39 +25,45 @@
     </script>
   </head>
   <body class="bg-accent">
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
     <div id="app" class="min-h-screen flex flex-col items-center justify-center px-4">
       <div class="bg-background p-8 rounded-lg shadow-lg max-w-2xl text-center">
-        <!-- Titolo principale -->
-        <h1 class="text-4xl font-bold mb-4 text-primary">Verifica le tue Frecce</h1>
-        <!-- Descrizione -->
+        <!-- Titolo con effetto gradient che richiama i colori della bandiera italiana -->
+        <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-green-500 via-white to-red-500 text-transparent bg-clip-text">
+          Verifica le tue Frecce
+        </h1>
         <p class="text-textSecondary mb-6">
-          Benvenuto! Questa landing page ti permette di verificare le tue frecce in modo semplice ed efficace.
+          Benvenuto! Questa SPA ti permetterà di ricavare informazioni e cercare i biglietti frecce di 
+          <a class="text-red-500 underline" href="https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html" target="_blank">Trenitalia</a> 
+          in modo semplice ed efficace.
         </p>
         <div>
-          <!-- Bottone con colore secondario -->
           <button 
-            @click="inizia" 
-            class="bg-secondary bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded">
+            @click="null" 
+            class="bg-secondary bg-red-500 text-white font-bold py-2 px-6 rounded">
             {{ btn }}
           </button>
         </div>
       </div>
     </div>
-    <script>
-      const { createApp, ref } = Vue
+    <!-- Script Vue -->
+    <script type="module">
+      import { createApp, ref } from 'vue'
       createApp({
         setup() {
-          const btn = ref('Inizia ora')
+          const btn = ref('Coming Soon');
           const inizia = () => {
             console.log('Benvenuto nella tua SPA di verifica Frecce!');
-          }
-
-          return {
-            btn,
-            inizia
-          }
+          };
+          return { btn, inizia };
         }
-      }).mount('#app')
+      }).mount('#app');
     </script>
   </body>
 </html>

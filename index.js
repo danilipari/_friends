@@ -98,18 +98,19 @@ app.use(
 
 // https://www.lefrecce.it/Channels.Website.BFF.WEB/website/travel/recover
 
-const freccePath = "/lefrecce";
-const freccePathRoot = "./lefrecce/";
+// FreccePath
+// const freccePath = "/lefrecce";
+// const freccePathRoot = "./lefrecce/";
 
-app.use(freccePath, express.static(freccePathRoot));
-app.get(
-  `${freccePath}`,
-  middlewareReadFiles(freccePathRoot),
-  (req, res) => {
-    const fileName = `index.html`;
-    res.sendFile(fileName, { root: freccePathRoot });
-  }
-);
+// app.use(freccePath, express.static(freccePathRoot));
+// app.get(
+//   `${freccePath}`,
+//   middlewareReadFiles(freccePathRoot),
+//   (req, res) => {
+//     const fileName = `index.html`;
+//     res.sendFile(fileName, { root: freccePathRoot });
+//   }
+// );
 
 // Default route
 app.get("/", (req, res) => res.send(`<h3>Welcome!</h3>`));

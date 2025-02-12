@@ -99,7 +99,7 @@ app.use(
 // https://www.lefrecce.it/Channels.Website.BFF.WEB/website/travel/recover
 
 // FreccePath
-const freccePath = "/lefrecce";
+const freccePath = ['/lefrecce', '/frecce'];
 const freccePathRoot = "./lefrecce/";
 
 app.use(freccePath, express.static(freccePathRoot));

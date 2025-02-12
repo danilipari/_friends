@@ -3,10 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LeFrecce</title>
+    <title>Verifica le tue Frecce</title>
+    <!-- Includi Tailwind CSS -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- Includi Vue.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Configurazione personalizzata di Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#003087',
+              secondary: '#E30613',
+              background: '#FFFFFF',
+              accent: '#F2F2F2',
+              textPrimary: '#333333',
+              textSecondary: '#666666'
+            }
+          }
+        }
+      }
+    </script>
   </head>
+  <body class="bg-accent">
+    <div id="app" class="min-h-screen flex flex-col items-center justify-center px-4">
+      <div class="bg-background p-8 rounded-lg shadow-lg max-w-2xl text-center">
+        <!-- Titolo principale -->
+        <h1 class="text-4xl font-bold mb-4 text-primary">Verifica le tue Frecce</h1>
+        <!-- Descrizione -->
+        <p class="text-textSecondary mb-6">
+          Benvenuto! Questa landing page ti permette di verificare le tue frecce in modo semplice ed efficace.
+        </p>
+        <div>
+          <!-- Bottone con colore secondario -->
+          <button 
+            @click="inizia" 
+            class="bg-secondary bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded">
+            {{ btn }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const { createApp, ref } = Vue
+      createApp({
+        setup() {
+          const btn = ref('Inizia ora')
+          const inizia = () => {
+            console.log('Benvenuto nella tua SPA di verifica Frecce!');
+          }
 
-  <body>
-    <h1>Frecce!</h1>
+          return {
+            btn,
+            inizia
+          }
+        }
+      }).mount('#app')
+    </script>
   </body>
 </html>

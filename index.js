@@ -15,6 +15,7 @@ const vonage = new Vonage(
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const isProd = process.env.NODE_ENV === "production";
+const util = require('util');
 
 const app = express();
 app.use(cors());
@@ -119,10 +120,10 @@ app.get(`${freccePath}`, middlewareReadFiles(freccePathRoot), (req, res) => {
 
 // Default route
 app.get("/", (req, res) => {
-  const visitorIp = req.ip;
-  const clientIp = req.headers['x-forwarded-for']
-    ? req.headers['x-forwarded-for'].split(',')[0].trim()
-    : req.ip;
+  const reqString = util.inspect(req, { showHidden: false, depth: 1 });
+  const userAgent = req.get('User-Agent');
+  const ip = req.ip;
+
   const htmlEle = `<!DOCTYPE html>
   <html lang="it">
   <head>
@@ -232,9 +233,9 @@ app.get("/", (req, res) => {
   <body>
     <div class="container">
       <h1>I'm Dani Lipari</h1>
-      <p>Team Lead - Full Stack Developer (FE-Heavy) - Web3 - Blockchain - Node.js - Angular - Vue - Ionic - Flutter</p>
-      <p>Il tuo IP è: <strong>${visitorIp}</strong></p>
-      <p>Client IP è: <strong>${clientIp}</strong></p>
+      <p>Swiss Team Lead - Full Stack Developer - Web3 - Blockchain - Node.js - Angular - Vue - Ionic - Flutter</p>
+      <p>YIP: <strong>${ip}</strong></p>
+      <p>UA: <strong>${userAgent}</strong></p>
       <a class="github-link" href="https://github.com/danilipari" target="_blank">Visit my GitHub</a>
       <a class="linkedin-link" href="https://www.linkedin.com/in/dani-lipari-developer/" target="_blank">Visit my LinkedIn</a>
       <footer>

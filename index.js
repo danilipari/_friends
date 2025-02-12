@@ -234,8 +234,8 @@ app.get("/", (req, res) => {
     <div class="container">
       <h1>I'm Dani Lipari</h1>
       <p>Swiss Team Lead - Full Stack Developer - Web3 - Blockchain - Node.js - Angular - Vue - Ionic - Flutter</p>
-      <p>YIP: <strong>${ip}</strong></p>
-      <p>UA: <strong>${userAgent}</strong></p>
+      <p>IP: <strong>${ip}</strong></p>
+      <p>UserAgent: <strong>${userAgent}</strong></p>
       <a class="github-link" href="https://github.com/danilipari" target="_blank">Visit my GitHub</a>
       <a class="linkedin-link" href="https://www.linkedin.com/in/dani-lipari-developer/" target="_blank">Visit my LinkedIn</a>
       <footer>

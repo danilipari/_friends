@@ -43,25 +43,141 @@
           <a class="text-red-500 underline" href="https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html" target="_blank">Trenitalia</a> 
           in modo semplice ed efficace.
         </p>
-        <div>
+        <!-- <div>
           <button 
             @click="null" 
             class="bg-secondary bg-red-500 text-white font-bold py-2 px-6 rounded">
             {{ 'Coming Soon' }}
           </button>
+        </div> -->
+        <div 
+          id="drop" 
+          class="bg-white p-4 border-dashed border-2 border-gray-400 my-4 hover:border-red-500 hover:cursor-pointer shadow-lg rounded-md flex flex-col items-center justify-center"
+          @dragover.prevent
+          @drop.prevent="handleDrop"
+          @dragenter="dragging = true"
+          @dragleave="dragging = false"
+          @click="openFileDialog"
+        >
+          <svg class="w-8 h-8 text-gray-300 mb-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 9l5-5m0 0l5 5m-5-5v12"/>
+          </svg>
+          <p class="text-gray-600">Trascina qui il tuo file PDF</p>
+          <input
+            ref="fileInput"
+            type="file"
+            multiple
+            accept="application/pdf"
+            class="hidden"
+            @change="handleFileSelect"
+          />
+        </div>
+        <div class="mt-4 text-gray-700">
+          <template v-if="droppedFiles.length > 0">
+            <div
+              v-for="fileObject in droppedFiles"
+              :key="fileObject.file.name"
+              class="bg-gray-100 p-2 rounded mb-2 relative shadow-sm"
+            >
+              <button
+                class="absolute top-2 right-2 hover:bg-red-200 rounded-full p-1 text-red-600 transition-colors"
+                @click="removeFile(fileObject)"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              {{ fileObject.pnr ? fileObject.pnr + ' - ' : '' }}{{ fileObject.file.name }}
+            </div>
+          </template>
+          <p v-else class="text-gray-500">La lista è vuota.</p>
+        </div>
+        <div v-if="showError" class="fixed bottom-4 right-4 p-4 bg-red-500 text-white rounded">
+          {{ errorMessage }}
         </div>
       </div>
     </div>
     <!-- Script Vue -->
+    <script src="https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.min.js"></script>
     <script type="module">
-      import { createApp, ref } from 'vue'
+      import { createApp, ref, reactive } from 'vue';
+      import { parsePNRFromPDF } from './pdfUtils.js';
       createApp({
         setup() {
           const btn = ref('Coming Soon');
           const inizia = () => {
             console.log('Benvenuto nella tua SPA di verifica Frecce!');
           };
-          return { btn, inizia };
+          const dragging = ref(false);
+          const droppedFiles = ref([]);
+          const errorMessage = ref('');
+          const showError = ref(false);
+          const fileInput = ref(null);
+          const handlePDFParse = async (fileObject) => {
+            const arrayBuffer = await fileObject.file.arrayBuffer();
+            const { pnr, cp } = await parsePNRFromPDF(arrayBuffer);
+            if (pnr) {
+              const completeName = `${pnr} - ${cp} - ${fileObject.name}`;
+              console.log('complete name:', completeName);
+              fileObject.pnr = pnr;
+            }
+          };
+          const handleDrop = async (event) => {
+            const files = event.dataTransfer.files;
+            for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+              if (file.type === 'application/pdf') {
+                // Controllo duplicati usando fileObject.file.name
+                if (droppedFiles.value.some((f) => f.file.name === file.name)) {
+                  errorMessage.value = 'Il file ' + file.name + ' è già stato caricato.';
+                  showError.value = true;
+                  setTimeout(() => {
+                    showError.value = false;
+                  }, 3000);
+                } else {
+                  // Creiamo l'oggetto reattivo con la proprietà pnr inizializzata a null
+                  const fileObject = reactive({ file: file, pnr: null });
+                  droppedFiles.value.push(fileObject);
+                  console.log('PDF file dropped:', file.name);
+                  await handlePDFParse(fileObject);
+                }
+              } else {
+                alert('Si accettano solo file PDF.');
+              }
+            }
+            dragging.value = false;
+          };
+          const removeFile = (file) => {
+            droppedFiles.value = droppedFiles.value.filter(
+              (f) => f !== file
+            );
+          };
+          const openFileDialog = () => {
+            fileInput.value.click();
+          };
+          const handleFileSelect = async (event) => {
+            const files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+              if (file.type === 'application/pdf') {
+                if (droppedFiles.value.some((f) => f.file.name === file.name)) {
+                  errorMessage.value = 'Il file ' + file.name + ' è già stato caricato.';
+                  showError.value = true;
+                  setTimeout(() => {
+                    showError.value = false;
+                  }, 3000);
+                } else {
+                  const fileObject = reactive({ file: file, pnr: null });
+                  droppedFiles.value.push(fileObject);
+                  console.log('PDF file selected:', file.name);
+                  await handlePDFParse(fileObject);
+                }
+              } else {
+                alert('Si accettano solo file PDF.');
+              }
+            }
+          };
+          return { btn, inizia, dragging, droppedFiles, errorMessage, showError, handleDrop, removeFile, openFileDialog, handleFileSelect, fileInput };
         }
       }).mount('#app');
     </script>

@@ -34,6 +34,7 @@ app.use(
         "data:",
       ],
       "img-src": ["'self'", "https:", "data:"],
+      "worker-src": ["'self'", "blob:"]
     },
   })
 );

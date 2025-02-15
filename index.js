@@ -18,26 +18,29 @@ const isProd = process.env.NODE_ENV === "production";
 const util = require('util');
 
 const app = express();
+app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  useDefaults: true,
+  directives: {
+    "default-src": ["'self'", "https:"],
+    "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:"],
+    "img-src": ["'self'", "https:", "data:"],
+    "connect-src": ["'self'", "https:"],
+    "style-src": ["'self'", "'unsafe-inline'", "https:"],
+    "font-src": ["'self'", "https:"],
+    "worker-src": ["'self'", "blob:"]
+  },
+}));
+
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+  next();
+});
+
 app.use(cors());
 app.set('trust proxy', true);
 // app.use(morgan('combined'));
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      "default-src": ["'self'", "https:"],
-      "script-src": [
-        "'self'",
-        "'unsafe-inline'",
-        "'unsafe-eval'",
-        "https:",
-        "data:",
-      ],
-      "img-src": ["'self'", "https:", "data:"],
-      "worker-src": ["'self'", "blob:"]
-    },
-  })
-);
 
 // Livia project
 // const liviaPath = "/livia";

@@ -32,7 +32,7 @@
         }
       }
     </script>
-    <div id="app" class="min-h-screen flex flex-col items-center justify-center px-4">
+    <div id="app" class="min-h-screen flex flex-col items-center justify-center px-4" v-cloak>
       <div class="bg-background p-8 rounded-lg shadow-lg max-w-2xl text-center">
         <!-- Titolo con effetto gradient che richiama i colori della bandiera italiana -->
         <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-green-500 via-white to-red-500 text-transparent bg-clip-text">
@@ -74,29 +74,70 @@
         </div>
         <div class="mt-4 text-gray-700">
           <template v-if="droppedFiles.length > 0">
+            <div class="flex items-center justify-between px-2 mb-1">
+              <div class="text-gray-800 text-sm">Biglietti: {{ droppedFiles.length }}</div>
+              <div class="text-red-500 hover:text-red-700 text-sm" @click="removeFiles()">Clear all</div>
+            </div>
             <div
               v-for="fileObject in droppedFiles"
               :key="fileObject.file.name"
-              class="bg-gray-100 p-2 rounded mb-2 relative shadow-sm"
+              class="bg-gray-100 p-2 rounded mb-2 relative shadow-sm text-left"
             >
               <button
                 class="absolute top-2 right-2 hover:bg-red-200 rounded-full p-1 text-red-600 transition-colors"
-                @click="removeFile(fileObject)"
+                @click="removeFiles(fileObject)"
               >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              {{ fileObject.pnr ? fileObject.pnr + ' - ' : '' }}{{ fileObject.file.name }}
+              <template v-if="fileObject.cp && fileObject.pnr">
+                <div class="flex flex-col items-start">
+                  <div class="h-4 rounded w-2/5 mb-1 flex items-center px-2">
+                    <div class="text-gray-800 text-sm">
+                      PNR: <span class="font-bold">{{ fileObject.pnr }}</span> - CP: <span class="font-bold">{{ fileObject.cp }}</span>
+                    </div>
+                  </div>
+                  <div class="w-full px-2">
+                    <small class="text-gray-400 text-sm truncate block">
+                      {{ fileObject.file.name }}
+                    </small>
+                    <div v-if="fileObject.verify?.error" class="mt-1 bg-red-100 text-red-700 font-semibold text-sm px-2 py-1 rounded">
+                      {{ fileObject.verify.error }}
+                    </div>
+                  </div>
+                </div>
+              </template>
+              <template v-else>
+                <div class="animate-pulse">
+                  <div class="h-4 bg-gray-300 rounded w-2/5 mb-2"></div>
+                  <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+                </div>
+              </template>
             </div>
+            <button 
+              @click="verify()" 
+              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 mt-2 px-6 rounded">
+              {{ 'Verify' }}
+            </button>
           </template>
           <p v-else class="text-gray-500">La lista è vuota.</p>
         </div>
-        <div v-if="showError" class="fixed bottom-4 right-4 p-4 bg-red-500 text-white rounded">
-          {{ errorMessage }}
+      </div>
+      <!-- Toast container spostato all'interno di #app per evitare visualizzazione grezza -->
+      <div class="fixed bottom-4 right-4 space-y-2 z-50" v-cloak>
+        <div v-for="toast in toasts" :key="toast.id"
+            :class="['px-4 py-2 rounded shadow', toast.type === 'error' ? 'bg-red-500 text-white' : 'bg-green-500 text-white']">
+          {{ toast.message }}
+          <button class="ml-2 font-bold" @click="removeToast(toast.id)">X</button>
         </div>
       </div>
     </div>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
     <!-- Script Vue -->
     <script src="https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.min.js"></script>
     <script type="module">
@@ -105,38 +146,52 @@
       createApp({
         setup() {
           const btn = ref('Coming Soon');
-          const inizia = () => {
-            console.log('Benvenuto nella tua SPA di verifica Frecce!');
-          };
           const dragging = ref(false);
           const droppedFiles = ref([]);
-          const errorMessage = ref('');
-          const showError = ref(false);
           const fileInput = ref(null);
+          // Nuovo array per i toast
+          const toasts = ref([]);
+          const delay = (ms = 500) => new Promise(resolve => setTimeout(resolve, ms));
+
+          const addToast = (message, type = 'error') => {
+            const id = Date.now() + Math.random();
+            toasts.value.push({ id, message, type });
+            setTimeout(() => {
+              toasts.value = toasts.value.filter(t => t.id !== id);
+            }, 5000);
+          };
+
+          const removeToast = (id) => {
+            toasts.value = toasts.value.filter(t => t.id !== id);
+          };
+
+          // Aggiorno la funzione per duplicati per aggiungere un toast per ciascun file duplicato
+          const showDuplicateError = (fileName) => {
+            addToast('Il file ' + fileName + ' è già stato caricato.', 'error');
+          };
+
           const handlePDFParse = async (fileObject) => {
             const arrayBuffer = await fileObject.file.arrayBuffer();
-            const { pnr, cp } = await parsePNRFromPDF(arrayBuffer);
-            if (pnr) {
-              const completeName = `${pnr} - ${cp} - ${fileObject.name}`;
-              console.log('complete name:', completeName);
+            const [result] = await Promise.all([
+              parsePNRFromPDF(arrayBuffer),
+              delay(250)
+            ]);
+            const { cp, pnr } = result;
+            if (cp && pnr) {
+              fileObject.cp = cp;
               fileObject.pnr = pnr;
             }
           };
+
           const handleDrop = async (event) => {
             const files = event.dataTransfer.files;
             for (let i = 0; i < files.length; i++) {
               const file = files[i];
               if (file.type === 'application/pdf') {
-                // Controllo duplicati usando fileObject.file.name
                 if (droppedFiles.value.some((f) => f.file.name === file.name)) {
-                  errorMessage.value = 'Il file ' + file.name + ' è già stato caricato.';
-                  showError.value = true;
-                  setTimeout(() => {
-                    showError.value = false;
-                  }, 3000);
+                  showDuplicateError(file.name);
                 } else {
-                  // Creiamo l'oggetto reattivo con la proprietà pnr inizializzata a null
-                  const fileObject = reactive({ file: file, pnr: null });
+                  const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null });
                   droppedFiles.value.push(fileObject);
                   console.log('PDF file dropped:', file.name);
                   await handlePDFParse(fileObject);
@@ -147,25 +202,28 @@
             }
             dragging.value = false;
           };
-          const removeFile = (file) => {
-            droppedFiles.value = droppedFiles.value.filter(
-              (f) => f !== file
-            );
+
+          const removeFiles = (file) => {
+            if (file) {
+              droppedFiles.value = droppedFiles.value.filter(
+                (f) => f !== file
+              );
+            } else {
+              droppedFiles.value = [];
+            }
           };
+
           const openFileDialog = () => {
             fileInput.value.click();
           };
+
           const handleFileSelect = async (event) => {
             const files = event.target.files;
             for (let i = 0; i < files.length; i++) {
               const file = files[i];
               if (file.type === 'application/pdf') {
                 if (droppedFiles.value.some((f) => f.file.name === file.name)) {
-                  errorMessage.value = 'Il file ' + file.name + ' è già stato caricato.';
-                  showError.value = true;
-                  setTimeout(() => {
-                    showError.value = false;
-                  }, 3000);
+                  showDuplicateError(file.name);
                 } else {
                   const fileObject = reactive({ file: file, pnr: null });
                   droppedFiles.value.push(fileObject);
@@ -176,8 +234,38 @@
                 alert('Si accettano solo file PDF.');
               }
             }
+            event.target.value = '';
           };
-          return { btn, inizia, dragging, droppedFiles, errorMessage, showError, handleDrop, removeFile, openFileDialog, handleFileSelect, fileInput };
+
+          const verify = async () => {
+            for (const fileObject of droppedFiles.value) {
+              const payload = {
+                recoverType: "PNR_CP",
+                pnr: fileObject.pnr,
+                cpCode: fileObject.cp
+              };
+              try {
+                const response = await fetch("https://www.lefrecce.it/Channels.Website.BFF.WEB/website/travel/recover", {
+                  method: "POST",
+                  mode: "cors",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                  fileObject.verify = { error: response.statusText, status: response.status };
+                  addToast(`Verifica fallita per ${fileObject.pnr}-${fileObject.cp}: ${response.statusText} (${response.status})`, "error");
+                  continue;
+                }
+                const result = await response.json();
+                fileObject.verify = { status: response.status, result };
+              } catch (err) {
+                fileObject.verify = { error: err.message };
+                addToast(`Verifica fallita per ${fileObject.pnr}-${fileObject.cp}: ${err.message}`, "error");
+              }
+            }
+          };
+
+          return { btn, verify, dragging, droppedFiles, toasts, removeToast, handleDrop, removeFiles, openFileDialog, handleFileSelect, fileInput };
         }
       }).mount('#app');
     </script>

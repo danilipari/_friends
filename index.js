@@ -1,8 +1,9 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const dotenv = require("dotenv");
 const { middlewareReadFiles } = require("./middlewares.cjs");
 // const { Vonage } = require("@vonage/server-sdk");
 // const vonage = new Vonage(
@@ -13,11 +14,11 @@ const { middlewareReadFiles } = require("./middlewares.cjs");
 //   {}
 // );
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const certs = false;
-const util = require('util');
-const fs = require('fs');
-const https = require('https');
+const util = require("util");
+const fs = require("fs");
+const https = require("https");
+const path = require("path");
 
 const app = express();
 app.use(express.json());
@@ -112,11 +113,24 @@ app.use(morgan('combined'));
 const freccePath = ["/lefrecce", "/frecce"];
 const freccePathRoot = "./lefrecce/";
 
-app.use(freccePath, express.static(freccePathRoot));
-app.get(`${freccePath}`, middlewareReadFiles(freccePathRoot), (req, res) => {
-  const fileName = `index.html`;
-  res.sendFile(fileName, { root: freccePathRoot });
+app.get(freccePath, middlewareReadFiles(freccePathRoot), (req, res) => {
+  const myServerVars = {
+    env: process.env.NODE_ENV === 'production'
+  };
+  const fileName = path.join(freccePathRoot, "index.html");
+  fs.readFile(fileName, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).send("Errore nella lettura del file HTML");
+    }
+
+    const serverScript = `<script>window.vueServerData = ${JSON.stringify(myServerVars)};</script>`;
+    const modifiedData = data.replace("</head>", `${serverScript}</head>`);
+
+    res.send(modifiedData);
+  });
 });
+// messo sotto per evitare che venga sovrascritto il middlewareReadFiles
+app.use(freccePath, express.static(freccePathRoot));
 
 app.post('/frecce/travel/recover', async (req, res) => {
   try {

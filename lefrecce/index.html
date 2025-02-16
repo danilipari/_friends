@@ -33,15 +33,22 @@
       }
     </script>
     <div id="app" class="min-h-screen flex flex-col items-center justify-center px-4" v-cloak>
+      <!-- Add language toggle inside Vue container -->
+      <div class="self-end mb-2">
+        <button @click="lang = 'IT'" :class="{'font-bold': lang==='IT'}" class="mx-1">IT</button>|
+        <button @click="lang = 'EN'" :class="{'font-bold': lang==='EN'}" class="mx-1">EN</button>
+      </div>
       <div class="bg-background p-8 rounded-lg shadow-lg max-w-2xl text-center">
         <!-- Titolo con effetto gradient che richiama i colori della bandiera italiana -->
         <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-green-500 via-white to-red-500 text-transparent bg-clip-text">
-          Verifica le tue Frecce
+          {{ translations.title }}
         </h1>
         <p class="text-textSecondary mb-6">
-          Benvenuto! Questa SPA ti permetterà di ricavare informazioni e cercare i biglietti di 
-          <a class="text-red-500 underline" href="https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html" target="_blank">Trenitalia</a> 
-          in modo semplice ed efficace.
+          {{ translations.welcome }}
+          <br/>
+          <a class="text-red-500 underline" :href="translations.trenitaliaUrl" target="_blank">
+            {{ translations.trenitaliaLink }}
+          </a> 
         </p>
         <div 
           id="drop" 
@@ -68,81 +75,91 @@
         <div class="mt-4 text-gray-700">
           <template v-if="droppedFiles.length > 0">
             <div class="flex items-center justify-between px-2 mb-1">
-              <div class="text-gray-800 text-sm">Biglietti: {{ droppedFiles.length }}</div>
-              <div class="text-red-500 hover:text-red-700 text-sm" @click="removeFiles()">Clear all</div>
+              <div class="text-gray-800 text-sm">{{ translations.tickets }}: {{ droppedFiles.length }}</div>
+              <div class="text-red-500 hover:text-red-700 text-sm" @click="removeFiles()">
+                {{ translations.clearAll }}
+              </div>
             </div>
-            <div
-              v-for="fileObject in droppedFiles"
-              :key="fileObject.file.name"
-              class="bg-gray-100 p-2 rounded mb-2 relative shadow-sm text-left"
-            >
-              <button
-                class="absolute top-2 right-2 hover:bg-red-200 rounded-full p-1 text-red-600 transition-colors"
-                @click="removeFiles(fileObject)"
-              >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              <template v-if="fileObject.cp && fileObject.pnr">
-                <div class="flex flex-col items-start">
-                  <div class="h-4 rounded w-3/5 mb-1 flex items-center px-2">
-                    <div class="text-gray-800 text-sm">
-                      PNR: <span class="font-bold">{{ fileObject.pnr }}</span> - CP: <span class="font-bold">{{ fileObject.cp }}</span>
-                      <a 
-                        v-if="fileObject.verify && fileObject.verify.status === 200 && fileObject.verify.result?.solutions[0]?.resourceId"
-                        :href="`https://www.lefrecce.it/Channels.Website.BFF.WEB/website/post/purchase/pdf?resourceId=${fileObject.verify.result.solutions[0].resourceId}`"
-                        download="ticket.pdf"
-                        class="ml-1 text-xs cursor-pointer font-bold hover:underline text-blue-600">
-                        (PDF)
-                      </a>
-                    </div>
-                  </div>
-                  <div class="w-full px-2">
-                    <small class="text-gray-400 text-sm truncate block">
-                      File: {{ fileObject.file.name }}
-                    </small>
-                    <div v-if="fileObject.verify?.result && fileObject.verify?.status !== 200" class="mt-1 bg-red-100 text-red-700 font-semibold text-sm px-2 py-1 rounded">
-                      {{ fileObject.verify?.result?.type || 'Failed request' }} - {{ fileObject.verify?.result?.message }} - {{ fileObject.verify.status }}
-                    </div>
-                    <div v-if="fileObject.verify?.result && fileObject.verify?.status === 200" class="mt-1 bg-green-100 text-green-700 font-semibold text-sm px-2 py-1 rounded">
-                      {{ 'Success request' }} - {{ fileObject.verify.status }}
-                    </div>
-                  </div>
-                </div>
+            <template v-for="fileObject in droppedFiles" :key="fileObject.file.name">
+              <div class="relative bg-gray-100 p-4 rounded mb-2 shadow-lg border text-left">
                 <button
-                  v-if="fileObject.verify?.result"
-                  @click="toggleExpand(fileObject)" 
-                  class="mt-2 text-xs text-blue-600 hover:underline px-2">
-                    {{ fileObject.expanded ? 'Hide request' : 'Show request' }}
+                  class="absolute top-2 right-2 hover:bg-red-200 rounded-full p-1 text-red-600 transition-colors"
+                  @click="removeFiles(fileObject)"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
-                <div v-if="fileObject.expanded" class="m-2 p-2 bg-gray-900 text-white rounded">
-                  <pre class="text-xs whitespace-pre-wrap">
-                    {{ JSON.stringify(fileObject.verify.result, null, 2) }}
-                  </pre>
-                </div>
-              </template>
-              <template v-else>
-                <div class="animate-pulse">
-                  <div class="h-4 bg-gray-300 rounded w-2/5 mb-2"></div>
-                  <div class="h-4 bg-gray-300 rounded w-1/2"></div>
-                </div>
-              </template>
-            </div>
+                <template v-if="fileObject.cp && fileObject.pnr">
+                  <div class="flex flex-col items-start">
+                    <div class="flex items-center mb-1 px-2">
+                      <div class="text-gray-800 text-sm">
+                        PNR: <span class="font-bold">{{ fileObject.pnr }}</span> - 
+                        CP: <span class="font-bold">{{ fileObject.cp }}</span>
+                        <a 
+                          v-if="fileObject.verify && fileObject.verify.status === 200 && fileObject.verify.result?.solutions[0]?.resourceId"
+                          :href="`https://www.lefrecce.it/Channels.Website.BFF.WEB/website/post/purchase/pdf?resourceId=${fileObject.verify.result.solutions[0].resourceId}`"
+                          download="ticket.pdf"
+                          class="ml-1 text-xs cursor-pointer font-bold hover:underline text-blue-600">
+                          (PDF)
+                        </a>
+                      </div>
+                    </div>
+                    <div class="w-full px-2">
+                      <small class="text-gray-400 text-sm truncate block">
+                        File: {{ fileObject.file.name }}
+                      </small>
+                      <div v-if="fileObject.verify?.result" class="mt-1 flex items-center">
+                        <div class="flex-1">
+                          <div v-if="fileObject.verify?.status !== 200" class="bg-red-100 text-red-700 font-semibold text-sm px-2 py-1 rounded">
+                            {{ fileObject.verify?.result?.type || translations.failedRequest }} - {{ fileObject.verify?.result?.message }} - {{ fileObject.verify.status }}
+                          </div>
+                          <div v-else class="bg-green-100 text-green-700 font-semibold text-sm px-2 py-1 rounded">
+                            {{ translations.successRequest }} - {{ fileObject.verify.status }}
+                          </div>
+                        </div>
+                        <button @click="toggleExpand(fileObject)" class="ml-2 text-xs text-blue-600 hover:underline px-2">
+                          {{ fileObject.expanded ? translations.hideRequest : translations.showRequest }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Progress bar -->
+                  <div v-if="fileObject.progress > 0 && fileObject.progress < 100" class="mt-2 w-full bg-gray-300 rounded h-2">
+                    <div :style="{ width: fileObject.progress + '%' }" class="bg-blue-500 h-2 rounded"></div>
+                  </div>
+                  <div v-if="fileObject.expanded" class="m-2 p-2 bg-gray-900 text-white rounded">
+                    <pre class="text-xs whitespace-pre-wrap">
+                      {{ JSON.stringify(fileObject.verify.result, null, 2) }}
+                    </pre>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="animate-pulse">
+                    <div class="h-4 bg-gray-300 rounded w-2/5 mb-2"></div>
+                    <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+                  </div>
+                </template>
+              </div>
+            </template>
             <button 
               @click="verify()" 
               class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 mt-2 px-6 rounded">
-              {{ 'Verify' }}
+              {{ translations.verify }}
             </button>
           </template>
-          <p v-else class="text-gray-500">La lista è vuota.</p>
+          <p v-else class="text-gray-500">{{ translations.emptyList }}</p>
         </div>
       </div>
       <div class="fixed bottom-4 right-4 space-y-2 z-50" v-cloak>
         <div v-for="toast in toasts" :key="toast.id"
-            :class="['px-4 py-2 rounded shadow', toast.type === 'error' ? 'bg-red-500 text-white' : 'bg-green-500 text-white']">
+            :class="['relative px-4 py-2 pr-12 rounded shadow', toast.type === 'error' ? 'bg-red-500 text-white' : 'bg-green-500 text-white']">
           {{ toast.message }}
-          <button class="ml-2 font-bold" @click="removeToast(toast.id)">X</button>
+          <button class="absolute top-[2px] right-2 hover:bg-gray-300 rounded-full p-2 text-lg transition-colors" @click="removeToast(toast.id)">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -154,10 +171,43 @@
     <!-- Script Vue -->
     <script src="https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.min.js"></script>
     <script type="module">
-      import { createApp, ref, reactive } from 'vue';
+      import { createApp, ref, reactive, computed } from 'vue';
       import { parsePNRFromPDF } from './pdfUtils.js';
       createApp({
         setup() {
+          const lang = ref('IT');
+          const translations = computed(() => {
+            return lang.value === 'EN'
+              ? {
+                  title: "Verify your Frecce",
+                  welcome: "Welcome! This SPA lets you extract info and search for tickets from",
+                  trenitaliaLink: "Trenitalia",
+                  trenitaliaUrl: "https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html",
+                  tickets: "Tickets",
+                  clearAll: "Clear all",
+                  verify: "Verify",
+                  emptyList: "The list is empty.",
+                  failedRequest: "Failed request",
+                  successRequest: "Success request",
+                  hideRequest: "Hide request",
+                  showRequest: "Show request"
+                }
+              : {
+                  title: "Verifica le tue Frecce",
+                  welcome: "Benvenuto! Questa SPA ti permette di ricavare informazioni e cercare i biglietti di",
+                  trenitaliaLink: "Trenitalia",
+                  trenitaliaUrl: "https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html",
+                  tickets: "Biglietti",
+                  clearAll: "Rimuovi tutti",
+                  verify: "Verifica",
+                  emptyList: "La lista è vuota.",
+                  failedRequest: "Richiesta fallita",
+                  successRequest: "Richiesta riuscita",
+                  hideRequest: "Nascondi richiesta",
+                  showRequest: "Mostra richiesta"
+                };
+          });
+          
           const btn = ref('Coming Soon');
           const dragging = ref(false);
           const droppedFiles = ref([]);
@@ -202,7 +252,8 @@
                 if (droppedFiles.value.some((f) => f.file.name === file.name)) {
                   showDuplicateError(file.name);
                 } else {
-                  const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null, expanded: false });
+                  // Add progress property here
+                  const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null, expanded: false, progress: 0 });
                   droppedFiles.value.push(fileObject);
                   await handlePDFParse(fileObject);
                 }
@@ -215,9 +266,7 @@
 
           const removeFiles = (file) => {
             if (file) {
-              droppedFiles.value = droppedFiles.value.filter(
-                (f) => f !== file
-              );
+              droppedFiles.value = droppedFiles.value.filter((f) => f !== file);
             } else {
               droppedFiles.value = [];
             }
@@ -235,7 +284,7 @@
                 if (droppedFiles.value.some((f) => f.file.name === file.name)) {
                   showDuplicateError(file.name);
                 } else {
-                  const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null, expanded: false });
+                  const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null, expanded: false, progress: 0 });
                   droppedFiles.value.push(fileObject);
                   await handlePDFParse(fileObject);
                 }
@@ -248,6 +297,8 @@
 
           const verify = async () => {
             for (const fileObject of droppedFiles.value) {
+              // Simulate progress start
+              fileObject.progress = 50;
               const payload = {
                 recoverType: "PNR_CP",
                 pnr: fileObject.pnr,
@@ -267,14 +318,17 @@
                   const result = await response.json();
                   fileObject.verify = { status: response.status, result };
                   addToast(`Verifica fallita - ${fileObject.pnr}-${fileObject.cp}: ${response.statusText} - [${response.status}]`, "error");
+                  fileObject.progress = 100;
                   continue;
                 }
                 const result = await response.json();
                 addToast(`Verifica eseguita - PNR:${fileObject.pnr} CP:${fileObject.cp} - [${response.status}]`, "success");
                 fileObject.verify = { status: response.status, result };
+                fileObject.progress = 100;
               } catch (err) {
                 fileObject.verify = { error: err.message };
                 addToast(`Verifica fallita per ${fileObject.pnr}-${fileObject.cp}: ${err.message}`, "error");
+                fileObject.progress = 100;
               }
             }
           };
@@ -284,7 +338,8 @@
           };
 
           return { 
-            btn, verify, dragging, droppedFiles, toasts, removeToast, handleDrop, removeFiles, openFileDialog, handleFileSelect, fileInput, toggleExpand 
+            lang, translations, btn, verify, dragging, droppedFiles, toasts, removeToast,
+            handleDrop, removeFiles, openFileDialog, handleFileSelect, fileInput, toggleExpand
           };
         }
       }).mount('#app');

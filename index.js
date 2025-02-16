@@ -14,7 +14,7 @@ const { middlewareReadFiles } = require("./middlewares.cjs");
 // );
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
-const ssl = false;
+const certs = false;
 const util = require('util');
 const fs = require('fs');
 const https = require('https');
@@ -271,12 +271,12 @@ app.get("/", (req, res) => {
 
 const port = process.env.PORT || 8000;
 
-if (ssl) {
+if (certs) {
   let options;
   try {
     options = {
-      key: fs.readFileSync('./ssl/server.key'),
-      cert: fs.readFileSync('./ssl/server.cert')
+      key: fs.readFileSync('./certs/server.key'),
+      cert: fs.readFileSync('./certs/server.cert')
     };
   } catch (err) {
     console.error("Errore nella lettura dei certificati:", err);

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate:cert": "openssl req -nodes -new -x509 -keyout server.key -out server.cert -days 365 -subj '/CN=localhost'",
+    "generate:cert": "mkdir -p certs && openssl req -nodes -new -x509 -keyout certs/server.key -out certs/server.cert -days 365 -subj '/CN=localhost'",
     "node": "node index.js",
     "//pip//heroku-postbuild": "npm run nest:install && npm run nest:build:production && npm run pip:install && npm run pip:init",
     "heroku-postbuild": "npm run nest:install && npm run nest:build:production",

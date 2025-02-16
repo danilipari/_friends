@@ -14,7 +14,7 @@ const vonage = new Vonage(
 );
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
-const isProd = process.env.NODE_ENV === "production";
+const ssl = false;
 const util = require('util');
 const fs = require('fs');
 const https = require('https');
@@ -277,7 +277,7 @@ app.get("/", (req, res) => {
 
 const port = process.env.PORT || 8000;
 
-if (process.env.NODE_ENV === "development") {
+if (ssl) {
   let options;
   try {
     options = {
@@ -292,7 +292,6 @@ if (process.env.NODE_ENV === "development") {
     console.log(`Secure server running in development on port ${port}.`);
   });
 } else {
-  // In produzione avvia il server normalmente (HTTP)
   app.listen(port, () => {
     console.log(`Server running in production on port ${port}.`);
   });

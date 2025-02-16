@@ -7,6 +7,8 @@
     <title>Verifica le tue Frecce</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
     <script>
       tailwind.config = {
         important: true,
@@ -157,6 +159,13 @@
               <template v-else>
                 {{ translations.verify }}
               </template>
+            </button>
+            <button 
+              v-if="hasResults"
+              @click="generatePDF()" 
+              :disabled="verifying"
+              :class="['bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-2 px-6 rounded disabled:opacity-50', verifying ? 'animate-pulse' : '']">
+              Export Report
             </button>
           </template>
           <p v-else class="text-gray-500">{{ translations.emptyList }}</p>
@@ -421,10 +430,79 @@
             }
           };
 
+          const hasResults = computed(() => droppedFiles.value.some(fileObject => fileObject.verify));
+
+          const generatePDF = () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const formatDate = (date) => {
+              const pad = n => n < 10 ? '0' + n : n;
+              return `${pad(date.getDate())}-${pad(date.getMonth() + 1)}-${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+            };
+            const tableRows = [];
+            droppedFiles.value.forEach(fileObject => {
+              if (fileObject.verify) {
+                let row = {
+                  pnr: fileObject.pnr || "N/A",
+                  cp: fileObject.cp || "N/A",
+                  status: String(fileObject.verify.status),
+                  pdf: ""
+                };
+                if (fileObject.verify.status === 200 && fileObject.verify.result?.solutions[0]?.resourceId) {
+                  row.pdf = "PDF";
+                  row.link = `https://www.lefrecce.it/Channels.Website.BFF.WEB/website/post/purchase/pdf?resourceId=${fileObject.verify.result.solutions[0].resourceId}`;
+                }
+                tableRows.push(row);
+              }
+            });
+            const tableColumns = [
+              { header: "PNR", dataKey: "pnr" },
+              { header: "CP", dataKey: "cp" },
+              { header: "Status", dataKey: "status" },
+              { header: "PDF", dataKey: "pdf" }
+            ];
+            // Header text (summary)
+            doc.text(`Summary: ${successCount.value} success, ${failureCount.value} failure`, 14, 15);
+            doc.autoTable({
+              columns: tableColumns,
+              body: tableRows,
+              startY: 25,
+              headStyles: {
+                fillColor: [0, 0, 255],
+                textColor: [255, 255, 255],
+                halign: 'left'
+              },
+              columnStyles: {
+                0: { cellWidth: "wrap" },
+                1: { cellWidth: "wrap" },
+                2: { cellWidth: "wrap" },
+                3: { cellWidth: "wrap", halign: 'left' }
+              },
+              didParseCell: function(data) {
+                if (data.section === 'body') {
+                  if (data.column.index === 2) {
+                    // Status: green for 200, red otherwise
+                    data.cell.styles.textColor = data.cell.text[0] === "200" ? [0,128,0] : [255,0,0];
+                  }
+                  if (data.column.index === 3 && data.cell.text[0] === "PDF") {
+                    // PDF column blue text remains blue
+                    data.cell.styles.textColor = [0,0,255];
+                  }
+                }
+              }
+            });
+            // Add export info at the bottom: export date and site provenance
+            const finalY = doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 10 : 40;
+            const exportInfo = `Export performed on: ${formatDate(new Date())} from: www.lipari.dev/frecce/`;
+            doc.setFontSize(10);
+            doc.text(exportInfo, 14, finalY);
+            doc.save("report.pdf");
+          };
+
           return { 
             lang, translations, verify, dragging, droppedFiles, toasts, removeToast,
             handleDrop, removeFiles, openFileDialog, handleFileSelect, fileInput, toggleExpand,
-            vueServerData, verifying, verifyingRequests, globalProgress, filesContainer
+            vueServerData, verifying, verifyingRequests, globalProgress, filesContainer, generatePDF, hasResults
           };
         }
       }).mount('#app');

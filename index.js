@@ -16,8 +16,11 @@ const vonage = new Vonage(
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const isProd = process.env.NODE_ENV === "production";
 const util = require('util');
+const fs = require('fs');
+const https = require('https');
 
 const app = express();
+app.use(express.json());
 app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
   useDefaults: true,
@@ -110,7 +113,6 @@ app.set('trust proxy', true);
 //   }
 // );
 
-// https://www.lefrecce.it/Channels.Website.BFF.WEB/website/travel/recover
 
 // FreccePath
 const freccePath = ["/lefrecce", "/frecce"];
@@ -120,6 +122,25 @@ app.use(freccePath, express.static(freccePathRoot));
 app.get(`${freccePath}`, middlewareReadFiles(freccePathRoot), (req, res) => {
   const fileName = `index.html`;
   res.sendFile(fileName, { root: freccePathRoot });
+});
+
+app.post('/frecce/simulateRecover', async (req, res) => {
+  try {
+    const response = await fetch("https://www.lefrecce.it/Channels.Website.BFF.WEB/website/travel/recover", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json, application/pdf, text/calendar",
+        "Content-Type": "application/json",
+        "cache-control": "no-cache",
+        "x-requested-with": "Fetch"
+      },
+      body: JSON.stringify(req.body)
+    });
+    const result = await response.json();
+    res.status(response.status).json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // Default route
@@ -254,8 +275,25 @@ app.get("/", (req, res) => {
   res.send(htmlEle);
 });
 
-// Start the app by listening on the default Heroku port
 const port = process.env.PORT || 8000;
-app.listen(port, "0.0.0.0", () => {
-  console.log(`Project is running on port ${port}.`);
-});
+
+if (process.env.NODE_ENV === "development") {
+  let options;
+  try {
+    options = {
+      key: fs.readFileSync('./ssl/server.key'),
+      cert: fs.readFileSync('./ssl/server.cert')
+    };
+  } catch (err) {
+    console.error("Errore nella lettura dei certificati:", err);
+    process.exit(1);
+  }
+  https.createServer(options, app).listen(port, () => {
+    console.log(`Secure server running in development on port ${port}.`);
+  });
+} else {
+  // In produzione avvia il server normalmente (HTTP)
+  app.listen(port, () => {
+    console.log(`Server running in production on port ${port}.`);
+  });
+}

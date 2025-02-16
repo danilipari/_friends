@@ -43,13 +43,6 @@
           <a class="text-red-500 underline" href="https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html" target="_blank">Trenitalia</a> 
           in modo semplice ed efficace.
         </p>
-        <!-- <div>
-          <button 
-            @click="null" 
-            class="bg-secondary bg-red-500 text-white font-bold py-2 px-6 rounded">
-            {{ 'Coming Soon' }}
-          </button>
-        </div> -->
         <div 
           id="drop" 
           class="bg-white p-4 border-dashed border-2 border-gray-400 my-4 hover:border-red-500 hover:cursor-pointer shadow-lg rounded-md flex flex-col items-center justify-center"
@@ -93,19 +86,40 @@
               </button>
               <template v-if="fileObject.cp && fileObject.pnr">
                 <div class="flex flex-col items-start">
-                  <div class="h-4 rounded w-2/5 mb-1 flex items-center px-2">
+                  <div class="h-4 rounded w-3/5 mb-1 flex items-center px-2">
                     <div class="text-gray-800 text-sm">
                       PNR: <span class="font-bold">{{ fileObject.pnr }}</span> - CP: <span class="font-bold">{{ fileObject.cp }}</span>
+                      <a 
+                        v-if="fileObject.verify && fileObject.verify.status === 200 && fileObject.verify.result?.solutions[0]?.resourceId"
+                        :href="`https://www.lefrecce.it/Channels.Website.BFF.WEB/website/post/purchase/pdf?resourceId=${fileObject.verify.result.solutions[0].resourceId}`"
+                        download="ticket.pdf"
+                        class="ml-1 text-xs cursor-pointer font-bold hover:underline text-blue-600">
+                        (PDF)
+                      </a>
                     </div>
                   </div>
                   <div class="w-full px-2">
                     <small class="text-gray-400 text-sm truncate block">
-                      {{ fileObject.file.name }}
+                      File: {{ fileObject.file.name }}
                     </small>
-                    <div v-if="fileObject.verify?.error" class="mt-1 bg-red-100 text-red-700 font-semibold text-sm px-2 py-1 rounded">
-                      {{ fileObject.verify.error }}
+                    <div v-if="fileObject.verify?.result && fileObject.verify?.status !== 200" class="mt-1 bg-red-100 text-red-700 font-semibold text-sm px-2 py-1 rounded">
+                      {{ fileObject.verify?.result?.type || 'Failed request' }} - {{ fileObject.verify?.result?.message }} - {{ fileObject.verify.status }}
+                    </div>
+                    <div v-if="fileObject.verify?.result && fileObject.verify?.status === 200" class="mt-1 bg-green-100 text-green-700 font-semibold text-sm px-2 py-1 rounded">
+                      {{ 'Success request' }} - {{ fileObject.verify.status }}
                     </div>
                   </div>
+                </div>
+                <button
+                  v-if="fileObject.verify?.result"
+                  @click="toggleExpand(fileObject)" 
+                  class="mt-2 text-xs text-blue-600 hover:underline px-2">
+                    {{ fileObject.expanded ? 'Hide request' : 'Show request' }}
+                </button>
+                <div v-if="fileObject.expanded" class="m-2 p-2 bg-gray-900 text-white rounded">
+                  <pre class="text-xs whitespace-pre-wrap">
+                    {{ JSON.stringify(fileObject.verify.result, null, 2) }}
+                  </pre>
                 </div>
               </template>
               <template v-else>
@@ -124,7 +138,6 @@
           <p v-else class="text-gray-500">La lista è vuota.</p>
         </div>
       </div>
-      <!-- Toast container spostato all'interno di #app per evitare visualizzazione grezza -->
       <div class="fixed bottom-4 right-4 space-y-2 z-50" v-cloak>
         <div v-for="toast in toasts" :key="toast.id"
             :class="['px-4 py-2 rounded shadow', toast.type === 'error' ? 'bg-red-500 text-white' : 'bg-green-500 text-white']">
@@ -149,9 +162,8 @@
           const dragging = ref(false);
           const droppedFiles = ref([]);
           const fileInput = ref(null);
-          // Nuovo array per i toast
           const toasts = ref([]);
-          const delay = (ms = 500) => new Promise(resolve => setTimeout(resolve, ms));
+          const delay = (ms = 250) => new Promise(resolve => setTimeout(resolve, ms));
 
           const addToast = (message, type = 'error', ms = 5_000) => {
             const id = Date.now() + Math.random();
@@ -165,7 +177,6 @@
             toasts.value = toasts.value.filter(t => t.id !== id);
           };
 
-          // Aggiorno la funzione per duplicati per aggiungere un toast per ciascun file duplicato
           const showDuplicateError = (fileName) => {
             addToast('Il file ' + fileName + ' è già stato caricato.', 'error');
           };
@@ -174,7 +185,7 @@
             const arrayBuffer = await fileObject.file.arrayBuffer();
             const [result] = await Promise.all([
               parsePNRFromPDF(arrayBuffer),
-              delay(250)
+              delay()
             ]);
             const { cp, pnr } = result;
             if (cp && pnr) {
@@ -191,9 +202,8 @@
                 if (droppedFiles.value.some((f) => f.file.name === file.name)) {
                   showDuplicateError(file.name);
                 } else {
-                  const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null });
+                  const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null, expanded: false });
                   droppedFiles.value.push(fileObject);
-                  console.log('PDF file dropped:', file.name);
                   await handlePDFParse(fileObject);
                 }
               } else {
@@ -225,7 +235,7 @@
                 if (droppedFiles.value.some((f) => f.file.name === file.name)) {
                   showDuplicateError(file.name);
                 } else {
-                  const fileObject = reactive({ file: file, pnr: null });
+                  const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null, expanded: false });
                   droppedFiles.value.push(fileObject);
                   await handlePDFParse(fileObject);
                 }
@@ -254,12 +264,12 @@
                   body: JSON.stringify(payload)
                 });
                 if (!response.ok) {
-                  fileObject.verify = { error: response.statusText, status: response.status };
+                  const result = await response.json();
+                  fileObject.verify = { status: response.status, result };
                   addToast(`Verifica fallita - ${fileObject.pnr}-${fileObject.cp}: ${response.statusText} - [${response.status}]`, "error");
                   continue;
                 }
                 const result = await response.json();
-                console.log('Verification result:', result);
                 addToast(`Verifica eseguita - PNR:${fileObject.pnr} CP:${fileObject.cp} - [${response.status}]`, "success");
                 fileObject.verify = { status: response.status, result };
               } catch (err) {
@@ -269,7 +279,13 @@
             }
           };
 
-          return { btn, verify, dragging, droppedFiles, toasts, removeToast, handleDrop, removeFiles, openFileDialog, handleFileSelect, fileInput };
+          const toggleExpand = (fileObject) => {
+            fileObject.expanded = !fileObject.expanded;
+          };
+
+          return { 
+            btn, verify, dragging, droppedFiles, toasts, removeToast, handleDrop, removeFiles, openFileDialog, handleFileSelect, fileInput, toggleExpand 
+          };
         }
       }).mount('#app');
     </script>

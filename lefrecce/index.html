@@ -372,9 +372,9 @@
                 cpCode: fileObject.cp
               };
               try {
+                // const response = await fetch("https://www.lipari.dev/frecce/travel/recover", {
                 const response = await fetch("/frecce/travel/recover", {
                   method: "POST",
-                  mode: "cors",
                   headers: {
                     "Accept": "application/json, application/pdf, text/calendar",
                     "Content-Type": "application/json"

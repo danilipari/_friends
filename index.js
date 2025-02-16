@@ -37,7 +37,7 @@ app.use(helmet.contentSecurityPolicy({
 
 app.use(cors());
 app.set('trust proxy', true);
-// app.use(morgan('combined'));
+app.use(morgan('combined'));
 
 // Livia project
 // const liviaPath = "/livia";

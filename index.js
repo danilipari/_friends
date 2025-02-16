@@ -4,14 +4,14 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const { middlewareReadFiles } = require("./middlewares.cjs");
-const { Vonage } = require("@vonage/server-sdk");
-const vonage = new Vonage(
-  {
-    apiKey: process.env.SECRET_KEY_NEXMO_API,
-    apiSecret: process.env.SECRET_KEY_NEXMO,
-  },
-  {}
-);
+// const { Vonage } = require("@vonage/server-sdk");
+// const vonage = new Vonage(
+//   {
+//     apiKey: process.env.SECRET_KEY_NEXMO_API,
+//     apiSecret: process.env.SECRET_KEY_NEXMO,
+//   },
+//   {}
+// );
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const ssl = false;
@@ -34,12 +34,6 @@ app.use(helmet.contentSecurityPolicy({
     "worker-src": ["'self'", "blob:"]
   },
 }));
-
-app.use((req, res, next) => {
-  res.setHeader("X-Content-Type-Options", "nosniff");
-  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
-  next();
-});
 
 app.use(cors());
 app.set('trust proxy', true);
@@ -124,7 +118,7 @@ app.get(`${freccePath}`, middlewareReadFiles(freccePathRoot), (req, res) => {
   res.sendFile(fileName, { root: freccePathRoot });
 });
 
-app.post('/frecce/simulateRecover', async (req, res) => {
+app.post('/frecce/travel/recover', async (req, res) => {
   try {
     const response = await fetch("https://www.lefrecce.it/Channels.Website.BFF.WEB/website/travel/recover", {
       method: "POST",

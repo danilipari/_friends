@@ -153,12 +153,12 @@
           const toasts = ref([]);
           const delay = (ms = 500) => new Promise(resolve => setTimeout(resolve, ms));
 
-          const addToast = (message, type = 'error') => {
+          const addToast = (message, type = 'error', ms = 5_000) => {
             const id = Date.now() + Math.random();
             toasts.value.push({ id, message, type });
             setTimeout(() => {
               toasts.value = toasts.value.filter(t => t.id !== id);
-            }, 5000);
+            }, ms);
           };
 
           const removeToast = (id) => {
@@ -227,7 +227,6 @@
                 } else {
                   const fileObject = reactive({ file: file, pnr: null });
                   droppedFiles.value.push(fileObject);
-                  console.log('PDF file selected:', file.name);
                   await handlePDFParse(fileObject);
                 }
               } else {
@@ -245,7 +244,7 @@
                 cpCode: fileObject.cp
               };
               try {
-                const response = await fetch("/frecce/simulateRecover", {
+                const response = await fetch("/frecce/travel/recover", {
                   method: "POST",
                   mode: "cors",
                   headers: {
@@ -256,10 +255,12 @@
                 });
                 if (!response.ok) {
                   fileObject.verify = { error: response.statusText, status: response.status };
-                  addToast(`Verifica fallita per ${fileObject.pnr}-${fileObject.cp}: ${response.statusText} (${response.status})`, "error");
+                  addToast(`Verifica fallita - ${fileObject.pnr}-${fileObject.cp}: ${response.statusText} - [${response.status}]`, "error");
                   continue;
                 }
                 const result = await response.json();
+                console.log('Verification result:', result);
+                addToast(`Verifica eseguita - PNR:${fileObject.pnr} CP:${fileObject.cp} - [${response.status}]`, "success");
                 fileObject.verify = { status: response.status, result };
               } catch (err) {
                 fileObject.verify = { error: err.message };

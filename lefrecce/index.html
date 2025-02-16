@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <script>
       tailwind.config = {
+        important: true,
         theme: {
           extend: {
             colors: {
@@ -24,8 +25,10 @@
       }
     </script>
   </head>
-  <!-- 'https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-outline.png' -->
-  <body class="bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-dark.png')] bg-repeat min-h-screen flex items-center justify-center">
+  <!-- 'double-bubble-outline.png' -->
+  <!-- 'double-bubble-dark.png' -->
+  <!-- 'double-bubble.png' -->
+  <body class="bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble.png')] bg-repeat min-h-screen flex items-center justify-center">
     <script type="importmap">
       {
         "imports": {
@@ -52,7 +55,7 @@
         <div 
           id="drop" 
           class="p-8 border-2 border-dashed border-gray-300 rounded-lg my-8 transition-colors duration-300 hover:border-secondary hover:bg-white cursor-pointer flex flex-col items-center justify-center"
-          @dragover.prevent
+          @dragover.prevent="$event.dataTransfer.dropEffect = 'copy'"
           @drop.prevent="handleDrop"
           @dragenter="dragging = true"
           @dragleave="dragging = false"
@@ -77,7 +80,7 @@
               <div class="text-gray-800 text-sm">
                 {{ translations.tickets }}: {{ droppedFiles.length }}
               </div>
-              <div class="text-red-500 hover:text-red-700 text-sm" @click="removeFiles()">
+              <div class="text-red-500 hover:text-red-700 text-sm cursor-pointer" @click="removeFiles()">
                 {{ translations.clearAll }}
               </div>
             </div>
@@ -147,7 +150,7 @@
             <button 
               @click="verify()" 
               :disabled="verifying"
-              :class="['bg-red-500 hover:bg-red-700 text-white font-bold py-2 mt-4 px-6 rounded disabled:opacity-50 disabled:cursor-not-allowed', verifying ? 'animate-pulse' : '']">
+              :class="['bg-red-500 hover:bg-red-700 text-white font-bold py-2 mt-4 px-6 rounded disabled:opacity-50', verifying ? 'animate-pulse' : '']">
               <template v-if="verifying">
                 {{ translations.verify }} ({{ globalProgress }}%)
               </template>

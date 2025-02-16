@@ -193,7 +193,8 @@
       import { parsePNRFromPDF } from './pdfUtils.js';
       createApp({
         setup() {
-          const lang = ref('IT');
+          const browserLanguage = navigator.language || navigator.userLanguage;
+          const lang = ref(browserLanguage.startsWith('it') ? 'IT' : 'EN');
           const translations = computed(() => {
             return lang.value === 'EN'
               ? {

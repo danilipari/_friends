@@ -481,17 +481,23 @@
               didParseCell: function(data) {
                 if (data.section === 'body') {
                   if (data.column.index === 2) {
-                    // Status: green for 200, red otherwise
                     data.cell.styles.textColor = data.cell.text[0] === "200" ? [0,128,0] : [255,0,0];
                   }
                   if (data.column.index === 3 && data.cell.text[0] === "PDF") {
-                    // PDF column blue text remains blue
                     data.cell.styles.textColor = [0,0,255];
+                  }
+                }
+              },
+              didDrawCell: function(data) {
+                if (data.section === 'body' && data.column.index === 3 && data.cell.raw === "PDF") {
+                  const rowIndex = data.row.index;
+                  const link = tableRows[rowIndex].link;
+                  if (link) {
+                    doc.link(data.cell.x, data.cell.y, data.cell.width, data.cell.height, { url: link });
                   }
                 }
               }
             });
-            // Add export info at the bottom: export date and site provenance
             const finalY = doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 10 : 40;
             const exportInfo = `Export performed on: ${formatDate(new Date())} from: www.lipari.dev/frecce/`;
             doc.setFontSize(10);

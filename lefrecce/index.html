@@ -149,24 +149,51 @@
                 </div>
               </template>
             </div>
-            <button 
-              @click="verify()" 
-              :disabled="verifying"
-              :class="['bg-red-500 hover:bg-red-700 text-white font-bold py-2 mt-6 px-6 rounded disabled:opacity-50', verifying ? 'animate-pulse' : '']">
-              <template v-if="verifying">
-                {{ translations.verify }} ({{ globalProgress }}%)
+            <div class="mt-4 text-gray-700">
+              <template v-if="globalProgress === 100">
+                <template v-if="hasResults">
+                  <div class="flex flex-col gap-2">
+                    <button 
+                      @click="generatePDF()" 
+                      :disabled="verifying"
+                      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded disabled:opacity-50">
+                      Export Report
+                    </button>
+                    <button 
+                      @click="verify()" 
+                      class="text-blue-500 hover:underline bg-transparent border-none">
+                      Esegui una nuova verifica
+                    </button>
+                  </div>
+                </template>
+                <template v-else>
+                  <button 
+                    @click="verify()" 
+                    :disabled="verifying"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded disabled:opacity-50">
+                    <template v-if="verifying">
+                      {{ translations.verify }} ({{ globalProgress }}%)
+                    </template>
+                    <template v-else>
+                      {{ translations.verify }}
+                    </template>
+                  </button>
+                </template>
               </template>
               <template v-else>
-                {{ translations.verify }}
+                <template v-if="verifying">
+                  <p class="text-gray-600">Verifica in corso: {{ globalProgress }}%</p>
+                </template>
+                <template v-else>
+                  <button 
+                    @click="verify()" 
+                    :disabled="verifying"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded disabled:opacity-50">
+                    {{ translations.verify }}
+                  </button>
+                </template>
               </template>
-            </button>
-            <button 
-              v-if="hasResults"
-              @click="generatePDF()" 
-              :disabled="verifying"
-              :class="['bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-2 px-6 rounded disabled:opacity-50', verifying ? 'animate-pulse' : '']">
-              Export Report
-            </button>
+            </div>
           </template>
           <p v-else class="text-gray-500">{{ translations.emptyList }}</p>
         </div>

@@ -5,10 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://www.trenitalia.com/etc.clientlibs/tcom/clientlibs/common/resources/immagini/favicon.ico">
     <title>Verifica le tue Frecce</title>
+    <!-- Load scripts in correct order -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+    <!-- Use the full build of Vue.js for template compilation -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Load PDF.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.8.162/pdf.min.js"></script>
+    <script>
+      if (typeof pdfjsLib !== "undefined") {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.8.162/pdf.worker.min.js";
+      }
+    </script>
     <script>
       tailwind.config = {
         important: true,
@@ -31,27 +40,20 @@
   <!-- 'double-bubble-dark.png' -->
   <!-- 'double-bubble.png' -->
   <body class="bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-outline.png')] bg-repeat min-h-screen flex items-center justify-center">
-    <script type="importmap">
-      {
-        "imports": {
-          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
-        }
-      }
-    </script>
     <div id="app" class="relative w-full min-h-screen flex flex-col items-center justify-center px-4" v-cloak>
       <div class="backdrop-blur-md bg-white/70 border border-white/40 rounded-xl p-8 pb-6 max-w-3xl w-full text-center shadow-2xl">
         <div class="absolute top-2 right-2">
-          <button @click="lang = 'IT'" :class="{'font-bold': lang==='IT'}" class="mx-1">IT</button>|
-          <button @click="lang = 'EN'" :class="{'font-bold': lang==='EN'}" class="mx-1">EN</button>
+          <button @click="setLanguage('IT')" :class="{'font-bold': language==='IT'}" class="mx-1">IT</button>|
+          <button @click="setLanguage('EN')" :class="{'font-bold': language==='EN'}" class="mx-1">EN</button>
         </div>
         <h1 class="text-5xl font-extrabold mb-4 text-red-600">
-          {{ translations.title }}
+          {{ t('title') }}
         </h1>
         <p class="text-textSecondary mb-6">
-          {{ translations.welcome }}
+          {{ t('welcome') }}
           <br/>
-          <a class="text-red-500 underline" :href="translations.trenitaliaUrl" target="_blank">
-            {{ translations.trenitaliaLink }}
+          <a class="text-red-500 underline" :href="t('trenitaliaUrl')" target="_blank">
+            {{ t('trenitaliaLink') }}
           </a> 
         </p>
         <div 
@@ -66,7 +68,7 @@
           <svg class="w-8 h-8 text-gray-300 mb-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 9l5-5m0 0l5 5m-5-5v12"/>
           </svg>
-          <p class="text-gray-600">{{ translations.dropZoneText }}</p>
+          <p class="text-gray-600">{{ t('dropZoneText') }}</p>
           <input
             ref="fileInput"
             type="file"
@@ -80,10 +82,10 @@
           <template v-if="droppedFiles.length > 0">
             <div class="flex items-center justify-between px-2 mb-1">
               <div class="text-gray-800 text-sm">
-                {{ translations.tickets }}: {{ droppedFiles.length }}
+                {{ t('tickets') }}: {{ droppedFiles.length }}
               </div>
               <div class="text-red-500 hover:text-red-700 text-sm cursor-pointer" @click="removeFiles()">
-                {{ translations.clearAll }}
+                {{ t('clearAll') }}
               </div>
             </div>
             <div ref="filesContainer" class="h-[400px] overflow-y-auto">
@@ -122,22 +124,20 @@
                         <div v-if="fileObject.verify?.result" class="mt-1 flex items-center">
                           <div class="flex-1">
                             <div v-if="fileObject.verify?.status !== 200" class="bg-red-100 text-red-700 font-semibold text-sm px-2 py-1 rounded">
-                              {{ fileObject.verify?.result?.type || translations.failedRequest }} - {{ translations[fileObject.verify?.result?.message] || translations.internalServerError }} - {{ fileObject.verify.status }}
+                              {{ fileObject.verify?.result?.type || t('failedRequest') }} - {{ t(fileObject.verify?.result?.message) || t('internalServerError') }} - {{ fileObject.verify.status }}
                             </div>
                             <div v-else class="bg-green-100 text-green-700 font-semibold text-sm px-2 py-1 rounded">
-                              {{ translations.successRequest }} - {{ fileObject.verify.status }}
+                              {{ t('successRequest') }} - {{ fileObject.verify.status }}
                             </div>
                           </div>
                           <button @click="toggleExpand(fileObject)" class="ml-2 text-xs text-blue-600 hover:underline px-2">
-                            {{ fileObject.expanded ? translations.hideRequest : translations.showRequest }}
+                            {{ fileObject.expanded ? t('hideRequest') : t('showRequest') }}
                           </button>
                         </div>
                       </div>
                     </div>
                     <div v-if="fileObject.expanded" class="m-2 p-2 bg-gray-900 text-white rounded h-[210px] overflow-y-auto">
-                      <pre class="text-xs whitespace-pre-wrap">
-                        {{ JSON.stringify(fileObject.verify.result, null, 2) }}
-                      </pre>
+                      <pre class="text-xs whitespace-pre-wrap">{{ JSON.stringify(fileObject.verify.result, null, 2) }}</pre>
                     </div>
                   </template>
                   <template v-else>
@@ -157,12 +157,12 @@
                       @click="generatePDF()" 
                       :disabled="verifying"
                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded disabled:opacity-50">
-                      {{ translations.exportReport }}
+                      {{ t('exportReport') }}
                     </button>
                     <button 
                       @click="verify()" 
                       class="text-blue-500 hover:underline bg-transparent border-none">
-                      {{ translations.newVerification }}
+                      {{ t('newVerification') }}
                     </button>
                   </div>
                 </template>
@@ -172,10 +172,10 @@
                     :disabled="verifying"
                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded disabled:opacity-50">
                     <template v-if="verifying">
-                      {{ translations.verify }} ({{ globalProgress }}%)
+                      {{ t('verify') }} ({{ globalProgress }}%)
                     </template>
                     <template v-else>
-                      {{ translations.verify }}
+                      {{ t('verify') }}
                     </template>
                   </button>
                 </template>
@@ -189,13 +189,13 @@
                     @click="verify()" 
                     :disabled="verifying"
                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded disabled:opacity-50">
-                    {{ translations.verify }}
+                    {{ t('verify') }}
                   </button>
                 </template>
               </template>
             </div>
           </template>
-          <p v-else class="text-gray-500">{{ translations.emptyList }}</p>
+          <p v-else class="text-gray-500">{{ t('emptyList') }}</p>
         </div>
       </div>
       <div class="fixed bottom-4 right-4 space-y-3 z-50" v-cloak>
@@ -242,115 +242,135 @@
         100% { background-color: #fecaca; }
       }
     </style>
-    <!-- Script Vue -->
-    <script src="https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.min.js"></script>
-    <script type="module">
-      import { createApp, ref, reactive, computed, nextTick } from 'vue';
-      import { parsePNRFromPDF } from './pdfUtils.js';
-      createApp({
+    <script>
+      // Create Vue app
+      const { createApp, ref, reactive, computed, nextTick } = Vue;
+
+      async function parsePDFContent(arrayBuffer) {
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        let pnr = null;
+        let cp = null;
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          const items = textContent.items.map((item) => item.str).join(" ");
+
+          if (!cp) {
+            const matchCP = items.match(/Codice\s+CP[\s\S]*?(\d{6})/);
+            if (matchCP) {
+              cp = matchCP[1];
+            }
+          }
+
+          if (!pnr) {
+            const matchPNR = items.match(/PNR:\s*([A-Z0-9]{6})/);
+            if (matchPNR) {
+              pnr = matchPNR[1];
+            }
+          }
+
+          if (cp && pnr) break;
+        }
+
+        return { cp, pnr };
+      }
+
+      const app = createApp({
         setup() {
-          const vueServerData = ref(window.vueServerData);
+          const vueServerData = ref(window.vueServerData || {});
           const browserLanguage = navigator.language || navigator.userLanguage;
-          const lang = ref(browserLanguage.startsWith('it') ? 'IT' : 'EN');
-          const translations = computed(() => {
-            return lang.value === 'EN'
-              ? {
-                  title: "Verify your Frecce",
-                  welcome: "Welcome! This SPA lets you extract info and search for tickets from",
-                  trenitaliaLink: "Trenitalia",
-                  trenitaliaUrl: "https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html",
-                  tickets: "Tickets",
-                  clearAll: "Clear all",
-                  verify: "Verify",
-                  exportReport: "Export Report",
-                  newVerification: "New Verification",
-                  emptyList: "The list is empty.",
-                  failedRequest: "Failed request",
-                  successRequest: "Success request",
-                  verifySuccess: "Verification executed",
-                  hideRequest: "Hide request",
-                  showRequest: "Show request",
-                  dropZoneText: "Drag your PDF file here",
-                  'label.travel.not.found': 'Travel not found',
-                  internalServerError: 'Internal Server Error'
-                }
-              : {
-                  title: "Verifica le tue Frecce",
-                  welcome: "Benvenuto! Questa SPA ti permette di ricavare informazioni e cercare i biglietti di",
-                  trenitaliaLink: "Trenitalia",
-                  trenitaliaUrl: "https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html",
-                  tickets: "Biglietti",
-                  clearAll: "Rimuovi tutti",
-                  verify: "Verifica",
-                  exportReport: "Esporta Report",
-                  newVerification: "Esegui una nuova verifica",
-                  emptyList: "La lista è vuota.",
-                  failedRequest: "Richiesta fallita",
-                  successRequest: "Richiesta riuscita",
-                  verifySuccess: "Verifica eseguita",
-                  hideRequest: "Nascondi richiesta",
-                  showRequest: "Mostra richiesta",
-                  dropZoneText: "Trascina qui il tuo file PDF",
-                  'label.travel.not.found': 'Viaggio non trovato',
-                  internalServerError: 'Errore interno del server'
-                };
-          });
+          const language = ref(browserLanguage.startsWith('it') ? 'IT' : 'EN');
           
-          const dragging = ref(false);
+          const translations = {
+            EN: {
+              title: "Verify your Frecce",
+              welcome: "Welcome! This SPA lets you extract info and search for tickets from",
+              trenitaliaLink: "Trenitalia",
+              trenitaliaUrl: "https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html",
+              tickets: "Tickets",
+              clearAll: "Clear all",
+              verify: "Verify",
+              exportReport: "Export Report",
+              newVerification: "New Verification",
+              emptyList: "The list is empty.",
+              failedRequest: "Failed request",
+              successRequest: "Success request",
+              verifySuccess: "Verification executed",
+              hideRequest: "Hide request",
+              showRequest: "Show request",
+              dropZoneText: "Drag your PDF file here",
+              'label.travel.not.found': 'Travel not found',
+              internalServerError: 'Internal Server Error'
+            },
+            IT: {
+              title: "Verifica le tue Frecce",
+              welcome: "Benvenuto! Questa SPA ti permette di ricavare informazioni e cercare i biglietti di",
+              trenitaliaLink: "Trenitalia",
+              trenitaliaUrl: "https://www.trenitalia.com/it/informazioni/cerca_e_modificailbiglietto.html",
+              tickets: "Biglietti",
+              clearAll: "Rimuovi tutti",
+              verify: "Verifica",
+              exportReport: "Esporta Report",
+              newVerification: "Esegui una nuova verifica",
+              emptyList: "La lista è vuota.",
+              failedRequest: "Richiesta fallita",
+              successRequest: "Richiesta riuscita",
+              verifySuccess: "Verifica eseguita",
+              hideRequest: "Nascondi richiesta",
+              showRequest: "Mostra richiesta",
+              dropZoneText: "Trascina qui il tuo file PDF",
+              'label.travel.not.found': 'Viaggio non trovato',
+              internalServerError: 'Errore interno del server'
+            }
+          };
+          
+          const t = (key) => {
+            return translations[language.value][key] || key;
+          };
+          
+          const setLanguage = (lang) => {
+            language.value = lang;
+          };
+          
+          const toasts = ref([]);
           const droppedFiles = ref([]);
           const fileInput = ref(null);
-          const toasts = ref([]);
           const filesContainer = ref(null);
-          const delay = (ms = 250) => new Promise(resolve => setTimeout(resolve, ms));
-
-          const addToast = (message, type = 'error', ms = 3_000) => {
+          const dragging = ref(false);
+          
+          const addToast = (message, type = 'error', ms = 3000) => {
             const id = Date.now() + Math.random();
             toasts.value.push({ id, message, type });
             setTimeout(() => {
-              toasts.value = toasts.value.filter(t => t.id !== id);
+              removeToast(id);
             }, ms);
+            return id;
           };
-
+          
           const removeToast = (id) => {
             toasts.value = toasts.value.filter(t => t.id !== id);
           };
-
-          const showDuplicateError = (fileName) => {
-            addToast('Il file ' + fileName + ' è già stato caricato.', 'error');
-          };
-
-          const handlePDFParse = async (fileObject) => {
-            const arrayBuffer = await fileObject.file.arrayBuffer();
-            const [result] = await Promise.all([
-              parsePNRFromPDF(arrayBuffer),
-              delay()
-            ]);
-            const { cp, pnr } = result;
-            if (cp && pnr) {
-              fileObject.cp = cp;
-              fileObject.pnr = pnr;
-            }
-          };
-
+          
           const handleDrop = async (event) => {
             const files = event.dataTransfer.files;
             for (let i = 0; i < files.length; i++) {
               const file = files[i];
               if (file.type === 'application/pdf') {
                 if (droppedFiles.value.some((f) => f.file.name === file.name)) {
-                  showDuplicateError(file.name);
+                  addToast(`Il file ${file.name} è già stato caricato.`, 'error');
                 } else {
                   const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null, expanded: false });
                   droppedFiles.value.push(fileObject);
                   await handlePDFParse(fileObject);
                 }
               } else {
-                alert('Si accettano solo file PDF.');
+                addToast('Si accettano solo file PDF.', 'warning');
               }
             }
             dragging.value = false;
           };
-
+          
           const removeFiles = (file) => {
             if (file) {
               droppedFiles.value = droppedFiles.value.filter((f) => f !== file);
@@ -358,40 +378,64 @@
               droppedFiles.value = [];
             }
           };
-
+          
           const openFileDialog = () => {
             fileInput.value.click();
           };
-
+          
           const handleFileSelect = async (event) => {
             const files = event.target.files;
             for (let i = 0; i < files.length; i++) {
               const file = files[i];
               if (file.type === 'application/pdf') {
                 if (droppedFiles.value.some((f) => f.file.name === file.name)) {
-                  showDuplicateError(file.name);
+                  addToast(`Il file ${file.name} è già stato caricato.`, 'error');
                 } else {
                   const fileObject = reactive({ file: file, cp: null, pnr: null, verify: null, expanded: false });
                   droppedFiles.value.push(fileObject);
                   await handlePDFParse(fileObject);
                 }
               } else {
-                alert('Si accettano solo file PDF.');
+                addToast('Si accettano solo file PDF.', 'warning');
               }
             }
             event.target.value = '';
           };
-
+          
+          const handlePDFParse = async (fileObject) => {
+            try {
+              const arrayBuffer = await fileObject.file.arrayBuffer();
+              const delay = (ms = 250) => new Promise(resolve => setTimeout(resolve, ms));
+              
+              const [result] = await Promise.all([
+                parsePDFContent(arrayBuffer),
+                delay()
+              ]);
+              
+              const { cp, pnr } = result;
+              if (cp && pnr) {
+                fileObject.cp = cp;
+                fileObject.pnr = pnr;
+              } else {
+                addToast(`Non è stato possibile estrarre PNR e CP dal file ${fileObject.file.name}`, 'warning');
+              }
+            } catch (error) {
+              console.error('Error processing PDF:', error);
+              addToast(`Errore nell'elaborazione del PDF: ${error.message}`, 'error');
+            }
+          };
+          
           const verifying = ref(false);
-          const verifyingRequests = ref(0);
-
           const processedCount = ref(0);
           const successCount = ref(0);
           const failureCount = ref(0);
+          
           const globalProgress = computed(() =>
             droppedFiles.value.length ? Math.round((processedCount.value / droppedFiles.value.length) * 100) : 0
           );
-
+          
+          const hasResults = computed(() => droppedFiles.value.some(fileObject => fileObject.verify));
+          
           const verify = async () => {
             if (verifying.value) return;
             verifying.value = true;
@@ -405,6 +449,9 @@
             if (filesContainer.value) {
               filesContainer.value.scrollTop = 0;
             }
+            
+            const delay = (ms = 250) => new Promise(resolve => setTimeout(resolve, ms));
+            
             for (const fileObject of droppedFiles.value) {
               fileObject.pending = true;
               const payload = {
@@ -426,17 +473,17 @@
                   const result = await response.json();
                   fileObject.verify = { status: response.status, result };
                   failureCount.value++;
-                  addToast(`${translations.value.failedRequest} - ${fileObject.pnr}-${fileObject.cp}: ${response.statusText} - [${response.status}]`, "error");
+                  addToast(`${t('failedRequest')} - ${fileObject.pnr}-${fileObject.cp}: ${response.statusText} - [${response.status}]`, "error");
                 } else {
                   const result = await response.json();
-                  addToast(`${translations.value.verifySuccess} - PNR:${fileObject.pnr} CP:${fileObject.cp} - [${response.status}]`, "success");
+                  addToast(`${t('verifySuccess')} - PNR:${fileObject.pnr} CP:${fileObject.cp} - [${response.status}]`, "success");
                   fileObject.verify = { status: response.status, result };
                   successCount.value++;
                 }
               } catch (err) {
                 fileObject.verify = { error: err.message };
                 failureCount.value++;
-                addToast(`${translations.value.failedRequest} per ${fileObject.pnr}-${fileObject.cp}: ${err.message}`, "error");
+                addToast(`${t('failedRequest')} per ${fileObject.pnr}-${fileObject.cp}: ${err.message}`, "error");
               } finally {
                 processedCount.value++;
                 fileObject.pending = false;
@@ -448,10 +495,10 @@
               }
             }
             await delay(500);
-            addToast(`Summary: ${successCount.value} success, ${failureCount.value} failure`, "info", 6_000);
+            addToast(`Summary: ${successCount.value} success, ${failureCount.value} failure`, "info", 6000);
             verifying.value = false;
           };
-
+          
           const toggleExpand = (fileObject) => {
             if (fileObject.expanded) {
               fileObject.expanded = false;
@@ -460,9 +507,7 @@
               fileObject.expanded = true;
             }
           };
-
-          const hasResults = computed(() => droppedFiles.value.some(fileObject => fileObject.verify));
-
+          
           const generatePDF = () => {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -535,14 +580,35 @@
             doc.text(exportInfo, 14, finalY);
             doc.save("report.pdf");
           };
-
-          return { 
-            lang, translations, verify, dragging, droppedFiles, toasts, removeToast,
-            handleDrop, removeFiles, openFileDialog, handleFileSelect, fileInput, toggleExpand,
-            vueServerData, verifying, verifyingRequests, globalProgress, filesContainer, generatePDF, hasResults
+          
+          return {
+            language,
+            t,
+            setLanguage,
+            dragging,
+            droppedFiles,
+            toasts,
+            removeToast,
+            handleDrop,
+            removeFiles,
+            openFileDialog,
+            handleFileSelect,
+            fileInput,
+            toggleExpand,
+            vueServerData,
+            verifying,
+            globalProgress,
+            filesContainer,
+            generatePDF,
+            hasResults,
+            verify,
+            addToast
           };
         }
-      }).mount('#app');
+      });
+
+      // Mount the app
+      app.mount('#app');
     </script>
   </body>
 </html>

@@ -1,41 +1,49 @@
+import * as pdfjsLib from "pdfjs-dist"
+
 if (typeof pdfjsLib !== "undefined" && pdfjsLib?.GlobalWorkerOptions) {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js";
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js"
 }
 
+/**
+ * Extracts PNR and CP codes from a PDF file
+ * @param {ArrayBuffer} arrayBuffer - The PDF file as an ArrayBuffer
+ * @returns {Promise<{cp: string|null, pnr: string|null}>} - The extracted CP and PNR codes
+ */
 export async function parsePNRFromPDF(arrayBuffer) {
-  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-  let pnr = null;
-  let cp = null;
-  // let seat = null;
+  try {
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
+    let pnr = null
+    let cp = null
 
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
-    const textContent = await page.getTextContent();
-    const items = textContent.items.map((item) => item.str).join(" ");
+    // Search through each page until we find both PNR and CP
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i)
+      const textContent = await page.getTextContent()
+      const items = textContent.items.map((item) => item.str).join(" ")
 
-    if (!cp) {
-      const matchCP = items.match(/Codice\s+CP[\s\S]*?(\d{6})/);
-      if (matchCP) {
-        cp = matchCP[1];
+      // Extract CP code if not already found
+      if (!cp) {
+        const matchCP = items.match(/Codice\s+CP[\s\S]*?(\d{6})/)
+        if (matchCP) {
+          cp = matchCP[1]
+        }
       }
+
+      // Extract PNR code if not already found
+      if (!pnr) {
+        const matchPNR = items.match(/PNR:\s*([A-Z0-9]{6})/)
+        if (matchPNR) {
+          pnr = matchPNR[1]
+        }
+      }
+
+      // Break the loop if we found both codes
+      if (cp && pnr) break
     }
 
-    if (!pnr) {
-      const matchPNR = items.match(/PNR:\s*([A-Z0-9]{6})/);
-      if (matchPNR) {
-        pnr = matchPNR[1];
-      }
-    }
-
-    // if (!seat) {
-    //   const matchPosition = items.match(/\b\d{1,2}[A-Z]\b/g);
-    //   if (matchPosition) {
-    //     seat = matchPosition[1];
-    //   }
-    // }
-
-    if (cp && pnr) break;
+    return { cp, pnr }
+  } catch (error) {
+    console.error("Error parsing PDF:", error)
+    return { cp: null, pnr: null }
   }
-
-  return { cp, pnr };
 }

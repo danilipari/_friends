@@ -157,12 +157,12 @@
                       @click="generatePDF()" 
                       :disabled="verifying"
                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded disabled:opacity-50">
-                      Export Report
+                      {{ translations.exportReport }}
                     </button>
                     <button 
                       @click="verify()" 
                       class="text-blue-500 hover:underline bg-transparent border-none">
-                      Esegui una nuova verifica
+                      {{ translations.newVerification }}
                     </button>
                   </div>
                 </template>
@@ -262,6 +262,8 @@
                   tickets: "Tickets",
                   clearAll: "Clear all",
                   verify: "Verify",
+                  exportReport: "Export Report",
+                  newVerification: "New Verification",
                   emptyList: "The list is empty.",
                   failedRequest: "Failed request",
                   successRequest: "Success request",
@@ -280,6 +282,8 @@
                   tickets: "Biglietti",
                   clearAll: "Rimuovi tutti",
                   verify: "Verifica",
+                  exportReport: "Esporta Report",
+                  newVerification: "Esegui una nuova verifica",
                   emptyList: "La lista è vuota.",
                   failedRequest: "Richiesta fallita",
                   successRequest: "Richiesta riuscita",

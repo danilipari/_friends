@@ -413,7 +413,7 @@
                 cpCode: fileObject.cp
               };
               try {
-                const path = vueServerData.value?.env ? "/frecce/travel/recover" : "https://www.lipari.dev/frecce/travel/recover";
+                const path = vueServerData.value?.env ? "/api/frecce/travel/recover" : "https://www.lipari.dev/api/frecce/travel/recover";
                 const response = await fetch(path, {
                   method: "POST",
                   headers: {

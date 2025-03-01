@@ -5,6 +5,9 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const { middlewareReadFiles } = require("./middlewares.cjs");
+const path = require("path");
+const fs = require("fs");
+const util = require("util");
 // const { Vonage } = require("@vonage/server-sdk");
 // const vonage = new Vonage(
 //   {
@@ -14,11 +17,9 @@ const { middlewareReadFiles } = require("./middlewares.cjs");
 //   {}
 // );
 
+// Optional HTTPS
 const certs = false;
-const util = require("util");
-const fs = require("fs");
 const https = require("https");
-const path = require("path");
 
 const app = express();
 app.use(express.json());
@@ -132,7 +133,7 @@ app.get(freccePath, middlewareReadFiles(freccePathRoot), (req, res) => {
 // messo sotto per evitare che venga sovrascritto il middlewareReadFiles
 app.use(freccePath, express.static(freccePathRoot));
 
-app.post('/frecce/travel/recover', async (req, res) => {
+app.post('/api/frecce/travel/recover', async (req, res) => {
   try {
     const response = await fetch("https://www.lefrecce.it/Channels.Website.BFF.WEB/website/travel/recover", {
       method: "POST",

@@ -7,7 +7,6 @@ const morgan = require("morgan");
 const { middlewareReadFiles } = require("./middlewares.cjs");
 const path = require("path");
 const fs = require("fs");
-const util = require("util");
 // const { Vonage } = require("@vonage/server-sdk");
 // const vonage = new Vonage(
 //   {
@@ -152,136 +151,9 @@ app.post('/api/frecce/travel/recover', async (req, res) => {
   }
 });
 
-// Default route
+app.use("/", express.static("./my/"));
 app.get("/", (req, res) => {
-  const reqString = util.inspect(req, { showHidden: false, depth: 1 });
-  const userAgent = req.get('User-Agent');
-  const ip = req.ip;
-
-  const htmlEle = `<!DOCTYPE html>
-  <html lang="it">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dani Lipari</title>
-    <style>
-      /* Reset di base */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      /* Stile generale */
-      body {
-        background-color: #0d0d0d;
-        font-family: 'Helvetica', Arial, sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        color: rgb(255, 136, 0);
-      }
-      
-      /* Contenitore centrale */
-      .container {
-        background-color: rgba(0, 0, 0, 0.85);
-        padding: 40px;
-        border: 2px solid rgb(255, 136, 0);
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgb(255, 136, 0);
-        text-align: center;
-        width: 90%;
-        max-width: 600px;
-      }
-      
-      /* Titolo con effetto neon più sobrio */
-      h1 {
-        font-size: 3em;
-        margin-bottom: 20px;
-      }
-      
-      /* Animazione neon pulita e leggera */
-      @keyframes neonPulse {
-        0% {
-          text-shadow: 0 0 8px rgba(255, 136, 0, 0.8), 0 0 16px rgba(255, 136, 0, 0.8);
-        }
-        50% {
-          text-shadow: 0 0 12px rgba(255, 136, 0, 1), 0 0 24px rgba(255, 136, 0, 1);
-        }
-        100% {
-          text-shadow: 0 0 8px rgba(255, 136, 0, 0.8), 0 0 16px rgba(255, 136, 0, 0.8);
-        }
-      }
-      
-      /* Introduzione migliorata */
-      p {
-        font-size: 1.2em;
-        margin-bottom: 30px;
-        line-height: 1.5;
-      }
-      
-      /* Stile per il link a GitHub (bianco) */
-      a.github-link {
-        display: inline-block;
-        padding: 10px 20px;
-        border: 2px solid #fff;
-        border-radius: 5px;
-        color: #fff;
-        text-decoration: none;
-        transition: all 0.3s ease-in-out;
-      }
-      
-      a.github-link:hover {
-        background-color: #fff;
-        color: #0d0d0d;
-        transform: scale(1.05);
-      }
-      
-      /* Stile per il link a LinkedIn (blu) */
-      a.linkedin-link {
-        display: inline-block;
-        padding: 10px 20px;
-        border: 2px solid #0077B5;
-        border-radius: 5px;
-        color: #0077B5;
-        text-decoration: none;
-        transition: all 0.3s ease-in-out;
-        margin-left: 10px;
-      }
-      
-      a.linkedin-link:hover {
-        background-color: #0077B5;
-        color: #fff;
-        transform: scale(1.05);
-      }
-      
-      /* Footer */
-      footer {
-        margin-top: 20px;
-        font-size: 0.9em;
-        opacity: 0.8;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>I'm Dani Lipari</h1>
-      <p>Swiss Team Lead - Full Stack Developer - Web3 - Blockchain - Node.js - Angular - Vue - Ionic - Flutter</p>
-      <p>IP: <strong>${ip}</strong></p>
-      <p>UserAgent: <strong>${userAgent}</strong></p>
-      <a class="github-link" href="https://github.com/danilipari" target="_blank">Visit my GitHub</a>
-      <a class="linkedin-link" href="https://www.linkedin.com/in/dani-lipari-developer/" target="_blank">Visit my LinkedIn</a>
-      <footer>
-        <p>&copy; <span id="currentYear"></span> DL</p>
-      </footer>
-    </div>
-    <script>
-      document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
-  </body>
-  </html>`;
-  res.send(htmlEle);
+  res.sendFile('index.html', { root: "./my/" });
 });
 
 const port = process.env.PORT || 8000;

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Developer Portfolio</title>
+
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: "#000000",
+              surface: "#111111",
+              primary: "#FF4800",
+              muted: "#888888",
+            },
+            fontFamily: {
+              sans: [
+                "-apple-system",
+                "BlinkMacSystemFont",
+                "Segoe UI",
+                "Roboto",
+                "sans-serif",
+              ],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .gradient-text {
+        background: linear-gradient(90deg, #ff4800, #ff8a00);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 200% 200%;
+        animation: gradient 4s ease infinite;
+      }
+
+      .gradient-border {
+        position: relative;
+        border: double 1px transparent;
+        border-radius: 1rem;
+        background-image: linear-gradient(#111111, #111111),
+          linear-gradient(90deg, #ff4800, #ff8a00);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+      }
+
+      .glass {
+        background: rgba(17, 17, 17, 0.8);
+        backdrop-filter: blur(12px);
+      }
+
+      [v-cloak] {
+        display: none;
+      }
+
+      .slide-up {
+        animation: slideUp 0.6s ease-out forwards;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hover-card {
+        transition: all 0.3s ease;
+      }
+
+      .hover-card:hover {
+        transform: translateY(-4px);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #111111;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #333333;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #444444;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-white min-h-screen">
+    <div id="app" v-cloak>
+      <!-- Header -->
+      <header
+        class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10"
+      >
+        <nav class="container mx-auto px-6 h-16">
+          <div class="flex items-center justify-between h-full">
+            <a href="#" class="text-xl font-bold gradient-text">DL</a>
+
+            <div class="hidden md:flex items-center space-x-8">
+              <a
+                v-for="item in navigation"
+                :key="item.id"
+                :href="'#' + item.id"
+                class="text-sm text-white/70 hover:text-white transition-colors"
+                @click.prevent="scrollToSection(item.id)"
+              >
+                {{ item.name }}
+              </a>
+            </div>
+
+            <button
+              @click="isMenuOpen = !isMenuOpen"
+              class="md:hidden text-white/70 hover:text-white transition-colors"
+            >
+              <i-menu v-if="!isMenuOpen" class="w-6 h-6"></i-menu>
+              <i-x v-else class="w-6 h-6"></i-x>
+            </button>
+          </div>
+        </nav>
+
+        <!-- Mobile menu -->
+        <div
+          v-show="isMenuOpen"
+          class="md:hidden glass border-t border-white/10"
+        >
+          <div class="container mx-auto px-6 py-4">
+            <a
+              v-for="item in navigation"
+              :key="item.id"
+              :href="'#' + item.id"
+              class="block py-2 text-sm text-white/70 hover:text-white transition-colors"
+              @click="scrollToSection(item.id); isMenuOpen = false"
+            >
+              {{ item.name }}
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="pt-16">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center py-20">
+          <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+              <div class="text-center mb-16 slide-up">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text">
+                  Dani Lipari
+                </h1>
+                <p class="text-xl text-white/70 mb-8">
+                  Swiss Team Lead · Full Stack Developer · Web3 Specialist
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                  <a
+                    href="https://github.com/danilipari"
+                    target="_blank"
+                    class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center gap-2"
+                  >
+                    <i-github class="w-5 h-5"></i-github>
+                    GitHub
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/dani-lipari-developer/"
+                    target="_blank"
+                    class="px-6 py-3 rounded-full bg-primary hover:bg-primary/80 transition-colors flex items-center gap-2"
+                  >
+                    <i-linkedin class="w-5 h-5"></i-linkedin>
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+
+              <!-- Client Info Card -->
+              <div class="gradient-border hover-card">
+                <div class="p-6 space-y-6">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold">Connection Info</h3>
+                    <i-info class="w-5 h-5 text-white/50"></i-info>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-2">
+                      <div class="flex items-center gap-2 text-white/50">
+                        <i-globe class="w-4 h-4"></i-globe>
+                        <span class="text-sm">IP Address</span>
+                      </div>
+                      <div class="font-mono">{{ clientInfo.ip }}</div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex items-center gap-2 text-white/50">
+                        <i-monitor class="w-4 h-4"></i-monitor>
+                        <span class="text-sm">User Agent</span>
+                      </div>
+                      <div class="font-mono text-sm break-all">
+                        {{ clientInfo.userAgent }}
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex items-center gap-2 text-white/50">
+                        <i-clock class="w-4 h-4"></i-clock>
+                        <span class="text-sm">Current Time</span>
+                      </div>
+                      <div class="font-mono">{{ clientInfo.currentTime }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="py-20">
+          <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+              <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 gradient-text">
+                  Developer Tools
+                </h2>
+                <p class="text-white/70">
+                  A collection of powerful tools for modern web development
+                </p>
+              </div>
+
+              <!-- Tools Navigation -->
+              <div class="flex overflow-x-auto space-x-4 mb-8 pb-4">
+                <button
+                  v-for="tab in toolTabs"
+                  :key="tab.id"
+                  @click="activeTab = tab.id"
+                  class="px-6 py-3 rounded-full transition-colors flex items-center gap-2 whitespace-nowrap"
+                  :class="activeTab === tab.id ? 
+                                            'bg-primary text-white' : 
+                                            'bg-white/10 text-white/70 hover:bg-white/20'"
+                >
+                  <component :is="tab.icon" class="w-4 h-4"></component>
+                  {{ tab.name }}
+                </button>
+              </div>
+
+              <!-- Hash Generator -->
+              <div v-show="activeTab === 'hash'" class="gradient-border">
+                <div class="p-6 space-y-6">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-semibold">Hash Generator</h3>
+                    <div class="flex items-center gap-2">
+                      <button
+                        v-for="algo in hashAlgorithms"
+                        :key="algo"
+                        @click="hashInput.algorithm = algo"
+                        class="px-4 py-1.5 rounded-full text-sm transition-colors"
+                        :class="hashInput.algorithm === algo ? 
+                                                        'bg-primary text-white' : 
+                                                        'bg-white/10 text-white/70 hover:bg-white/20'"
+                      >
+                        {{ algo }}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm text-white/50 mb-2"
+                        >Input Text</label
+                      >
+                      <textarea
+                        v-model="hashInput.text"
+                        class="w-full h-32 px-4 py-3 rounded-lg bg-surface border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-white"
+                        placeholder="Enter text to hash..."
+                      ></textarea>
+                    </div>
+
+                    <button
+                      @click="generateHash"
+                      class="w-full px-6 py-3 rounded-lg bg-primary hover:bg-primary/80 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <i-hash class="w-4 h-4"></i-hash>
+                      Generate Hash
+                    </button>
+
+                    <div v-if="hashResult" class="space-y-2">
+                      <label class="block text-sm text-white/50">
+                        Hash Result ({{ hashInput.algorithm }})
+                      </label>
+                      <div class="flex gap-2">
+                        <input
+                          type="text"
+                          :value="hashResult"
+                          readonly
+                          class="flex-1 px-4 py-3 rounded-lg bg-surface border border-white/10 font-mono text-sm"
+                        />
+                        <button
+                          @click="copyToClipboard(hashResult)"
+                          class="px-4 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                        >
+                          <i-clipboard class="w-4 h-4"></i-clipboard>
+                        </button>
+                      </div>
+                      <p v-if="copied" class="text-sm text-green-400">
+                        Copied to clipboard!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Blockchain Demo -->
+              <div v-show="activeTab === 'blockchain'" class="space-y-6">
+                <div class="gradient-border">
+                  <div class="p-6">
+                    <div class="flex items-center justify-between mb-6">
+                      <h3 class="text-xl font-semibold">Blockchain Explorer</h3>
+                      <div class="flex items-center gap-2">
+                        <span class="text-sm text-white/50"
+                          >Mining Difficulty:</span
+                        >
+                        <select
+                          v-model="blockchain.difficulty"
+                          class="px-3 py-1.5 rounded-lg bg-surface border border-white/10"
+                        >
+                          <option v-for="n in 5" :key="n" :value="n">
+                            {{ n }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="space-y-4">
+                      <div
+                        v-for="(block, index) in blockchain.blocks"
+                        :key="index"
+                        class="border border-white/10 rounded-lg overflow-hidden"
+                      >
+                        <div
+                          class="bg-surface/50 px-4 py-3 flex items-center justify-between"
+                        >
+                          <div class="flex items-center gap-2">
+                            <div
+                              class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center"
+                            >
+                              <i-cube class="w-4 h-4 text-primary"></i-cube>
+                            </div>
+                            <span class="font-medium">Block #{{ index }}</span>
+                          </div>
+                          <div
+                            :class="block.isValid ? 'text-green-400' : 'text-red-400'"
+                            class="flex items-center gap-1 text-sm"
+                          >
+                            <i-check-circle
+                              v-if="block.isValid"
+                              class="w-4 h-4"
+                            ></i-check-circle>
+                            <i-x-circle v-else class="w-4 h-4"></i-x-circle>
+                            {{ block.isValid ? 'Valid' : 'Invalid' }}
+                          </div>
+                        </div>
+
+                        <div class="p-4 space-y-4">
+                          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label class="block text-sm text-white/50 mb-1"
+                                >Previous Hash</label
+                              >
+                              <div
+                                class="bg-surface p-2 rounded font-mono text-xs break-all"
+                              >
+                                {{ block.previousHash || 'Genesis Block' }}
+                              </div>
+                            </div>
+                            <div>
+                              <label class="block text-sm text-white/50 mb-1"
+                                >Current Hash</label
+                              >
+                              <div
+                                class="bg-surface p-2 rounded font-mono text-xs break-all"
+                                :class="{'text-red-400': !block.isValid}"
+                              >
+                                {{ block.hash }}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label class="block text-sm text-white/50 mb-1"
+                              >Block Data</label
+                            >
+                            <textarea
+                              v-model="block.data"
+                              @input="updateBlock(index)"
+                              class="w-full h-24 px-4 py-3 rounded-lg bg-surface border border-white/10 font-mono text-sm"
+                            ></textarea>
+                          </div>
+
+                          <div class="flex items-center justify-between">
+                            <div class="space-y-1">
+                              <label class="block text-sm text-white/50"
+                                >Nonce</label
+                              >
+                              <input
+                                type="number"
+                                v-model="block.nonce"
+                                @input="updateBlock(index)"
+                                class="px-3 py-1.5 w-32 rounded-lg bg-surface border border-white/10 font-mono"
+                              />
+                            </div>
+                            <button
+                              @click="mineBlock(index)"
+                              :disabled="block.isMining"
+                              class="px-6 py-2 rounded-lg bg-primary hover:bg-primary/80 transition-colors flex items-center gap-2"
+                            >
+                              <i-hammer class="w-4 h-4"></i-hammer>
+                              {{ block.isMining ? 'Mining...' : 'Mine Block' }}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-center">
+                      <button
+                        @click="addBlock"
+                        class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center gap-2"
+                      >
+                        <i-plus class="w-4 h-4"></i-plus>
+                        Add New Block
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Web3 Wallet -->
+              <div v-show="activeTab === 'wallet'" class="gradient-border">
+                <div class="p-6">
+                  <div v-if="!wallet.connected" class="text-center py-12">
+                    <div
+                      class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6"
+                    >
+                      <i-wallet class="w-8 h-8 text-primary"></i-wallet>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">
+                      Connect Your Wallet
+                    </h3>
+                    <p class="text-white/50 mb-6">
+                      Connect your Web3 wallet to interact with blockchain
+                      features
+                    </p>
+                    <button
+                      @click="connectWallet"
+                      class="px-6 py-3 rounded-full bg-primary hover:bg-primary/80 transition-colors flex items-center gap-2 mx-auto"
+                    >
+                      <i-plug class="w-4 h-4"></i-plug>
+                      Connect Wallet
+                    </button>
+                  </div>
+
+                  <div v-else class="space-y-6">
+                    <div class="bg-surface/50 rounded-lg p-4">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                          <div
+                            class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center"
+                          >
+                            <i-wallet class="w-5 h-5 text-primary"></i-wallet>
+                          </div>
+                          <div>
+                            <div class="font-medium">Connected Wallet</div>
+                            <div class="text-sm text-white/50 font-mono">
+                              {{ truncateAddress(wallet.address) }}
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          @click="disconnectWallet"
+                          class="text-sm text-white/50 hover:text-white transition-colors"
+                        >
+                          Disconnect
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-sm text-white/50 mb-2"
+                          >Network</label
+                        >
+                        <div
+                          class="px-4 py-3 rounded-lg bg-surface border border-white/10 flex items-center"
+                        >
+                          <span
+                            class="w-2 h-2 rounded-full bg-green-400 mr-2"
+                          ></span>
+                          {{ wallet.network }}
+                        </div>
+                      </div>
+                      <div>
+                        <label class="block text-sm text-white/50 mb-2"
+                          >Balance</label
+                        >
+                        <div
+                          class="px-4 py-3 rounded-lg bg-surface border border-white/10 font-mono"
+                        >
+                          {{ wallet.balance }} ETH
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const { createApp, ref, onMounted } = Vue;
+
+      createApp({
+        setup() {
+          // Navigation
+          const isMenuOpen = ref(false);
+          const navigation = [
+            { id: "home", name: "Home" },
+            { id: "tools", name: "Tools" },
+          ];
+
+          // Client Info
+          const clientInfo = ref({
+            ip: "Loading...",
+            userAgent: navigator.userAgent,
+            currentTime: new Date().toLocaleString(),
+          });
+
+          // Update time every second
+          setInterval(() => {
+            clientInfo.value.currentTime = new Date().toLocaleString();
+          }, 1000);
+
+          // Fetch IP address
+          fetch("https://api.ipify.org?format=json")
+            .then((response) => response.json())
+            .then((data) => {
+              clientInfo.value.ip = data.ip;
+            })
+            .catch(() => {
+              clientInfo.value.ip = "Unable to detect";
+            });
+
+          // Tools
+          const activeTab = ref("hash");
+          const toolTabs = [
+            { id: "hash", name: "Hash Generator", icon: "i-hash" },
+            { id: "blockchain", name: "Blockchain Demo", icon: "i-cube" },
+            { id: "wallet", name: "Web3 Wallet", icon: "i-wallet" },
+          ];
+
+          // Hash Generator
+          const hashInput = ref({
+            text: "",
+            algorithm: "SHA-256",
+          });
+          const hashResult = ref("");
+          const copied = ref(false);
+          const hashAlgorithms = ["SHA-256", "SHA-1", "SHA-512"];
+
+          async function generateHash() {
+            if (!hashInput.value.text) return;
+
+            try {
+              const encoder = new TextEncoder();
+              const data = encoder.encode(hashInput.value.text);
+              let hashBuffer;
+
+              switch (hashInput.value.algorithm) {
+                case "SHA-1":
+                  hashBuffer = await crypto.subtle.digest("SHA-1", data);
+                  break;
+                case "SHA-256":
+                  hashBuffer = await crypto.subtle.digest("SHA-256", data);
+                  break;
+                case "SHA-512":
+                  hashBuffer = await crypto.subtle.digest("SHA-512", data);
+                  break;
+              }
+
+              const hashArray = Array.from(new Uint8Array(hashBuffer));
+              hashResult.value = hashArray
+                .map((b) => b.toString(16).padStart(2, "0"))
+                .join("");
+            } catch (error) {
+              console.error("Error generating hash:", error);
+              hashResult.value = "Error generating hash";
+            }
+          }
+
+          function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+              copied.value = true;
+              setTimeout(() => {
+                copied.value = false;
+              }, 2000);
+            });
+          }
+
+          // Blockchain Demo
+          const blockchain = ref({
+            difficulty: 2,
+            blocks: [],
+          });
+
+          async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray
+              .map((b) => b.toString(16).padStart(2, "0"))
+              .join("");
+          }
+
+          async function calculateHash(block) {
+            return await sha256(
+              `${block.index}${block.timestamp}${block.data}${block.previousHash}${block.nonce}`
+            );
+          }
+
+          async function createBlock(index, previousHash = "") {
+            const block = {
+              index,
+              timestamp: Date.now(),
+              data: `Block #${index} Data`,
+              previousHash,
+              nonce: 0,
+              isMining: false,
+              isValid: true,
+            };
+            block.hash = await calculateHash(block);
+            return block;
+          }
+
+          async function initBlockchain() {
+            const genesisBlock = await createBlock(0);
+            blockchain.value.blocks = [genesisBlock];
+            await addBlock();
+          }
+
+          async function addBlock() {
+            const previousBlock =
+              blockchain.value.blocks[blockchain.value.blocks.length - 1];
+            const newBlock = await createBlock(
+              blockchain.value.blocks.length,
+              previousBlock.hash
+            );
+            blockchain.value.blocks.push(newBlock);
+          }
+
+          async function mineBlock(index) {
+            const block = blockchain.value.blocks[index];
+            block.isMining = true;
+
+            const target = Array(blockchain.value.difficulty + 1).join("0");
+
+            while (
+              block.hash.substring(0, blockchain.value.difficulty) !== target
+            ) {
+              block.nonce++;
+              block.hash = await calculateHash(block);
+
+              if (block.nonce % 100 === 0) {
+                await new Promise((resolve) => setTimeout(resolve, 0));
+              }
+            }
+
+            block.isMining = false;
+            block.isValid = true;
+            updateSubsequentBlocks(index);
+          }
+
+          async function updateBlock(index) {
+            const block = blockchain.value.blocks[index];
+            block.hash = await calculateHash(block);
+
+            const target = Array(blockchain.value.difficulty + 1).join("0");
+            block.isValid =
+              block.hash.substring(0, blockchain.value.difficulty) === target;
+
+            updateSubsequentBlocks(index);
+          }
+
+          async function updateSubsequentBlocks(startIndex) {
+            for (
+              let i = startIndex + 1;
+              i < blockchain.value.blocks.length;
+              i++
+            ) {
+              const block = blockchain.value.blocks[i];
+              const previousBlock = blockchain.value.blocks[i - 1];
+              block.previousHash = previousBlock.hash;
+              block.hash = await calculateHash(block);
+
+              const target = Array(blockchain.value.difficulty + 1).join("0");
+              block.isValid =
+                block.hash.substring(0, blockchain.value.difficulty) === target;
+            }
+          }
+
+          // Web3 Wallet
+          const wallet = ref({
+            connected: false,
+            address: "",
+            network: "Ethereum Mainnet",
+            balance: "0.000",
+          });
+
+          function connectWallet() {
+            setTimeout(() => {
+              wallet.value.connected = true;
+              wallet.value.address =
+                "0x71C7656EC7ab88b098defB751B7401B5f6d8976F";
+              wallet.value.balance = (Math.random() * 10).toFixed(4);
+            }, 1000);
+          }
+
+          function disconnectWallet() {
+            wallet.value.connected = false;
+            wallet.value.address = "";
+          }
+
+          function truncateAddress(address) {
+            if (!address) return "";
+            return `${address.slice(0, 6)}...${address.slice(-4)}`;
+          }
+
+          function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+              const headerOffset = 64;
+              const elementPosition = element.getBoundingClientRect().top;
+              const offsetPosition =
+                elementPosition + window.pageYOffset - headerOffset;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth",
+              });
+              isMenuOpen.value = false;
+            }
+          }
+
+          // Initialize
+          onMounted(() => {
+            initBlockchain();
+          });
+
+          return {
+            isMenuOpen,
+            navigation,
+            clientInfo,
+            activeTab,
+            toolTabs,
+            hashInput,
+            hashResult,
+            copied,
+            hashAlgorithms,
+            generateHash,
+            copyToClipboard,
+            blockchain,
+            addBlock,
+            mineBlock,
+            updateBlock,
+            wallet,
+            connectWallet,
+            disconnectWallet,
+            truncateAddress,
+            scrollToSection,
+          };
+        },
+      }).mount("#app");
+
+      // Initialize Lucide icons
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

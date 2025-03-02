@@ -2,18 +2,15 @@
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      href="https://www.trenitalia.com/etc.clientlibs/tcom/clientlibs/common/resources/immagini/favicon.ico"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#3b76ff" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-status-bar-style" content="default" />
+    <link rel="icon" href="https://www.trenitalia.com/etc.clientlibs/tcom/clientlibs/common/resources/immagini/favicon.ico" />
     <title>Verifica le tue Frecce</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
@@ -21,8 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.8.162/pdf.min.js"></script>
     <script>
       if (typeof pdfjsLib !== "undefined") {
-        pdfjsLib.GlobalWorkerOptions.workerSrc =
-          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.8.162/pdf.worker.min.js";
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.8.162/pdf.worker.min.js";
       }
     </script>
     <script>
@@ -32,41 +28,45 @@
           extend: {
             colors: {
               primary: {
-                50: "#f0f6ff",
-                100: "#e0ecff",
-                200: "#c0daff",
-                300: "#91bfff",
-                400: "#609bff",
-                500: "#3b76ff",
-                600: "#1f4fff",
-                700: "#1240ff",
-                800: "#1435df",
-                900: "#1832b5",
+                50: '#f0f6ff',
+                100: '#e0ecff',
+                200: '#c0daff',
+                300: '#91bfff',
+                400: '#609bff',
+                500: '#3b76ff',
+                600: '#1f4fff',
+                700: '#1240ff',
+                800: '#1435df',
+                900: '#1832b5',
               },
               accent: {
-                50: "#fff1f1",
-                100: "#ffe1e1",
-                200: "#ffc7c7",
-                300: "#ffa0a0",
-                400: "#ff6b6b",
-                500: "#ff3b3b",
-                600: "#ff1111",
-                700: "#e70000",
-                800: "#c00",
-                900: "#a00",
-              },
+                50: '#fff1f1',
+                100: '#ffe1e1',
+                200: '#ffc7c7',
+                300: '#ffa0a0',
+                400: '#ff6b6b',
+                500: '#ff3b3b',
+                600: '#ff1111',
+                700: '#e70000',
+                800: '#c00',
+                900: '#a00',
+              }
             },
             fontFamily: {
-              sans: ["Inter", "sans-serif"],
+              sans: ['Inter', 'sans-serif'],
             },
-          },
-        },
-      };
+            spacing: {
+              'safe-top': 'env(safe-area-inset-top)',
+              'safe-bottom': 'env(safe-area-inset-bottom)',
+              'safe-left': 'env(safe-area-inset-left)',
+              'safe-right': 'env(safe-area-inset-right)',
+            },
+          }
+        }
+      }
     </script>
   </head>
-  <body
-    class="min-h-screen bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-outline.png')] bg-repeat font-sans"
-  >
+  <body class="min-h-screen bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-outline.png')] bg-repeat font-sans antialiased">
     <div
       id="app"
       class="relative w-full min-h-screen flex flex-col items-center justify-center p-4 md:p-6"

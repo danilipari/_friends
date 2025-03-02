@@ -887,19 +887,81 @@
 
           const generatePDF = () => {
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+
+            // Create PDF with custom font support
+            const doc = new jsPDF({
+              orientation: "portrait",
+              unit: "mm",
+              format: "a4",
+            });
+
+            // Add fonts
+            doc.setFont("helvetica", "normal");
+
+            // Helper functions
             const formatDate = (date) => {
               const pad = (n) => (n < 10 ? "0" + n : n);
-              return `${pad(date.getDate())}-${pad(
-                date.getMonth() + 1
-              )}-${date.getFullYear()} ${pad(date.getHours())}:${pad(
-                date.getMinutes()
-              )}:${pad(date.getSeconds())}`;
+              const d = new Date(date);
+              return `${pad(d.getDate())}-${pad(
+                d.getMonth() + 1
+              )}-${d.getFullYear()} ${pad(d.getHours())}:${pad(
+                d.getMinutes()
+              )}:${pad(d.getSeconds())}`;
             };
+
+            // Colors
+            const colors = {
+              primary: [59, 118, 255], // #3b76ff
+              accent: [255, 59, 59], // #ff3b3b
+              success: [34, 197, 94], // #22c55e
+              error: [220, 38, 38], // #dc2626
+              text: [55, 65, 81], // #374151
+              textLight: [107, 114, 128], // #6b7280
+            };
+
+            // Add header
+            doc.setFillColor(...colors.primary);
+            doc.rect(0, 0, 210, 40, "F");
+
+            // Add title
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(24);
+            doc.text("Trenitalia Ticket Report", 15, 20);
+
+            // Add subtitle with timestamp
+            doc.setFontSize(12);
+            doc.text(`Generated on ${formatDate(new Date())}`, 15, 30);
+
+            // Add summary section
+            doc.setTextColor(...colors.text);
+            doc.setFontSize(14);
+            doc.text("Summary", 15, 55);
+
+            // Add summary box
+            doc.setDrawColor(...colors.primary);
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(15, 60, 180, 25, 3, 3, "FD");
+
+            // Add summary content
+            doc.setFontSize(12);
+            doc.setTextColor(...colors.text);
+            const totalTickets = droppedFiles.value.length;
+            doc.text(
+              [
+                `Total Tickets: ${totalTickets}`,
+                `Successful Verifications: ${successCount.value}`,
+                `Failed Verifications: ${failureCount.value}`,
+              ],
+              25,
+              70
+            );
+
+            // Prepare table data
             const tableRows = [];
-            droppedFiles.value.forEach((fileObject) => {
+            droppedFiles.value.forEach((fileObject, index) => {
               if (fileObject.verify) {
                 let row = {
+                  index: (index + 1).toString(),
                   pnr: fileObject.pnr || "N/A",
                   cp: fileObject.cp || "N/A",
                   status: String(fileObject.verify.status),
@@ -909,55 +971,71 @@
                   fileObject.verify.status === 200 &&
                   fileObject.verify.result?.solutions[0]?.resourceId
                 ) {
-                  row.pdf = "PDF";
+                  row.pdf = "Download";
                   row.link = `https://www.lefrecce.it/Channels.Website.BFF.WEB/website/post/purchase/pdf?resourceId=${fileObject.verify.result.solutions[0].resourceId}`;
                 }
                 tableRows.push(row);
               }
             });
+
+            // Configure table
             const tableColumns = [
+              { header: "#", dataKey: "index" },
               { header: "PNR", dataKey: "pnr" },
               { header: "CP", dataKey: "cp" },
               { header: "Status", dataKey: "status" },
               { header: "PDF", dataKey: "pdf" },
             ];
-            // Header text (summary)
-            doc.text(
-              `Summary: ${successCount.value} success, ${failureCount.value} failure`,
-              14,
-              15
-            );
+
+            // Add table
             doc.autoTable({
               columns: tableColumns,
               body: tableRows,
-              startY: 25,
+              startY: 95,
+              styles: {
+                font: "helvetica",
+                fontSize: 10,
+                cellPadding: 5,
+              },
               headStyles: {
-                fillColor: [0, 0, 255],
+                fillColor: [...colors.primary],
                 textColor: [255, 255, 255],
+                fontStyle: "bold",
                 halign: "left",
               },
               columnStyles: {
-                0: { cellWidth: "wrap" },
-                1: { cellWidth: "wrap" },
-                2: { cellWidth: "wrap" },
-                3: { cellWidth: "wrap", halign: "left" },
+                0: { cellWidth: 15 },
+                1: { cellWidth: 40 },
+                2: { cellWidth: 40 },
+                3: { cellWidth: 30 },
+                4: { cellWidth: 35 },
+              },
+              alternateRowStyles: {
+                fillColor: [245, 247, 250],
               },
               didParseCell: function (data) {
                 if (data.section === "body") {
-                  if (data.column.index === 2) {
-                    data.cell.styles.textColor =
-                      data.cell.text[0] === "200" ? [0, 128, 0] : [255, 0, 0];
+                  if (data.column.dataKey === "status") {
+                    const isSuccess = data.cell.raw === "200";
+                    data.cell.styles.textColor = isSuccess
+                      ? colors.success
+                      : colors.error;
+                    data.cell.styles.fontStyle = "bold";
                   }
-                  if (data.column.index === 3 && data.cell.text[0] === "PDF") {
-                    data.cell.styles.textColor = [0, 0, 255];
+                  if (
+                    data.column.dataKey === "pdf" &&
+                    data.cell.raw === "Download"
+                  ) {
+                    data.cell.styles.textColor = colors.primary;
+                    data.cell.styles.fontStyle = "bold";
                   }
                 }
               },
               didDrawCell: function (data) {
                 if (
                   data.section === "body" &&
-                  data.column.index === 3 &&
-                  data.cell.raw === "PDF"
+                  data.column.dataKey === "pdf" &&
+                  data.cell.raw === "Download"
                 ) {
                   const rowIndex = data.row.index;
                   const link = tableRows[rowIndex].link;
@@ -973,15 +1051,33 @@
                 }
               },
             });
-            const finalY = doc.lastAutoTable.finalY
-              ? doc.lastAutoTable.finalY + 10
-              : 40;
-            const exportInfo = `Export performed on: ${formatDate(
-              new Date()
-            )} from: www.lipari.dev/frecce/`;
+
+            // Add footer
+            const pageCount = doc.internal.getNumberOfPages();
             doc.setFontSize(10);
-            doc.text(exportInfo, 14, finalY);
-            doc.save("report.pdf");
+            doc.setTextColor(...colors.textLight);
+
+            for (let i = 1; i <= pageCount; i++) {
+              doc.setPage(i);
+
+              // Add page number
+              doc.text(
+                `Page ${i} of ${pageCount}`,
+                doc.internal.pageSize.width / 2,
+                doc.internal.pageSize.height - 10,
+                { align: "center" }
+              );
+
+              // Add website URL
+              doc.text(
+                "www.lipari.dev/frecce/",
+                15,
+                doc.internal.pageSize.height - 10
+              );
+            }
+
+            // Save the PDF
+            doc.save(`trenitalia-report-${formatDate(new Date())}.pdf`);
           };
 
           return {

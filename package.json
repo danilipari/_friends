@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "install_cert:guide": "brew install mkcert && brew install nss && mkcert -install",
     "generate:cert": "mkdir -p certs && openssl req -nodes -new -x509 -keyout certs/server.key -out certs/server.cert -days 365 -subj '/CN=localhost'",
+    "generate:cert:local": "mkdir -p certs && mkcert -install localhost 127.0.0.1 ::1 && mv ./localhost+2.pem ./certs/server.cert && mv ./localhost+2-key.pem ./certs/server.key",
     "node": "node index.js",
     "//pip//heroku-postbuild": "npm run nest:install && npm run nest:build:production && npm run pip:install && npm run pip:init",
     "heroku-postbuild": "npm run nest:install && npm run nest:build:production",

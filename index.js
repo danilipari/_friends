@@ -109,6 +109,15 @@ app.use(morgan('combined'));
 // );
 
 
+// Fiscalini
+const fiscaliniPath = "/fiscalini";
+const fiscaliniPathRoot = "./fiscalini/";
+
+app.use(fiscaliniPath, express.static(fiscaliniPathRoot));
+app.get(fiscaliniPath, (req, res) => {
+  res.sendFile('index.html', { root: fiscaliniPathRoot });
+});
+
 // FreccePath
 const freccePath = ["/lefrecce", "/frecce"];
 const freccePathRoot = "./lefrecce/";

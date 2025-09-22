@@ -32,7 +32,8 @@ app.use(helmet.contentSecurityPolicy({
     "connect-src": ["'self'", "https:"],
     "style-src": ["'self'", "'unsafe-inline'", "https:"],
     "font-src": ["'self'", "https:"],
-    "worker-src": ["'self'", "blob:"]
+    "worker-src": ["'self'", "blob:"],
+    "manifest-src": ["'self'", "data:"]
   },
 }));
 

@@ -267,7 +267,7 @@
 
     <div id="app">
         <header class="fixed top-0 w-full z-50 bg-blu-notte/80 backdrop-blur-xl border-b border-oro/20">
-            <div class="max-w-7xl mx-auto px-8 py-5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 md:py-5">
                 <div class="flex justify-between items-center">
                     <div @click.prevent="scrollToTop" class="font-modern text-xl font-medium text-oro tracking-wide hover:text-oro/80 transition-colors cursor-pointer" aria-label="Torna all'inizio della pagina">FISCALINI</div>
                     <div class="flex items-center gap-6">
@@ -276,30 +276,43 @@
                             <span class="text-oro text-sm font-modern font-medium">{{ t.inDevelopment }}</span>
                         </div>
                         <!-- Language Selector -->
-                        <div class="flex items-center gap-1 border-l border-oro/20 pl-6">
-                            <button
-                                v-for="lang in ['de', 'it', 'en', 'fr']"
-                                :key="lang"
-                                @click="setLanguage(lang)"
-                                :class="[
-                                    'text-xs font-modern font-medium uppercase tracking-wider transition-all duration-300 px-3 py-3 min-w-[48px] min-h-[48px] flex items-center justify-center',
-                                    currentLang === lang ? 'text-oro scale-110' : 'text-gray-400 hover:text-oro/70'
-                                ]"
-                                :aria-label="`Switch to ${lang.toUpperCase()}`">
-                                {{ lang }}
-                            </button>
+                        <div class="flex items-center border-l border-oro/20 pl-4 md:pl-6">
+                            <div class="relative" @click.stop>
+                                <button
+                                    @click="toggleLangDropdown"
+                                    class="bg-blu-notte/50 text-oro border border-oro/30 rounded px-3 py-2 text-xs font-modern font-medium uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-oro/50 cursor-pointer hover:bg-blu-notte/70 transition-colors flex items-center gap-2 min-w-[70px]"
+                                    :aria-label="'Lingua corrente: ' + currentLang.toUpperCase()">
+                                    {{ currentLang }}
+                                    <svg class="w-3 h-3 transition-transform" :class="{ 'rotate-180': langDropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+
+                                <div v-show="langDropdownOpen" class="absolute right-0 mt-2 w-24 bg-blu-notte/95 backdrop-blur-xl border border-oro/30 rounded-lg shadow-xl overflow-hidden z-50">
+                                    <button
+                                        v-for="lang in ['de', 'it', 'en', 'fr']"
+                                        :key="lang"
+                                        @click="selectLanguage(lang)"
+                                        :class="[
+                                            'w-full text-left px-4 py-2 text-xs font-modern font-medium uppercase tracking-wider transition-colors',
+                                            currentLang === lang ? 'bg-oro/20 text-oro' : 'text-gray-300 hover:bg-oro/10 hover:text-oro'
+                                        ]">
+                                        {{ lang }}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
 
-        <main class="min-h-screen px-8 pt-24">
+        <main class="min-h-screen px-4 sm:px-6 md:px-8 pt-20 md:pt-24">
             <div class="max-w-7xl mx-auto">
 
-                <section class="min-h-screen flex items-center py-20">
+                <section class="flex items-center py-16 md:py-20 min-h-[calc(100vh-5rem)] md:min-h-screen">
                     <div class="w-full">
-                        <div class="asymmetric-grid mb-20">
+                        <div class="asymmetric-grid mb-12 md:mb-16 lg:mb-20">
                             <div class="space-y-6 animate-slide-in">
                                 <div class="space-y-2">
                                     <p class="text-oro text-sm font-modern font-medium uppercase tracking-[0.2em]">{{ t.studioLegal }}</p>
@@ -314,7 +327,7 @@
                             </div>
 
                             <div class="animate-fade-in">
-                                <h1 class="font-modern text-7xl md:text-8xl lg:text-9xl font-bold modern-gradient leading-none tracking-tight">
+                                <h1 class="font-modern text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold modern-gradient leading-none tracking-tight">
                                     FISCALINI
                                 </h1>
                                 <div class="mt-4 flex items-center gap-4">
@@ -325,7 +338,7 @@
                     </div>
                 </section>
 
-                <section class="py-20 section-border pl-8">
+                <section class="py-12 md:py-16 lg:py-20 section-border pl-4 sm:pl-6 md:pl-8">
                     <div class="mb-16">
                         <div class="flex items-center gap-6 mb-8">
                             <h2 class="text-oro text-sm font-modern font-medium uppercase tracking-[0.3em]">{{ t.whoWeAre }}</h2>
@@ -333,10 +346,10 @@
                         </div>
                     </div>
 
-                    <div class="space-y-20">
+                    <div class="space-y-12 md:space-y-16 lg:space-y-20">
                       <div class="asymmetric-grid">
                           <div class="space-y-4 animate-fade-in">
-                              <h3 class="font-modern text-4xl md:text-5xl font-bold text-white leading-tight">
+                              <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
                                   Elio<br>
                                   <span class="text-oro">Fiscalini</span>
                               </h3>
@@ -365,7 +378,7 @@
                                 </div>
                             </div>
                             <div class="space-y-4 animate-fade-in order-1 md:order-2 text-left md:text-right">
-                                <h3 class="font-modern text-4xl md:text-5xl font-bold text-white leading-tight">
+                                <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
                                     Massimiliano<br>
                                     <span class="text-oro">Fiscalini</span>
                                 </h3>
@@ -378,7 +391,7 @@
 
                         <div class="asymmetric-grid">
                             <div class="space-y-4 animate-fade-in">
-                                <h3 class="font-modern text-4xl md:text-5xl font-bold text-white leading-tight">
+                                <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
                                     Milena<br>
                                     <span class="text-oro">Fiscalini</span>
                                 </h3>
@@ -399,7 +412,7 @@
                     </div>
                 </section>
 
-                <section class="py-20 section-border pl-8">
+                <section class="py-12 md:py-16 lg:py-20 section-border pl-4 sm:pl-6 md:pl-8">
                     <!-- Titoli -->
                     <div class="mb-16">
                         <div class="flex items-center gap-6 mb-8">
@@ -443,9 +456,9 @@
                             <!-- Linea verticale decorativa -->
                             <div class="hidden lg:block absolute left-0 top-0 w-px h-32 bg-gradient-to-b from-transparent via-oro/40 to-transparent"></div>
                             <div class="space-y-6 animate-fade-in">
-                                <div class="flex flex-row items-center gap-4 md:gap-6 flex-wrap sm:flex-nowrap">
-                                    <h3 class="font-modern text-3xl md:text-4xl font-bold text-white whitespace-nowrap">Manuela</h3>
-                                    <h3 class="font-modern text-3xl md:text-4xl font-bold text-oro whitespace-nowrap">Locatelli</h3>
+                                <div class="flex flex-row items-center gap-3 md:gap-4 lg:gap-6 flex-wrap sm:flex-nowrap">
+                                    <h3 class="font-modern text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">Manuela</h3>
+                                    <h3 class="font-modern text-2xl sm:text-3xl md:text-4xl font-bold text-oro whitespace-nowrap">Locatelli</h3>
                                 </div>
                                 <div class="w-24 h-px bg-oro/60"></div>
                                 <p class="text-gray-100 text-sm uppercase tracking-[0.2em] font-medium">
@@ -456,7 +469,7 @@
                     </div>
                 </section>
 
-                <section class="py-20">
+                <section class="py-12 md:py-16 lg:py-20">
                     <div class="mb-12">
                         <div class="flex items-center gap-6">
                             <h3 class="text-oro text-sm font-modern font-medium uppercase tracking-[0.3em]">{{ t.position }}</h3>
@@ -467,7 +480,7 @@
                     <div class="relative">
                         <div class="absolute -top-4 -left-4 w-8 h-8 bg-oro/20 rounded-lg animate-glow-pulse"></div>
                         <div class="rounded-2xl overflow-hidden border border-oro/30">
-                            <div class="w-full h-96 bg-[#475569] rounded-lg flex items-center justify-center relative overflow-hidden" style="filter: contrast(120%) brightness(0.9);">
+                            <div class="w-full h-64 md:h-80 lg:h-96 bg-[#475569] rounded-lg flex items-center justify-center relative overflow-hidden" style="filter: contrast(120%) brightness(0.9);">
                                 <div class="text-center space-y-4">
                                     <div class="w-16 h-16 bg-oro/20 rounded-full flex items-center justify-center mx-auto">
                                         <svg class="w-8 h-8 text-oro" fill="none" stroke="currentColor" viewBox="0 0 24 24" role="img" aria-label="Icona mappa">
@@ -496,8 +509,8 @@
             </div>
         </main>
 
-        <footer class="py-16 border-t border-oro/20">
-            <div class="max-w-7xl mx-auto px-8">
+        <footer class="py-12 md:py-16 border-t border-oro/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                 <div class="asymmetric-grid">
                     <div class="space-y-4">
                         <p class="text-gray-200 text-xs uppercase tracking-[0.3em] font-modern font-medium">
@@ -538,6 +551,7 @@
         createApp({
             setup() {
                 const currentLang = ref(localStorage.getItem('lang') || 'de');
+                const langDropdownOpen = ref(false);
 
                 const translations = {
                     it: {
@@ -635,6 +649,15 @@
                     document.documentElement.lang = lang;
                 };
 
+                const toggleLangDropdown = () => {
+                    langDropdownOpen.value = !langDropdownOpen.value;
+                };
+
+                const selectLanguage = (lang) => {
+                    setLanguage(lang);
+                    langDropdownOpen.value = false;
+                };
+
                 const scrollToTop = () => {
                     window.scrollTo({
                         top: 0,
@@ -642,11 +665,21 @@
                     });
                 };
 
+                // Chiudi dropdown quando si clicca fuori
+                onMounted(() => {
+                    document.addEventListener('click', (e) => {
+                        langDropdownOpen.value = false;
+                    });
+                });
+
                 return {
                     currentLang,
                     currentYear,
+                    langDropdownOpen,
                     t,
                     setLanguage,
+                    toggleLangDropdown,
+                    selectLanguage,
                     scrollToTop
                 };
             }

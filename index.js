@@ -114,12 +114,17 @@ app.use(morgan('combined'));
 const fiscaliniPath = "/fiscalini";
 const fiscaliniPathRoot = "./fiscalini/";
 
+app.use(`${fiscaliniPath}/images`, express.static(`${fiscaliniPathRoot}images/`));
+
 const fiscaliniVersions = fs.readdirSync(fiscaliniPathRoot).filter(item => {
   const itemPath = path.join(fiscaliniPathRoot, item);
-  return fs.statSync(itemPath).isDirectory();
+  return fs.statSync(itemPath).isDirectory() && !item.startsWith('.');
 });
 
 fiscaliniVersions.forEach(version => {
+  // Skip the images folder from being served as a version
+  if (version === 'images') return;
+
   const versionPath = `${fiscaliniPath}/${version}`;
   const versionRoot = `${fiscaliniPathRoot}${version}/`;
 

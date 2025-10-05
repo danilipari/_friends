@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Studio Legale e Notarile Fiscalini | Avv. Elio, Massimiliano e Milena Fiscalini | Chiasso</title>
+    <meta name="description" content="Studio Legale e Notarile Fiscalini - Chiasso. Avv. Elio Fiscalini Notaio, Avv. Massimiliano Fiscalini Notaio e Avv. Milena Fiscalini Notaio. Servizi legali e notarili.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Studio Legale e Notarile Fiscalini">
+    <meta name="keywords" content="notaio Chiasso, notaio Mendrisio, notaio Fiscalini, Notar Tessin, Notar Tessin deutsch, Notar Chiasso, Notar Mendrisio, notaio Chiasso tedesco, notaio Mendrisio tedesco, Notar Tessin schweizerdeutsch, notary Chiasso, notary Ticino, notaire Chiasso, notaire Tessin">
+    <meta name="theme-color" content="#F8FAFC">
+    <meta name="color-scheme" content="light">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="canonical" href="https://fiscalini.ch/">
+
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU3R1ZGlvIEZpc2NhbGluaSIsInNob3J0X25hbWUiOiJGaXNjYWxpbmkiLCJzdGFydF91cmwiOiJpbmRleC5odG1sIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI0Y4RkFGQyIsInRoZW1lX2NvbG9yIjoiI0Y4RkFGQyJ9">
+
+    <meta property="og:title" content="Studio Legale e Notarile Fiscalini | Chiasso">
+    <meta property="og:description" content="Studio Legale e Notarile Fiscalini - Chiasso. Servizi legali e notarili professionali.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fiscalini.ch/">
+    <meta property="og:locale" content="it_CH">
+
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https:; media-src 'self'; manifest-src 'self' data:;">
+
+    <link rel="preload" href="https://unpkg.com/vue@3/dist/vue.global.prod.js" as="script" crossorigin="anonymous">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      "name": "Studio Legale e Notarile Fiscalini",
+      "description": "Studio legale e notarile specializzato atti notarili",
+      "url": "https://fiscalini.ch",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Corso San Gottardo 16",
+        "addressLocality": "Chiasso",
+        "postalCode": "6830",
+        "addressCountry": "CH"
+      },
+      "telephone": ["+41916823714", "+41916824733"],
+      "email": ["elio@fiscalini.ch", "massimiliano@fiscalini.ch", "milena@fiscalini.ch"],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Switzerland"
+      },
+      "employee": [
+        {
+          "@type": "Person",
+          "name": "Elio Fiscalini",
+          "jobTitle": "Avvocato e Notaio",
+          "email": "elio@fiscalini.ch"
+        },
+        {
+          "@type": "Person",
+          "name": "Massimiliano Fiscalini",
+          "jobTitle": "Avvocato e Notaio",
+          "email": "massimiliano@fiscalini.ch"
+        },
+        {
+          "@type": "Person",
+          "name": "Milena Fiscalini",
+          "jobTitle": "Avvocato e Notaio",
+          "email": "milena@fiscalini.ch"
+        },
+        {
+          "@type": "Person",
+          "name": "Manuela Locatelli",
+          "jobTitle": "Responsabile Amministrazione"
+        }
+      ]
+    }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof tailwind !== 'undefined') {
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                'neutral-bg': '#F8FAFC',
+                                'neutral-accent': '#64748B',
+                                'neutral-dark': '#334155',
+                                'blu-notte': '#F8FAFC',
+                                'oro': '#64748B',
+                            },
+                            fontFamily: {
+                                'modern': ['Space Grotesk', 'system-ui', '-apple-system', 'sans-serif'],
+                                'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                            },
+                            animation: {
+                                'fade-in': 'fadeIn 1.5s ease-out',
+                                'slide-in': 'slideIn 1s ease-out',
+                                'glow-pulse': 'glowPulse 2s ease-in-out infinite',
+                                'float': 'float 6s ease-in-out infinite',
+                            },
+                            keyframes: {
+                                fadeIn: {
+                                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                                    '100%': { opacity: '1', transform: 'translateY(0)' }
+                                },
+                                slideIn: {
+                                    '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                                    '100%': { opacity: '1', transform: 'translateX(0)' }
+                                },
+                                glowPulse: {
+                                    '0%, 100%': { boxShadow: '0 0 20px rgba(100, 116, 139, 0.2)' },
+                                    '50%': { boxShadow: '0 0 40px rgba(100, 116, 139, 0.4)' }
+                                },
+                                float: {
+                                    '0%, 100%': { transform: 'translateY(0px)' },
+                                    '50%': { transform: 'translateY(-10px)' }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    <style>
+        body {
+            background: #F8FAFC;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-display: swap;
+        }
+
+        .geometric-bg {
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(100, 116, 139, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(100, 116, 139, 0.03) 0%, transparent 50%);
+        }
+
+        .modern-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #64748B 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-border {
+            border-left: 2px solid rgba(100, 116, 139, 0.2);
+            position: relative;
+        }
+
+        .section-border::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(180deg, #64748B 0%, transparent 100%);
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; transform: scaleY(0.5); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        .modern-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modern-hover:hover {
+            transform: translateX(8px);
+            color: #64748B;
+        }
+
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .asymmetric-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .progress-modern {
+            background: linear-gradient(90deg,
+                rgba(100, 116, 139, 0.8) 0%,
+                rgba(100, 116, 139, 0.4) 75%,
+                transparent 100%);
+            animation: progressFlow 4s ease-in-out infinite;
+        }
+
+        @keyframes progressFlow {
+            0%, 100% { width: 75%; opacity: 0.8; }
+            50% { width: 85%; opacity: 1; }
+        }
+
+        .status-modern {
+            background: linear-gradient(45deg, #64748B, #475569);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .status-modern::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, #64748B, #475569);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: pulseRing 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.1; }
+            100% { transform: scale(1); opacity: 0.3; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .modern-hover:focus {
+            outline: 2px solid #64748B;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        a:focus {
+            outline: 2px solid #64748B;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="text-neutral-dark geometric-bg">
+    <noscript>
+        <div style="padding: 20px; background: #64748B; color: #F8FAFC; text-align: center; font-weight: bold; margin: 20px; border-radius: 10px;">
+            Questo sito richiede JavaScript per funzionare correttamente.
+            Per maggiori informazioni contattaci al +41 91 682 37 14 o via email: info@fiscalini.ch
+        </div>
+    </noscript>
+
+    <div id="app">
+        <header class="fixed top-0 w-full z-50 bg-neutral-bg/80 backdrop-blur-xl border-b border-neutral-accent/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 md:py-5">
+                <div class="flex justify-between items-center">
+                    <div @click.prevent="scrollToTop" class="font-modern text-xl font-medium text-neutral-accent tracking-wide hover:text-neutral-accent/80 transition-colors cursor-pointer" aria-label="Torna all'inizio della pagina">FISCALINI</div>
+                    <div class="flex items-center gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="status-modern w-3 h-3"></div>
+                            <span class="text-neutral-accent text-sm font-modern font-medium">{{ t.inDevelopment }}</span>
+                        </div>
+                        <!-- Language Selector -->
+                        <div class="flex items-center border-l border-neutral-accent/20 pl-4 md:pl-6">
+                            <div class="relative" @click.stop>
+                                <button
+                                    @click="toggleLangDropdown"
+                                    class="bg-neutral-bg/50 text-neutral-accent border border-neutral-accent/30 rounded px-3 py-2 text-xs font-modern font-medium uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-neutral-accent/50 cursor-pointer hover:bg-neutral-bg/70 transition-colors flex items-center gap-2 min-w-[70px]"
+                                    :aria-label="'Lingua corrente: ' + currentLang.toUpperCase()">
+                                    {{ currentLang }}
+                                    <svg class="w-3 h-3 transition-transform" :class="{ 'rotate-180': langDropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+
+                                <div v-show="langDropdownOpen" class="absolute right-0 mt-2 w-24 bg-neutral-bg/95 backdrop-blur-xl border border-neutral-accent/30 rounded-lg shadow-xl overflow-hidden z-50">
+                                    <button
+                                        v-for="lang in ['de', 'it', 'en', 'fr']"
+                                        :key="lang"
+                                        @click="selectLanguage(lang)"
+                                        :class="[
+                                            'w-full text-left px-4 py-2 text-xs font-modern font-medium uppercase tracking-wider transition-colors',
+                                            currentLang === lang ? 'bg-neutral-accent/20 text-neutral-accent' : 'text-neutral-dark/60 hover:bg-neutral-accent/10 hover:text-neutral-accent'
+                                        ]">
+                                        {{ lang }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="min-h-screen">
+            <section ref="heroSection" class="relative flex items-center pt-20 md:pt-24 pb-0 min-h-screen overflow-hidden">
+                <div
+                    class="absolute inset-0 z-0 transition-transform duration-75 ease-out opacity-[0.08]"
+                    :style="{
+                        backgroundImage: 'url(/fiscalini/images/IMG_6102.webp)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        transform: `translateY(${parallaxOffset}px) scale(1.15)`,
+                        filter: 'grayscale(0.5) blur(1px)'
+                    }"
+                ></div>
+
+                <div class="absolute inset-0 bg-neutral-bg/99 z-10"></div>
+
+                <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-20">
+                        <div class="asymmetric-grid mb-12 md:mb-16 lg:mb-20">
+                            <div class="space-y-6 animate-slide-in">
+                                <div class="space-y-2">
+                                    <p class="text-neutral-accent text-sm font-modern font-medium uppercase tracking-[0.2em]">{{ t.studioLegal }}</p>
+                                    <p class="text-neutral-dark/80 text-xs uppercase tracking-[0.3em]">{{ t.location }}</p>
+                                </div>
+                                <div class="w-16 h-px bg-neutral-accent"></div>
+                                <p class="text-neutral-dark/80 text-lg font-light leading-relaxed max-w-md">
+                                    {{ t.newSite }}<br>
+                                    {{ t.comingSoon }}<br>
+                                    {{ t.digitalExperience }}
+                                </p>
+                            </div>
+
+                            <div class="animate-fade-in">
+                                <h1 class="font-modern text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold modern-gradient leading-none tracking-tight">
+                                    FISCALINI
+                                </h1>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <div class="progress-modern h-1 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-12 md:mt-14 lg:mt-16">
+                <section class="py-12 md:py-16 lg:py-20 section-border pl-4 sm:pl-6 md:pl-8">
+                    <div class="mb-16">
+                        <div class="flex items-center gap-6 mb-8">
+                            <h2 class="text-neutral-accent text-sm font-modern font-medium uppercase tracking-[0.3em]">{{ t.whoWeAre }}</h2>
+                            <div class="flex-1 h-px bg-gradient-to-r from-neutral-accent/40 to-transparent"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-12 md:space-y-16 lg:space-y-20">
+                      <div class="asymmetric-grid">
+                          <div class="space-y-4 animate-fade-in">
+                              <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-dark leading-tight">
+                                  Elio<br>
+                                  <span class="text-neutral-accent">Fiscalini</span>
+                              </h3>
+                              <div class="w-24 h-px bg-neutral-accent/60"></div>
+                              <p class="text-neutral-dark/80 text-sm uppercase tracking-[0.2em] font-medium">
+                                  {{ t.lawyerNotary }}
+                              </p>
+                          </div>
+                          <div class="space-y-4 text-right animate-slide-in">
+                              <a href="mailto:elio@avv-fiscalini.ch" class="text-neutral-dark/80 hover:text-neutral-accent transition-colors text-lg font-light leading-relaxed block modern-hover" aria-label="Invia email a massimiliano@avv-fiscalini.ch">
+                                  elio@avv-fiscalini.ch
+                              </a>
+                              <div class="flex justify-end">
+                                  <div class="w-16 h-px bg-neutral-accent/40"></div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="asymmetric-grid">
+                            <div class="space-y-4 text-right animate-slide-in order-2 md:order-1">
+                                <a href="mailto:massimiliano@avv-fiscalini.ch" class="text-neutral-dark/80 hover:text-neutral-accent transition-colors text-lg font-light leading-relaxed block modern-hover" aria-label="Invia email a elio@avv-fiscalini.ch">
+                                    massimiliano@avv-fiscalini.ch
+                                </a>
+                                <div class="flex justify-start md:justify-end">
+                                    <div class="w-16 h-px bg-neutral-accent/40"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-4 animate-fade-in order-1 md:order-2 text-left md:text-right">
+                                <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-dark leading-tight">
+                                    Massimiliano<br>
+                                    <span class="text-neutral-accent">Fiscalini</span>
+                                </h3>
+                                <div class="w-24 h-px bg-neutral-accent/60 md:ml-auto"></div>
+                                <p class="text-neutral-dark/80 text-sm uppercase tracking-[0.2em] font-medium">
+                                    {{ t.lawyerNotary }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="asymmetric-grid">
+                            <div class="space-y-4 animate-fade-in">
+                                <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-dark leading-tight">
+                                    Milena<br>
+                                    <span class="text-neutral-accent">Fiscalini</span>
+                                </h3>
+                                <div class="w-24 h-px bg-neutral-accent/60"></div>
+                                <p class="text-neutral-dark/80 text-sm uppercase tracking-[0.2em] font-medium">
+                                    {{ t.lawyerNotary }}
+                                </p>
+                            </div>
+                            <div class="space-y-4 text-right animate-slide-in">
+                                <a href="mailto:milena@avv-fiscalini.ch" class="text-neutral-dark/80 hover:text-neutral-accent transition-colors text-lg font-light leading-relaxed block modern-hover" aria-label="Invia email a milena@avv-fiscalini.ch">
+                                    milena@avv-fiscalini.ch
+                                </a>
+                                <div class="flex justify-end">
+                                    <div class="w-16 h-px bg-neutral-accent/40"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-12 md:py-16 lg:py-20 section-border pl-4 sm:pl-6 md:pl-8">
+                    <!-- Titoli -->
+                    <div class="mb-16">
+                        <div class="flex items-center gap-6 mb-8">
+                            <h2 class="text-neutral-accent text-sm font-modern font-medium uppercase tracking-[0.3em]">{{ t.contactsAdmin }}</h2>
+                            <div class="flex-1 h-px bg-gradient-to-r from-neutral-accent/40 to-transparent"></div>
+                        </div>
+                    </div>
+
+                    <!-- Contenuti divisi in 1/3 e 2/3 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
+                        <!-- Contatti (1/3) con separatore -->
+                        <div class="space-y-8">
+                            <div class="space-y-6 float animate-float" style="animation-delay: 0s;">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-8 h-8 bg-neutral-accent/20 rounded-lg flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-neutral-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="Telefono" role="img">
+                                            <title>Icona telefono</title>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-neutral-accent font-modern font-medium text-sm uppercase tracking-[0.2em]">{{ t.phone }}</h3>
+                                </div>
+                                <div class="space-y-2 pl-12">
+                                    <a href="tel:+41916823714" class="block text-neutral-dark hover:text-neutral-accent transition-colors font-mono text-sm modern-hover" aria-label="Chiama il numero +41 91 682 37 14">
+                                        +41 91 682 37 14
+                                    </a>
+                                    <a href="tel:+41916824733" class="block text-neutral-dark hover:text-neutral-accent transition-colors font-mono text-sm modern-hover" aria-label="Chiama il numero +41 91 682 47 33">
+                                        +41 91 682 47 33
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Separatore orizzontale (visibile solo su mobile) -->
+                            <div class="lg:hidden flex items-center justify-center py-4">
+                                <div class="h-px w-32 bg-gradient-to-r from-transparent via-neutral-accent/40 to-transparent"></div>
+                            </div>
+                        </div>
+
+                        <!-- Amministrazione (spans 2 columns on large screens) -->
+                        <div class="lg:col-span-2 lg:border-l lg:border-neutral-accent/20 lg:pl-12">
+                            <!-- Linea verticale decorativa -->
+                            <div class="hidden lg:block absolute left-0 top-0 w-px h-32 bg-gradient-to-b from-transparent via-neutral-accent/40 to-transparent"></div>
+                            <div class="space-y-6 animate-fade-in">
+                                <div class="flex flex-row items-center gap-3 md:gap-4 lg:gap-6 flex-wrap sm:flex-nowrap">
+                                    <h3 class="font-modern text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-dark whitespace-nowrap">Manuela</h3>
+                                    <h3 class="font-modern text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-accent whitespace-nowrap">Locatelli</h3>
+                                </div>
+                                <div class="w-24 h-px bg-neutral-accent/60"></div>
+                                <p class="text-neutral-dark/80 text-sm uppercase tracking-[0.2em] font-medium">
+                                    {{ t.administrationManager }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-12 md:py-16 lg:py-20">
+                    <div class="mb-12">
+                        <div class="flex items-center gap-6">
+                            <h3 class="text-neutral-accent text-sm font-modern font-medium uppercase tracking-[0.3em]">{{ t.position }}</h3>
+                            <div class="flex-1 h-px bg-gradient-to-r from-neutral-accent/40 to-transparent"></div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute -top-4 -left-4 w-8 h-8 bg-neutral-accent/20 rounded-lg animate-glow-pulse"></div>
+                        <div class="rounded-2xl overflow-hidden border border-neutral-accent/30">
+                            <div class="w-full h-64 md:h-80 lg:h-96 bg-slate-200 rounded-lg flex items-center justify-center relative overflow-hidden" style="filter: contrast(120%) brightness(0.9);">
+                                <div class="text-center space-y-4">
+                                    <div class="w-16 h-16 bg-neutral-accent/20 rounded-full flex items-center justify-center mx-auto">
+                                        <svg class="w-8 h-8 text-neutral-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" role="img" aria-label="Icona mappa">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <h4 class="text-neutral-dark font-medium">{{ t.studioName }}</h4>
+                                        <p class="text-slate-700 text-sm">{{ t.address }}<br>{{ t.city }}</p>
+                                    </div>
+                                    <a href="https://www.google.com/maps/place/Corso+S.+Gottardo+16,+6830+Chiasso,+Svizzera/@45.8347222,9.025611,17z"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      class="inline-block bg-neutral-accent text-white px-6 py-3 rounded-lg font-medium hover:bg-neutral-accent/90 transition-colors"
+                                      :aria-label="t.viewOnMaps">
+                                        {{ t.viewOnMaps }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 w-6 h-6 bg-neutral-accent/20 rounded-lg animate-glow-pulse" style="animation-delay: 1s;"></div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <footer class="py-12 md:py-16 border-t border-neutral-accent/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                <div class="asymmetric-grid">
+                    <div class="space-y-4">
+                        <p class="text-neutral-dark/70 text-xs uppercase tracking-[0.3em] font-modern font-medium">
+                            © {{ currentYear }} {{ t.copyrightText }}
+                        </p>
+                        <a href="privacy.html" class="text-neutral-dark/50 hover:text-neutral-accent text-xs uppercase tracking-[0.2em] font-modern font-medium transition-colors duration-300 inline-block mt-2">
+                            Privacy Policy
+                        </a>
+                        <div class="w-24 h-px bg-neutral-accent/30"></div>
+                    </div>
+                    <div class="text-right space-y-4">
+                        <p class="text-neutral-accent font-modern font-medium text-sm uppercase tracking-[0.2em]">
+                            {{ t.comingSoonFooter }}
+                        </p>
+                        <p class="text-neutral-dark/80 text-sm font-light">
+                            {{ t.innovationLegal }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        if (typeof console !== 'undefined' && console.warn) {
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                if (args[0] && typeof args[0] === 'string' && args[0].includes('tailwindcss.com should not be used in production')) {
+                    return;
+                }
+                originalWarn.apply(console, args);
+            };
+        }
+
+        const { createApp, onMounted, ref, computed } = Vue;
+
+        createApp({
+            setup() {
+                const currentLang = ref(localStorage.getItem('lang') || 'de');
+                const langDropdownOpen = ref(false);
+                const heroSection = ref(null);
+                const parallaxOffset = ref(0);
+
+                const translations = {
+                    it: {
+                        studioLegal: 'Studio Legale e Notarile',
+                        location: 'Chiasso • Svizzera',
+                        inDevelopment: 'IN SVILUPPO',
+                        newSite: 'Nuovo sito web in fase di sviluppo.',
+                        comingSoon: 'Presto disponibile con una nuova',
+                        digitalExperience: 'esperienza digitale.',
+                        whoWeAre: 'Chi siamo',
+                        lawyerNotary: 'Avvocato e Notaio',
+                        contactsAdmin: 'Contatti & Amministrazione',
+                        phone: 'Telefono',
+                        administrationManager: 'Responsabile Amministrazione',
+                        position: 'Posizione',
+                        studioName: 'Studio Legale Fiscalini',
+                        address: 'Corso San Gottardo 16',
+                        city: '6830 Chiasso, Svizzera',
+                        viewOnMaps: 'Visualizza su Google Maps',
+                        copyrightText: 'Studio Legale e Notarile Fiscalini',
+                        comingSoonFooter: 'Coming Soon',
+                        innovationLegal: 'Innovazione nel servizio legale'
+                    },
+                    de: {
+                        studioLegal: 'Rechtsanwalts- und Notariatsbüro',
+                        location: 'Chiasso • Schweiz',
+                        inDevelopment: 'IN ENTWICKLUNG',
+                        newSite: 'Neue Website in Entwicklung.',
+                        comingSoon: 'Bald verfügbar mit einem neuen',
+                        digitalExperience: 'digitalen Erlebnis.',
+                        whoWeAre: 'Wer wir sind',
+                        lawyerNotary: 'Rechtsanwalt und Notar',
+                        contactsAdmin: 'Kontakte & Verwaltung',
+                        phone: 'Telefon',
+                        administrationManager: 'Verwaltungsleiter',
+                        position: 'Standort',
+                        studioName: 'Rechtsanwaltskanzlei Fiscalini',
+                        address: 'Corso San Gottardo 16',
+                        city: '6830 Chiasso, Schweiz',
+                        viewOnMaps: 'Auf Google Maps anzeigen',
+                        copyrightText: 'Rechtsanwalts- und Notariatsbüro Fiscalini',
+                        comingSoonFooter: 'Coming Soon',
+                        innovationLegal: 'Innovation in der Rechtsdienstleistung'
+                    },
+                    en: {
+                        studioLegal: 'Law and Notary Office',
+                        location: 'Chiasso • Switzerland',
+                        inDevelopment: 'IN DEVELOPMENT',
+                        newSite: 'New website under development.',
+                        comingSoon: 'Coming soon with a new',
+                        digitalExperience: 'digital experience.',
+                        whoWeAre: 'Who we are',
+                        lawyerNotary: 'Lawyer and Notary',
+                        contactsAdmin: 'Contacts & Administration',
+                        phone: 'Phone',
+                        administrationManager: 'Administration Manager',
+                        position: 'Location',
+                        studioName: 'Fiscalini Law Office',
+                        address: 'Corso San Gottardo 16',
+                        city: '6830 Chiasso, Switzerland',
+                        viewOnMaps: 'View on Google Maps',
+                        copyrightText: 'Fiscalini Law and Notary Office',
+                        comingSoonFooter: 'Coming Soon',
+                        innovationLegal: 'Innovation in legal services'
+                    },
+                    fr: {
+                        studioLegal: 'Cabinet d\'Avocats et Notaire',
+                        location: 'Chiasso • Suisse',
+                        inDevelopment: 'EN DÉVELOPPEMENT',
+                        newSite: 'Nouveau site web en développement.',
+                        comingSoon: 'Bientôt disponible avec une nouvelle',
+                        digitalExperience: 'expérience numérique.',
+                        whoWeAre: 'Qui sommes-nous',
+                        lawyerNotary: 'Avocat et Notaire',
+                        contactsAdmin: 'Contacts & Administration',
+                        phone: 'Téléphone',
+                        administrationManager: 'Responsable Administration',
+                        position: 'Position',
+                        studioName: 'Cabinet Fiscalini',
+                        address: 'Corso San Gottardo 16',
+                        city: '6830 Chiasso, Suisse',
+                        viewOnMaps: 'Voir sur Google Maps',
+                        copyrightText: 'Cabinet d\'Avocats et Notaire Fiscalini',
+                        comingSoonFooter: 'Coming Soon',
+                        innovationLegal: 'Innovation dans les services juridiques'
+                    }
+                };
+
+                const t = computed(() => translations[currentLang.value]);
+                const currentYear = ref(new Date().getFullYear());
+
+                const setLanguage = (lang) => {
+                    currentLang.value = lang;
+                    localStorage.setItem('lang', lang);
+                    document.documentElement.lang = lang;
+                };
+
+                const toggleLangDropdown = () => {
+                    langDropdownOpen.value = !langDropdownOpen.value;
+                };
+
+                const selectLanguage = (lang) => {
+                    setLanguage(lang);
+                    langDropdownOpen.value = false;
+                };
+
+                const scrollToTop = () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                };
+
+                // Gestione parallax
+                const handleParallax = () => {
+                    if (!heroSection.value) return;
+                    const scrolled = window.pageYOffset;
+                    const heroHeight = heroSection.value.offsetHeight;
+
+                    // Applica parallax solo finché hero è visibile
+                    if (scrolled < heroHeight) {
+                        parallaxOffset.value = scrolled * 0.4; // velocità 40%
+                    }
+                };
+
+                // Chiudi dropdown quando si clicca fuori e gestione parallax scroll
+                onMounted(() => {
+                    document.addEventListener('click', (e) => {
+                        langDropdownOpen.value = false;
+                    });
+
+                    // Parallax scroll con requestAnimationFrame per performance
+                    let ticking = false;
+                    window.addEventListener('scroll', () => {
+                        if (!ticking) {
+                            window.requestAnimationFrame(() => {
+                                handleParallax();
+                                ticking = false;
+                            });
+                            ticking = true;
+                        }
+                    }, { passive: true });
+                });
+
+                return {
+                    currentLang,
+                    currentYear,
+                    langDropdownOpen,
+                    heroSection,
+                    parallaxOffset,
+                    t,
+                    setLanguage,
+                    toggleLangDropdown,
+                    selectLanguage,
+                    scrollToTop
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

@@ -310,17 +310,17 @@
         <main class="min-h-screen">
             <section ref="heroSection" class="relative flex items-center pt-20 md:pt-24 pb-0 min-h-screen overflow-hidden">
                 <div
-                    class="absolute inset-0 z-0 transition-transform duration-75 ease-out opacity-[0.08]"
+                    class="absolute inset-0 z-0 transition-transform duration-75 ease-out opacity-[0.15]"
                     :style="{
                         backgroundImage: 'url(/fiscalini/images/IMG_6102.webp)',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         transform: `translateY(${parallaxOffset}px) scale(1.15)`,
-                        filter: 'grayscale(0.5) blur(1px)'
+                        filter: 'grayscale(0.3) blur(0.5px)'
                     }"
                 ></div>
 
-                <div class="absolute inset-0 bg-blu-notte/99 z-10"></div>
+                <div class="absolute inset-0 bg-blu-notte/96 z-10"></div>
 
                 <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-20">
                     <div class="asymmetric-grid mb-12 md:mb-16 lg:mb-20">
@@ -570,72 +570,72 @@
                 const parallaxOffset = ref(0);
 
                 const translations = {
-                    it: {
-                        studioLegal: 'Studio Legale e Notarile',
-                        location: 'Chiasso • Svizzera',
-                        inDevelopment: 'IN SVILUPPO',
-                        newSite: 'Nuovo sito web in fase di sviluppo.',
-                        comingSoon: 'Presto disponibile con una nuova',
-                        digitalExperience: 'esperienza digitale.',
-                        whoWeAre: 'Chi siamo',
-                        lawyerNotary: 'Avvocato e Notaio',
-                        contacts: 'Contatti',
-                        administration: 'Amministrazione',
-                        phone: 'Telefono',
-                        administrationManager: 'Responsabile Amministrazione',
-                        position: 'Posizione',
-                        studioName: 'Studio Legale Fiscalini',
-                        address: 'Corso San Gottardo 16',
-                        city: '6830 Chiasso, Svizzera',
-                        viewOnMaps: 'Visualizza su Google Maps',
-                        copyrightText: 'Studio Legale e Notarile Fiscalini',
-                        comingSoonFooter: 'Coming Soon',
-                        innovationLegal: 'Innovazione nel servizio legale'
-                    },
-                    de: {
-                        studioLegal: 'Rechtsanwalts- und Notariatsbüro',
-                        location: 'Chiasso • Schweiz',
-                        inDevelopment: 'IN ENTWICKLUNG',
-                        newSite: 'Neue Website in Entwicklung.',
-                        comingSoon: 'Bald verfügbar mit einem neuen',
-                        digitalExperience: 'digitalen Erlebnis.',
-                        whoWeAre: 'Wer wir sind',
-                        lawyerNotary: 'Rechtsanwalt und Notar',
-                        contacts: 'Kontakte',
-                        administration: 'Verwaltung',
-                        phone: 'Telefon',
-                        administrationManager: 'Verwaltungsleiter',
-                        position: 'Standort',
-                        studioName: 'Rechtsanwaltskanzlei Fiscalini',
-                        address: 'Corso San Gottardo 16',
-                        city: '6830 Chiasso, Schweiz',
-                        viewOnMaps: 'Auf Google Maps anzeigen',
-                        copyrightText: 'Rechtsanwalts- und Notariatsbüro Fiscalini',
-                        comingSoonFooter: 'Coming Soon',
-                        innovationLegal: 'Innovation in der Rechtsdienstleistung'
-                    },
-                    en: {
-                        studioLegal: 'Law and Notary Office',
-                        location: 'Chiasso • Switzerland',
-                        inDevelopment: 'IN DEVELOPMENT',
-                        newSite: 'New website under development.',
-                        comingSoon: 'Coming soon with a new',
-                        digitalExperience: 'digital experience.',
-                        whoWeAre: 'Who we are',
-                        lawyerNotary: 'Lawyer and Notary',
-                        contacts: 'Contacts',
-                        administration: 'Administration',
-                        phone: 'Phone',
-                        administrationManager: 'Administration Manager',
-                        position: 'Location',
-                        studioName: 'Fiscalini Law Office',
-                        address: 'Corso San Gottardo 16',
-                        city: '6830 Chiasso, Switzerland',
-                        viewOnMaps: 'View on Google Maps',
-                        copyrightText: 'Fiscalini Law and Notary Office',
-                        comingSoonFooter: 'Coming Soon',
-                        innovationLegal: 'Innovation in legal services'
-                    },
+                  it: {
+                    studioLegal: 'Studio Legale e Notarile',
+                    location: 'Chiasso • Svizzera',
+                    inDevelopment: 'IN SVILUPPO',
+                    newSite: 'Nuovo sito web in fase di sviluppo.',
+                    comingSoon: 'Presto disponibile con una nuova',
+                    digitalExperience: 'esperienza digitale.',
+                    whoWeAre: 'Chi siamo',
+                    lawyerNotary: 'Avvocato e Notaio',
+                    contacts: 'Contatti',
+                    administration: 'Amministrazione',
+                    phone: 'Telefono',
+                    administrationManager: 'Collaboratrice Amministrativa',
+                    position: 'Posizione',
+                    studioName: 'Studio Legale e Notarile Fiscalini',
+                    address: 'Corso San Gottardo 16',
+                    city: '6830 Chiasso, Svizzera',
+                    viewOnMaps: 'Visualizza su Google Maps',
+                    copyrightText: 'Studio Legale e Notarile Fiscalini',
+                    comingSoonFooter: 'Coming Soon',
+                    innovationLegal: 'Innovazione nel servizio legale'
+                  },
+                  de: {
+                    studioLegal: 'Rechtsanwalts- und Notariatskanzlei',
+                    location: 'Chiasso • Schweiz',
+                    inDevelopment: 'IN ENTWICKLUNG',
+                    newSite: 'Neue Webseite in Entwicklungsphase.',
+                    comingSoon: 'Bald verfügbar mit einem neuen',
+                    digitalExperience: 'digitalen Erlebnis.',
+                    whoWeAre: 'Wer wir sind',
+                    lawyerNotary: 'Rechtsanwalt und Notar',
+                    contacts: 'Kontakte',
+                    administration: 'Verwaltung',
+                    phone: 'Telefon',
+                    administrationManager: 'Sachbearbeiterin',
+                    position: 'Standort',
+                    studioName: ' Rechtsanwalts- und Notariatskanzlei Fiscalini',
+                    address: 'Corso San Gottardo 16',
+                    city: '6830 Chiasso, Schweiz',
+                    viewOnMaps: 'Auf Google Maps anzeigen',
+                    copyrightText: 'Rechtsanwalts- und Notariatskanzlei Fiscalini',
+                    comingSoonFooter: 'Coming Soon',
+                    innovationLegal: 'Innovation in der Rechtsdienstleistung'
+                  },
+                  en: {
+                    studioLegal: 'Law and Notary Office',
+                    location: 'Chiasso • Switzerland',
+                    inDevelopment: 'IN DEVELOPMENT',
+                    newSite: 'New website under development.',
+                    comingSoon: 'Coming soon with a new',
+                    digitalExperience: 'digital experience.',
+                    whoWeAre: 'Who we are',
+                    lawyerNotary: 'Lawyer and Notary',
+                    contacts: 'Contacts',
+                    administration: 'Administration',
+                    phone: 'Phone',
+                    administrationManager: 'Administrative Assistant', 
+                    position: 'Location',
+                    studioName: 'Fiscalini Law and Notary Office',
+                    address: 'Corso San Gottardo 16',
+                    city: '6830 Chiasso, Switzerland',
+                    viewOnMaps: 'View on Google Maps',
+                    copyrightText: 'Fiscalini Law and Notary Office',
+                    comingSoonFooter: 'Coming Soon',
+                    innovationLegal: 'Innovation in legal services'
+                  }
                 };
 
                 const t = computed(() => translations[currentLang.value]);

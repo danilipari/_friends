@@ -534,6 +534,16 @@
     </div>
 
     <script>
+        if (typeof console !== 'undefined') {
+            console.log(
+                '%cDani Lipari %cFull-Stack Developer \nSiti web • App • Bot/Automazioni • API %c\nhttps://www.linkedin.com/in/dani-lipari-developer',
+                'background: #003166; color: #E8DDD0; padding: 6px 12px; font-weight: bold; font-size: 14px; border-bottom: 1.5px solid #003166;',
+                'background: #E8DDD0; color: #003166; padding: 6px 12px; font-weight: bold; font-size: 13px; border-bottom: 1.5px solid #003166;',
+                'color: #003166!important; font-size: 12px; line-height: 1.6; margin-top: 4px;'
+            );
+        }
+
+        // Soppressione warning Tailwind
         if (typeof console !== 'undefined' && console.warn) {
             const originalWarn = console.warn;
             console.warn = function(...args) {

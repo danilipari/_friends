@@ -1,0 +1,12 @@
+# robots.txt per Studio Legale e Notarile Fiscalini
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://avv-fiscalini.ch/sitemap.xml
+
+# Disallow crawling di file non necessari
+Disallow: /cgi-bin/
+Disallow: /*.json$
+Disallow: /*.xml$

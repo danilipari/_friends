@@ -679,7 +679,7 @@
                     memberships: false
                 });
                 const timelineItems = ref([false, false, false]);
-                const experienceItems = ref([false, false, false, false, false, false]);
+                const experienceItems = ref([false, false, false, false, false, false, false, false, false, false]);
                 const cardsRevealed = ref([false, false]);
                 const timelineProgress = ref(0);
                 const experienceProgress = ref(0);
@@ -704,7 +704,11 @@
                             { period: 'Ottobre 2019 – Agosto 2022', title: 'Cancelliera', location: 'Prima Camera civile del Tribunale d\'appello, Lugano' },
                             { period: 'Gennaio 2015 – Settembre 2019', title: 'Cancelliera', location: 'Camera di esecuzione e fallimenti del Tribunale d\'appello, Lugano' },
                             { period: 'Ottobre 2011 – Dicembre 2014', title: 'Cancelliera', location: 'Prima Camera civile del Tribunale d\'appello, Lugano' },
-                            { period: 'Gennaio 2010 – Settembre 2011', title: 'Avvocato dipendente', location: 'Studio legale e notarile a Locarno' }
+                            { period: 'Marzo 2010', title: 'Praticantato notarile', location: 'Ufficio del registro di commercio, Lugano' },
+                            { period: 'Febbraio 2010', title: 'Praticantato notarile', location: 'Ufficio del registro fondiario, Locarno' },
+                            { period: 'Gennaio 2010 – Settembre 2011', title: 'Avvocato dipendente', location: 'Studio legale e notarile a Locarno' },
+                            { period: 'Ottobre 2007 – Dicembre 2007', title: 'Alunnato giudiziario', location: 'Pretura di Locarno-Città' },
+                            { period: 'Maggio 2007 – Dicembre 2009', title: 'Praticantato legale e notarile', location: 'Studio legale e notarile a Locarno' }
                         ],
                         areasTitle: 'Campi di Attività',
                         areas: {
@@ -744,7 +748,11 @@
                             { period: 'Oktober 2019 – August 2022', title: 'Gerichtsschreiberin', location: 'Erste Zivilkammer des Appellationsgerichts, Lugano' },
                             { period: 'Januar 2015 – September 2019', title: 'Gerichtsschreiberin', location: 'Schuldbetreibungs- und Konkurskammer des Appellationsgerichts, Lugano' },
                             { period: 'Oktober 2011 – Dezember 2014', title: 'Gerichtsschreiberin', location: 'Erste Zivilkammer des Appellationsgerichts, Lugano' },
-                            { period: 'Januar 2010 – September 2011', title: 'Angestellte Rechtsanwältin', location: 'Rechtsanwalts- und Notariatskanzlei in Locarno' }
+                            { period: 'März 2010', title: 'Notarielles Praktikum', location: 'Handelsregisteramt, Lugano' },
+                            { period: 'Februar 2010', title: 'Notarielles Praktikum', location: 'Grundbuchamt, Locarno' },
+                            { period: 'Januar 2010 – September 2011', title: 'Angestellte Rechtsanwältin', location: 'Rechtsanwalts- und Notariatskanzlei in Locarno' },
+                            { period: 'Oktober 2007 – Dezember 2007', title: 'Gerichtspraktikum', location: 'Bezirksgericht Locarno-Stadt' },
+                            { period: 'Mai 2007 – Dezember 2009', title: 'Rechts- und Notariatspraktikum', location: 'Rechtsanwalts- und Notariatskanzlei in Locarno' }
                         ],
                         areasTitle: 'Tätigkeitsbereiche',
                         areas: {
@@ -784,7 +792,11 @@
                             { period: 'October 2019 – August 2022', title: 'Court Clerk', location: 'First Civil Chamber of the Court of Appeal, Lugano' },
                             { period: 'January 2015 – September 2019', title: 'Court Clerk', location: 'Debt Enforcement and Bankruptcy Chamber of the Court of Appeal, Lugano' },
                             { period: 'October 2011 – December 2014', title: 'Court Clerk', location: 'First Civil Chamber of the Court of Appeal, Lugano' },
-                            { period: 'January 2010 – September 2011', title: 'Employed Lawyer', location: 'Law and Notary Office in Locarno' }
+                            { period: 'March 2010', title: 'Notarial Internship', location: 'Commercial Register Office, Lugano' },
+                            { period: 'February 2010', title: 'Notarial Internship', location: 'Land Registry Office, Locarno' },
+                            { period: 'January 2010 – September 2011', title: 'Employed Lawyer', location: 'Law and Notary Office in Locarno' },
+                            { period: 'October 2007 – December 2007', title: 'Court Internship', location: 'District Court of Locarno-City' },
+                            { period: 'May 2007 – December 2009', title: 'Legal and Notarial Internship', location: 'Law and Notary Office in Locarno' }
                         ],
                         areasTitle: 'Areas of Activity',
                         areas: {
@@ -889,6 +901,10 @@
                     setTimeout(() => { experienceItems.value[3] = true; }, 800);
                     setTimeout(() => { experienceItems.value[4] = true; }, 1000);
                     setTimeout(() => { experienceItems.value[5] = true; }, 1200);
+                    setTimeout(() => { experienceItems.value[6] = true; }, 1400);
+                    setTimeout(() => { experienceItems.value[7] = true; }, 1600);
+                    setTimeout(() => { experienceItems.value[8] = true; }, 1800);
+                    setTimeout(() => { experienceItems.value[9] = true; }, 2000);
                     let progress = 0;
                     const interval = setInterval(() => {
                         progress += 5;

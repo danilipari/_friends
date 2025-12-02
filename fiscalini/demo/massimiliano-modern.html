@@ -690,7 +690,7 @@
                     memberships: false
                 });
                 const timelineItems = ref([false, false, false]);
-                const experienceItems = ref([false, false, false, false]);
+                const experienceItems = ref([false, false, false, false, false, false]);
                 const cardsRevealed = ref([false, false]);
                 const timelineProgress = ref(0);
                 const experienceProgress = ref(0);
@@ -719,6 +719,16 @@
                                 period: 'Gennaio 2011 – Dicembre 2021',
                                 title: 'Avvocato e Notaio dipendente',
                                 location: 'Studio Legale e Notarile Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'Marzo 2010',
+                                title: 'Praticantato notarile',
+                                location: 'Ufficio del registro di commercio, Lugano'
+                            },
+                            {
+                                period: 'Febbraio 2010',
+                                title: 'Praticantato notarile',
+                                location: 'Ufficio del registro fondiario, Mendrisio'
                             },
                             {
                                 period: 'Luglio 2007 – Dicembre 2010',
@@ -790,6 +800,16 @@
                                 location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso'
                             },
                             {
+                                period: 'März 2010',
+                                title: 'Notarielles Praktikum',
+                                location: 'Handelsregisteramt, Lugano'
+                            },
+                            {
+                                period: 'Februar 2010',
+                                title: 'Notarielles Praktikum',
+                                location: 'Grundbuchamt, Mendrisio'
+                            },
+                            {
                                 period: 'Juli 2007 – Dezember 2010',
                                 title: 'Rechtsanwalt',
                                 location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso'
@@ -857,6 +877,16 @@
                                 period: 'January 2011 – December 2021',
                                 title: 'Lawyer and Notary Public',
                                 location: 'Law and Notary Office Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'March 2010',
+                                title: 'Notarial Internship',
+                                location: 'Commercial Register Office, Lugano'
+                            },
+                            {
+                                period: 'February 2010',
+                                title: 'Notarial Internship',
+                                location: 'Land Registry Office, Mendrisio'
                             },
                             {
                                 period: 'July 2007 – December 2010',
@@ -1001,6 +1031,8 @@
                     setTimeout(() => { experienceItems.value[1] = true; }, 400);
                     setTimeout(() => { experienceItems.value[2] = true; }, 600);
                     setTimeout(() => { experienceItems.value[3] = true; }, 800);
+                    setTimeout(() => { experienceItems.value[4] = true; }, 1000);
+                    setTimeout(() => { experienceItems.value[5] = true; }, 1200);
 
                     let progress = 0;
                     const interval = setInterval(() => {

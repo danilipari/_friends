@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Milena Fiscalini | Avvocato e Notaio | Studio Fiscalini Chiasso</title>
-    <meta name="description" content="Milena Fiscalini - Avvocato e Notaio. Esperienza pluriennale presso il Tribunale d'appello, specializzata in diritto notarile e successorio.">
+    <title>Massimiliano Fiscalini | Avvocato e Notaio | Studio Fiscalini Chiasso</title>
+    <meta name="description" content="Massimiliano Fiscalini - Avvocato e Notaio. Laurea magna cum laude, specializzato in diritto notarile, societario e successorio.">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#003166">
 
@@ -52,6 +52,7 @@
             overflow-x: hidden;
         }
 
+        /* Grain Texture */
         .grain {
             position: fixed;
             top: 0;
@@ -64,6 +65,7 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
         }
 
+        /* Advanced Parallax Hero */
         .parallax-hero {
             position: relative;
             min-height: 100vh;
@@ -96,6 +98,7 @@
                 rgba(0, 49, 102, 0.95) 100%);
         }
 
+        /* Sticky Split Layout */
         .sticky-split {
             display: grid;
             grid-template-columns: 45% 55%;
@@ -130,6 +133,7 @@
             filter: grayscale(0.2) contrast(1.1);
         }
 
+        /* Progressive Timeline */
         .timeline-progressive {
             position: relative;
             padding-left: 3rem;
@@ -186,6 +190,7 @@
             transform: scale(1.2);
         }
 
+        /* 3D Hover Cards */
         .card-3d {
             background: linear-gradient(135deg, rgba(232, 221, 208, 0.05) 0%, rgba(232, 221, 208, 0.02) 100%);
             border: 1px solid rgba(232, 221, 208, 0.15);
@@ -217,6 +222,7 @@
             opacity: 1;
         }
 
+        /* Reveal Animations */
         .reveal-section {
             opacity: 0;
             clip-path: inset(10% 0 10% 0);
@@ -228,6 +234,7 @@
             clip-path: inset(0 0 0 0);
         }
 
+        /* Animated Section Numbers */
         .section-number {
             font-family: 'Cormorant Garamond', serif;
             font-size: 8rem;
@@ -243,6 +250,7 @@
             color: rgba(212, 175, 55, 0.15);
         }
 
+        /* Decorative Elements */
         .decorative-line {
             position: relative;
             height: 2px;
@@ -267,6 +275,7 @@
             50% { opacity: 1; transform: scale(1.3); }
         }
 
+        /* Smooth Fade In */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -278,20 +287,14 @@
             transform: translateY(0);
         }
 
+        /* Stagger delays */
         .stagger-1 { transition-delay: 0.1s; }
         .stagger-2 { transition-delay: 0.2s; }
         .stagger-3 { transition-delay: 0.3s; }
         .stagger-4 { transition-delay: 0.4s; }
         .stagger-5 { transition-delay: 0.5s; }
 
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-        }
-
+        /* Status Modern */
         .status-modern {
             background: linear-gradient(45deg, #E8DDD0, #D4C4B0);
             border-radius: 50%;
@@ -317,6 +320,7 @@
             100% { transform: scale(1); opacity: 0.3; }
         }
 
+        /* Footer Grid */
         .footer-asymmetric-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -324,6 +328,7 @@
             align-items: start;
         }
 
+        /* Responsive */
         @media (max-width: 1024px) {
             .sticky-split {
                 grid-template-columns: 1fr;
@@ -346,8 +351,13 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
+
+            .parallax-hero {
+                min-height: 100vh;
+            }
         }
 
+        /* Custom Cursor Effect */
         .cursor-glow {
             pointer-events: none;
             position: fixed;
@@ -405,7 +415,7 @@
         <header class="fixed top-0 w-full z-50 bg-blu-notte/80 backdrop-blur-xl border-b border-beige/20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 md:py-5">
                 <div class="flex justify-between items-center">
-                    <a href="../coming-soon/index.html" class="font-modern text-xl font-medium text-beige tracking-wide hover:text-beige/80 transition-colors">FISCALINI</a>
+                    <a href="index.html" class="font-modern text-xl font-medium text-beige tracking-wide hover:text-beige/80 transition-colors">FISCALINI</a>
                     <div class="flex items-center gap-6">
                         <div class="flex items-center">
                             <div class="relative" @click.stop>
@@ -439,7 +449,7 @@
 
         <!-- Parallax Hero -->
         <section class="parallax-hero" ref="heroSection">
-            <div class="parallax-layer parallax-image" ref="parallaxImage" :style="{backgroundImage: 'url(../images/people/webp/IMG_6336.webp)'}"></div>
+            <div class="parallax-layer parallax-image" ref="parallaxImage" :style="{backgroundImage: 'url(../images/people/webp/IMG_6276.webp)'}"></div>
             <div class="parallax-layer parallax-overlay" ref="parallaxOverlay"></div>
 
             <div class="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-32">
@@ -452,7 +462,7 @@
 
                     <div class="fade-in stagger-2" :class="{ 'revealed': heroRevealed }">
                         <h1 class="font-serif text-6xl md:text-7xl lg:text-8xl font-bold text-beige leading-none mb-8">
-                            Milena<br>
+                            Massimiliano<br>
                             <span class="italic">Fiscalini</span>
                         </h1>
                     </div>
@@ -463,7 +473,7 @@
 
                     <div class="fade-in stagger-4" :class="{ 'revealed': heroRevealed }">
                         <p class="text-beige/90 text-xl font-light leading-relaxed mb-8 max-w-2xl">
-                            {{ t.subtitle }}
+                            {{ t.degree }}
                         </p>
                     </div>
 
@@ -473,15 +483,15 @@
                                 {{ t.sinceYear }}
                             </span>
                             <span class="px-6 py-3 bg-oro/10 border border-oro/20 rounded-full text-sm font-sans text-oro backdrop-blur-sm">
-                                {{ t.badge }}
+                                {{ t.owner }}
                             </span>
                         </div>
                     </div>
 
                     <div class="fade-in stagger-5" :class="{ 'revealed': heroRevealed }">
-                        <a href="mailto:milena@avv-fiscalini.ch"
+                        <a href="mailto:massimiliano@avv-fiscalini.ch"
                            class="inline-flex items-center gap-3 text-beige hover:text-oro transition-all duration-300 group text-lg">
-                            <span class="font-sans">milena@avv-fiscalini.ch</span>
+                            <span class="font-sans">massimiliano@avv-fiscalini.ch</span>
                             <svg class="w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                             </svg>
@@ -498,7 +508,7 @@
                     <!-- Sticky Photo -->
                     <div class="sticky-photo">
                         <div class="sticky-photo-inner">
-                            <img src="../images/people/webp/IMG_6336.webp" alt="Milena Fiscalini">
+                            <img src="../images/people/webp/IMG_6276.webp" alt="Massimiliano Fiscalini">
                             <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0, 49, 102, 0.3) 0%, rgba(0, 49, 102, 0.1) 100%);"></div>
                         </div>
                     </div>
@@ -519,20 +529,20 @@
 
                                     <div class="timeline-item-modern" :class="{ 'revealed': timelineItems[0] }">
                                         <div class="timeline-dot"></div>
-                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2006</p>
+                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2004</p>
                                         <h3 class="font-serif text-2xl font-semibold text-beige mb-2">{{ t.formation.degree }}</h3>
-                                        <p class="text-beige/70">{{ t.formation.university }}</p>
+                                        <p class="text-beige/70">{{ t.formation.degreeDetail }}</p>
                                     </div>
 
                                     <div class="timeline-item-modern" :class="{ 'revealed': timelineItems[1] }">
                                         <div class="timeline-dot"></div>
-                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2009</p>
+                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2007</p>
                                         <h3 class="font-serif text-2xl font-semibold text-beige mb-2">{{ t.formation.lawyer }}</h3>
                                     </div>
 
                                     <div class="timeline-item-modern" :class="{ 'revealed': timelineItems[2] }">
                                         <div class="timeline-dot"></div>
-                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2024</p>
+                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2010</p>
                                         <h3 class="font-serif text-2xl font-semibold text-beige mb-2">{{ t.formation.notary }}</h3>
                                     </div>
                                 </div>
@@ -578,21 +588,20 @@
 
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     <div class="card-3d fade-in" :class="{ 'revealed': cardsRevealed[0] }">
-                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.legal.title }}</h3>
-                        <ul class="space-y-3 mb-6">
-                            <li v-for="(item, index) in t.areas.legal.items" :key="index"
+                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.notary.title }}</h3>
+                        <ul class="space-y-3">
+                            <li v-for="(item, index) in t.areas.notary.items" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
                                 <span class="text-oro mt-1">•</span>
                                 <span>{{ item }}</span>
                             </li>
                         </ul>
-                        <p class="text-beige/60 text-sm italic">{{ t.areas.legal.note }}</p>
                     </div>
 
                     <div class="card-3d fade-in stagger-2" :class="{ 'revealed': cardsRevealed[1] }">
-                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.notary.title }}</h3>
+                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.legal.title }}</h3>
                         <ul class="space-y-3">
-                            <li v-for="(item, index) in t.areas.notary.items" :key="index"
+                            <li v-for="(item, index) in t.areas.legal.items" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
                                 <span class="text-oro mt-1">•</span>
                                 <span>{{ item }}</span>
@@ -645,7 +654,7 @@
                         <div class="w-24 h-px bg-beige/30"></div>
                     </div>
                     <div class="text-right space-y-4">
-                        <a href="../coming-soon/index.html" class="text-beige font-modern font-medium text-sm uppercase tracking-[0.2em] hover:text-oro transition-colors inline-block">
+                        <a href="index.html" class="text-beige font-modern font-medium text-sm uppercase tracking-[0.2em] hover:text-oro transition-colors inline-block">
                             ← {{ t.backToStudio }}
                         </a>
                         <p class="text-gray-100 text-sm font-light">
@@ -666,10 +675,12 @@
                 const langDropdownOpen = ref(false);
                 const currentYear = new Date().getFullYear();
 
+                // Parallax refs
                 const heroSection = ref(null);
                 const parallaxImage = ref(null);
                 const parallaxOverlay = ref(null);
 
+                // Reveal states
                 const heroRevealed = ref(false);
                 const sectionsRevealed = ref({
                     formation: false,
@@ -679,7 +690,7 @@
                     memberships: false
                 });
                 const timelineItems = ref([false, false, false]);
-                const experienceItems = ref([false, false, false, false, false, false, false, false, false, false]);
+                const experienceItems = ref([false, false, false, false, false, false]);
                 const cardsRevealed = ref([false, false]);
                 const timelineProgress = ref(0);
                 const experienceProgress = ref(0);
@@ -687,132 +698,237 @@
                 const translations = {
                     it: {
                         title: 'Avvocato e Notaio',
-                        subtitle: 'Esperienza pluriennale presso il Tribunale d\'appello del Canton Ticino',
-                        sinceYear: 'Dal 2006',
-                        badge: 'Notaio dal 2024',
+                        degree: 'Laurea in diritto magna cum laude',
+                        sinceYear: 'Dal 2004',
+                        owner: 'Titolare dello Studio',
                         formationTitle: 'Formazione',
                         formation: {
                             degree: 'Laurea in Diritto',
-                            university: 'Università di Zurigo',
+                            degreeDetail: 'Università di Friborgo, con distinzione "magna cum laude"',
                             lawyer: 'Brevetto di Avvocato',
                             notary: 'Brevetto di Notaio'
                         },
                         experienceTitle: 'Esperienza',
                         experience: [
-                            { period: 'Agosto 2024 – Oggi', title: 'Avvocato e Notaio dipendente', location: 'Studio Legale e Notarile Fiscalini, Chiasso' },
-                            { period: 'Settembre 2022 – Luglio 2024', title: 'Avvocato dipendente', location: 'Studio Legale e Notarile Fiscalini, Chiasso' },
-                            { period: 'Ottobre 2019 – Agosto 2022', title: 'Cancelliera', location: 'Prima Camera civile del Tribunale d\'appello, Lugano' },
-                            { period: 'Gennaio 2015 – Settembre 2019', title: 'Cancelliera', location: 'Camera di esecuzione e fallimenti del Tribunale d\'appello, Lugano' },
-                            { period: 'Ottobre 2011 – Dicembre 2014', title: 'Cancelliera', location: 'Prima Camera civile del Tribunale d\'appello, Lugano' },
-                            { period: 'Marzo 2010', title: 'Praticantato notarile', location: 'Ufficio del registro di commercio, Lugano' },
-                            { period: 'Febbraio 2010', title: 'Praticantato notarile', location: 'Ufficio del registro fondiario, Locarno' },
-                            { period: 'Gennaio 2010 – Settembre 2011', title: 'Avvocato dipendente', location: 'Studio legale e notarile a Locarno' },
-                            { period: 'Ottobre 2007 – Dicembre 2007', title: 'Alunnato giudiziario', location: 'Pretura di Locarno-Città' },
-                            { period: 'Maggio 2007 – Dicembre 2009', title: 'Praticantato legale e notarile', location: 'Studio legale e notarile a Locarno' }
+                            {
+                                period: 'Gennaio 2022 – Oggi',
+                                title: 'Titolare dello Studio',
+                                location: 'Studio Legale e Notarile Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'Gennaio 2011 – Dicembre 2021',
+                                title: 'Avvocato e Notaio dipendente',
+                                location: 'Studio Legale e Notarile Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'Marzo 2010',
+                                title: 'Praticantato notarile',
+                                location: 'Ufficio del registro di commercio, Lugano'
+                            },
+                            {
+                                period: 'Febbraio 2010',
+                                title: 'Praticantato notarile',
+                                location: 'Ufficio del registro fondiario, Mendrisio'
+                            },
+                            {
+                                period: 'Luglio 2007 – Dicembre 2010',
+                                title: 'Avvocato dipendente',
+                                location: 'Studio Legale e Notarile Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'Gennaio 2005 – Giugno 2007',
+                                title: 'Praticantato legale e notarile',
+                                location: 'Studio Legale e Notarile Fiscalini – Rulli, Chiasso'
+                            }
                         ],
                         areasTitle: 'Campi di Attività',
                         areas: {
                             notary: {
                                 title: 'Notariato',
-                                items: ['Diritto immobiliare e fondiario', 'Diritto societario', 'Diritto successorio', 'Diritto matrimoniale', 'Autentiche di firme e copie conformi']
+                                items: [
+                                    'Diritto immobiliare e fondiario',
+                                    'Diritto societario',
+                                    'Diritto successorio',
+                                    'Diritto matrimoniale',
+                                    'Autentiche di firme e copie conformi'
+                                ]
                             },
                             legal: {
                                 title: 'Legale',
-                                items: ['Consulenza successoria', 'Consulenza matrimoniale', 'Consulenza contrattuale']
+                                items: [
+                                    'Consulenza successoria',
+                                    'Consulenza societaria',
+                                    'Consulenza contrattuale'
+                                ]
                             }
                         },
                         languagesTitle: 'Lingue',
-                        languages: ['Italiano', 'Schwiizerdütsch', 'Tedesco', 'Francese', 'Inglese'],
+                        languages: ['Italiano', 'Francese'],
                         membershipsTitle: 'Affiliazioni',
-                        memberships: ['Membro dell\'Ordine degli Avvocati del Canton Ticino', 'Membro della Federazione Svizzera degli Avvocati', 'Membro dell\'Ordine dei Notai del Canton Ticino', 'Membro della Federazione Svizzera dei Notai'],
+                        memberships: [
+                            'Membro dell\'Ordine degli Avvocati del Canton Ticino',
+                            'Membro della Federazione Svizzera degli Avvocati',
+                            'Membro dell\'Ordine dei Notai del Canton Ticino',
+                            'Membro della Federazione Svizzera dei Notai'
+                        ],
                         copyrightText: 'Studio Legale e Notarile Fiscalini',
                         backToStudio: 'Torna allo Studio',
                         innovationLegal: 'Innovazione nel servizio legale'
                     },
                     de: {
                         title: 'Rechtsanwalt und Notar',
-                        subtitle: 'Langjährige Erfahrung beim Appellationsgericht des Kantons Tessin',
-                        sinceYear: 'Seit 2006',
-                        badge: 'Notar seit 2024',
+                        degree: 'Studienabschluss magna cum laude',
+                        sinceYear: 'Seit 2004',
+                        owner: 'Inhaber der Kanzlei',
                         formationTitle: 'Ausbildung',
                         formation: {
                             degree: 'Studienabschluss in Rechtswissenschaft',
-                            university: 'Universität Zürich',
+                            degreeDetail: 'Universität Freiburg, mit Auszeichnung "Magna cum laude"',
                             lawyer: 'Anwaltspatent',
                             notary: 'Notariatspatent'
                         },
                         experienceTitle: 'Erfahrung',
                         experience: [
-                            { period: 'August 2024 – Heute', title: 'Angestellte Rechtsanwältin und Notarin', location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso' },
-                            { period: 'September 2022 – Juli 2024', title: 'Angestellte Rechtsanwältin', location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso' },
-                            { period: 'Oktober 2019 – August 2022', title: 'Gerichtsschreiberin', location: 'Erste Zivilkammer des Appellationsgerichts, Lugano' },
-                            { period: 'Januar 2015 – September 2019', title: 'Gerichtsschreiberin', location: 'Schuldbetreibungs- und Konkurskammer des Appellationsgerichts, Lugano' },
-                            { period: 'Oktober 2011 – Dezember 2014', title: 'Gerichtsschreiberin', location: 'Erste Zivilkammer des Appellationsgerichts, Lugano' },
-                            { period: 'März 2010', title: 'Notarielles Praktikum', location: 'Handelsregisteramt, Lugano' },
-                            { period: 'Februar 2010', title: 'Notarielles Praktikum', location: 'Grundbuchamt, Locarno' },
-                            { period: 'Januar 2010 – September 2011', title: 'Angestellte Rechtsanwältin', location: 'Rechtsanwalts- und Notariatskanzlei in Locarno' },
-                            { period: 'Oktober 2007 – Dezember 2007', title: 'Gerichtspraktikum', location: 'Bezirksgericht Locarno-Stadt' },
-                            { period: 'Mai 2007 – Dezember 2009', title: 'Rechts- und Notariatspraktikum', location: 'Rechtsanwalts- und Notariatskanzlei in Locarno' }
+                            {
+                                period: 'Januar 2022 – Heute',
+                                title: 'Inhaber der Kanzlei',
+                                location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'Januar 2011 – Dezember 2021',
+                                title: 'Rechtsanwalt und Notar',
+                                location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'März 2010',
+                                title: 'Notarielles Praktikum',
+                                location: 'Handelsregisteramt, Lugano'
+                            },
+                            {
+                                period: 'Februar 2010',
+                                title: 'Notarielles Praktikum',
+                                location: 'Grundbuchamt, Mendrisio'
+                            },
+                            {
+                                period: 'Juli 2007 – Dezember 2010',
+                                title: 'Rechtsanwalt',
+                                location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'Januar 2005 – Juni 2007',
+                                title: 'Rechts- und Notariatspraktikum',
+                                location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini – Rulli, Chiasso'
+                            }
                         ],
                         areasTitle: 'Tätigkeitsbereiche',
                         areas: {
                             notary: {
                                 title: 'Notariat',
-                                items: ['Immobilien- und Grundstücksrecht', 'Gesellschaftsrecht', 'Erbrecht', 'Eherecht', 'Beglaubigungen von Unterschriften und Kopien']
+                                items: [
+                                    'Immobilien- und Grundstücksrecht',
+                                    'Gesellschaftsrecht',
+                                    'Erbrecht',
+                                    'Eherecht',
+                                    'Beglaubigungen von Unterschriften'
+                                ]
                             },
                             legal: {
                                 title: 'Rechtsgebiete',
-                                items: ['Erbrechtliche Beratung', 'Eherecht Beratung', 'Vertragsrechtliche Beratung']
+                                items: [
+                                    'Beratung in Erbschaftsangelegenheiten',
+                                    'Beratung in Gesellschaftsangelegenheiten',
+                                    'Beratung in Vertragsangelegenheiten'
+                                ]
                             }
                         },
                         languagesTitle: 'Sprachen',
-                        languages: ['Italienisch', 'Schwiizerdütsch', 'Deutsch', 'Französisch', 'Englisch'],
+                        languages: ['Italienisch', 'Französisch'],
                         membershipsTitle: 'Mitgliedschaften',
-                        memberships: ['Mitglied des Anwaltsverbandes des Kantons Tessins', 'Mitglied des Schweizerischen Anwaltsverbandes', 'Mitglied des Notarenverbandes des Kantons Tessins', 'Mitglied des Schweizerischen Notarenverbandes'],
+                        memberships: [
+                            'Mitglied des Anwaltsverbandes des Kantons Tessins',
+                            'Mitglied des Schweizerischen Anwaltsverbandes',
+                            'Mitglied des Notarenverbandes des Kantons Tessins',
+                            'Mitglied des Schweizerischen Notarenverbandes'
+                        ],
                         copyrightText: 'Rechtsanwalts- und Notariatskanzlei Fiscalini',
                         backToStudio: 'Zurück zur Kanzlei',
                         innovationLegal: 'Innovation in der Rechtsdienstleistung'
                     },
                     en: {
                         title: 'Lawyer and Notary Public',
-                        subtitle: 'Extensive experience at the Court of Appeal of Canton Ticino',
-                        sinceYear: 'Since 2006',
-                        badge: 'Notary since 2024',
+                        degree: 'Law degree magna cum laude',
+                        sinceYear: 'Since 2004',
+                        owner: 'Office Owner',
                         formationTitle: 'Education',
                         formation: {
                             degree: 'Graduated in Law',
-                            university: 'University of Zurich',
+                            degreeDetail: 'University of Freiburg, with honors "Magna cum laude"',
                             lawyer: 'Admitted to the Bar',
                             notary: 'Notary License'
                         },
                         experienceTitle: 'Experience',
                         experience: [
-                            { period: 'August 2024 – Today', title: 'Employed Lawyer and Notary Public', location: 'Law and Notary Office Fiscalini, Chiasso' },
-                            { period: 'September 2022 – July 2024', title: 'Employed Lawyer', location: 'Law and Notary Office Fiscalini, Chiasso' },
-                            { period: 'October 2019 – August 2022', title: 'Court Clerk', location: 'First Civil Chamber of the Court of Appeal, Lugano' },
-                            { period: 'January 2015 – September 2019', title: 'Court Clerk', location: 'Debt Enforcement and Bankruptcy Chamber of the Court of Appeal, Lugano' },
-                            { period: 'October 2011 – December 2014', title: 'Court Clerk', location: 'First Civil Chamber of the Court of Appeal, Lugano' },
-                            { period: 'March 2010', title: 'Notarial Internship', location: 'Commercial Register Office, Lugano' },
-                            { period: 'February 2010', title: 'Notarial Internship', location: 'Land Registry Office, Locarno' },
-                            { period: 'January 2010 – September 2011', title: 'Employed Lawyer', location: 'Law and Notary Office in Locarno' },
-                            { period: 'October 2007 – December 2007', title: 'Court Internship', location: 'District Court of Locarno-City' },
-                            { period: 'May 2007 – December 2009', title: 'Legal and Notarial Internship', location: 'Law and Notary Office in Locarno' }
+                            {
+                                period: 'January 2022 – Today',
+                                title: 'Owner of the Office',
+                                location: 'Law and Notary Office Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'January 2011 – December 2021',
+                                title: 'Lawyer and Notary Public',
+                                location: 'Law and Notary Office Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'March 2010',
+                                title: 'Notarial Internship',
+                                location: 'Commercial Register Office, Lugano'
+                            },
+                            {
+                                period: 'February 2010',
+                                title: 'Notarial Internship',
+                                location: 'Land Registry Office, Mendrisio'
+                            },
+                            {
+                                period: 'July 2007 – December 2010',
+                                title: 'Lawyer',
+                                location: 'Law and Notary Office Fiscalini, Chiasso'
+                            },
+                            {
+                                period: 'January 2005 – June 2007',
+                                title: 'Legal and Notarial Internship',
+                                location: 'Law and Notary Office Fiscalini – Rulli, Chiasso'
+                            }
                         ],
                         areasTitle: 'Areas of Activity',
                         areas: {
                             notary: {
                                 title: 'Notary\'s Office',
-                                items: ['Real Estate and Property Law', 'Corporate Law', 'Inheritance Law', 'Marital Law', 'Authentications of signatures and certified copies']
+                                items: [
+                                    'Real Estate and Property Law',
+                                    'Corporate Law',
+                                    'Inheritance Law',
+                                    'Marital Law',
+                                    'Authentications of signatures'
+                                ]
                             },
                             legal: {
                                 title: 'Areas of Law',
-                                items: ['Inheritance Law Consulting', 'Matrimonial Law Consulting', 'Contract Law Consulting']
+                                items: [
+                                    'Counseling on inheritance matters',
+                                    'Counseling on corporate law',
+                                    'Counseling on contractual matters'
+                                ]
                             }
                         },
                         languagesTitle: 'Languages',
-                        languages: ['Italian', 'Swiss German', 'German', 'French', 'English'],
+                        languages: ['Italian', 'French'],
                         membershipsTitle: 'Memberships',
-                        memberships: ['Member of the Bar Association of the Canton of Ticino', 'Member of the Swiss Bar Association', 'Member of the Notary Association of the Canton of Ticino', 'Member of the Swiss Notary Association'],
+                        memberships: [
+                            'Member of the Bar Association of the Canton of Ticino',
+                            'Member of the Swiss Bar Association',
+                            'Member of the Notary Association of the Canton of Ticino',
+                            'Member of the Swiss Notary Association'
+                        ],
                         copyrightText: 'Fiscalini Law and Notary Office',
                         backToStudio: 'Back to Office',
                         innovationLegal: 'Innovation in legal services'
@@ -832,14 +948,17 @@
                     document.documentElement.lang = lang;
                 };
 
+                // Parallax effect
                 const handleParallax = () => {
                     const scrolled = window.pageYOffset;
+
                     if (parallaxImage.value && parallaxOverlay.value) {
                         parallaxImage.value.style.transform = `translateY(${scrolled * 0.5}px)`;
                         parallaxOverlay.value.style.transform = `translateY(${scrolled * 0.3}px)`;
                     }
                 };
 
+                // Cursor glow effect
                 const handleMouseMove = (e) => {
                     const glow = document.getElementById('cursorGlow');
                     if (glow) {
@@ -848,12 +967,18 @@
                     }
                 };
 
+                // Intersection Observer for reveals
                 const setupObservers = () => {
-                    const observerOptions = { threshold: 0.2, rootMargin: '-50px' };
+                    const observerOptions = {
+                        threshold: 0.2,
+                        rootMargin: '-50px'
+                    };
+
                     const observer = new IntersectionObserver((entries) => {
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
                                 const target = entry.target;
+
                                 if (target.classList.contains('reveal-section')) {
                                     if (target.querySelector('h2')?.textContent.includes(t.value.formationTitle)) {
                                         sectionsRevealed.value.formation = true;
@@ -863,9 +988,12 @@
                                         animateExperience();
                                     } else if (target.querySelector('h2')?.textContent.includes(t.value.areasTitle)) {
                                         sectionsRevealed.value.areas = true;
-                                        setTimeout(() => { cardsRevealed.value = [true, true]; }, 200);
+                                        setTimeout(() => {
+                                            cardsRevealed.value = [true, true];
+                                        }, 200);
                                     }
                                 }
+
                                 if (target.classList.contains('fade-in')) {
                                     if (target.querySelector('h2')?.textContent.includes(t.value.languagesTitle)) {
                                         sectionsRevealed.value.languages = true;
@@ -877,8 +1005,11 @@
                         });
                     }, observerOptions);
 
+                    // Observe all sections
                     setTimeout(() => {
-                        document.querySelectorAll('.reveal-section, .fade-in').forEach(el => observer.observe(el));
+                        document.querySelectorAll('.reveal-section, .fade-in').forEach(el => {
+                            observer.observe(el);
+                        });
                     }, 100);
                 };
 
@@ -886,6 +1017,7 @@
                     setTimeout(() => { timelineItems.value[0] = true; }, 200);
                     setTimeout(() => { timelineItems.value[1] = true; }, 400);
                     setTimeout(() => { timelineItems.value[2] = true; }, 600);
+
                     let progress = 0;
                     const interval = setInterval(() => {
                         progress += 5;
@@ -901,10 +1033,7 @@
                     setTimeout(() => { experienceItems.value[3] = true; }, 800);
                     setTimeout(() => { experienceItems.value[4] = true; }, 1000);
                     setTimeout(() => { experienceItems.value[5] = true; }, 1200);
-                    setTimeout(() => { experienceItems.value[6] = true; }, 1400);
-                    setTimeout(() => { experienceItems.value[7] = true; }, 1600);
-                    setTimeout(() => { experienceItems.value[8] = true; }, 1800);
-                    setTimeout(() => { experienceItems.value[9] = true; }, 2000);
+
                     let progress = 0;
                     const interval = setInterval(() => {
                         progress += 5;
@@ -914,9 +1043,16 @@
                 };
 
                 onMounted(() => {
-                    setTimeout(() => { heroRevealed.value = true; }, 100);
+                    // Reveal hero after mount
+                    setTimeout(() => {
+                        heroRevealed.value = true;
+                    }, 100);
+
+                    // Setup scroll effects
                     window.addEventListener('scroll', handleParallax, { passive: true });
                     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+                    // Setup observers
                     setupObservers();
                 });
 
@@ -926,9 +1062,22 @@
                 });
 
                 return {
-                    currentLang, langDropdownOpen, currentYear, heroSection, parallaxImage, parallaxOverlay,
-                    heroRevealed, sectionsRevealed, timelineItems, experienceItems, cardsRevealed,
-                    timelineProgress, experienceProgress, t, toggleLangDropdown, selectLanguage
+                    currentLang,
+                    langDropdownOpen,
+                    currentYear,
+                    heroSection,
+                    parallaxImage,
+                    parallaxOverlay,
+                    heroRevealed,
+                    sectionsRevealed,
+                    timelineItems,
+                    experienceItems,
+                    cardsRevealed,
+                    timelineProgress,
+                    experienceProgress,
+                    t,
+                    toggleLangDropdown,
+                    selectLanguage
                 };
             }
         }).mount('#app');

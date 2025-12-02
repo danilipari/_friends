@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Milena Fiscalini | Avvocato e Notaio | Studio Fiscalini Chiasso</title>
-    <meta name="description" content="Milena Fiscalini - Avvocato e Notaio. Esperienza presso il Tribunale d'appello, specializzata in diritto notarile e successorio.">
+    <title>Elio Fiscalini | Avvocato e Notaio | Studio Fiscalini Chiasso</title>
+    <meta name="description" content="Elio Fiscalini - Avvocato e Notaio. Fondatore dello Studio Fiscalini, 25 anni come amministratore di società in Svizzera e all'estero.">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#003166">
 
@@ -146,7 +146,6 @@
         .stagger-4 { animation-delay: 0.4s; }
         .stagger-5 { animation-delay: 0.5s; }
         .stagger-6 { animation-delay: 0.6s; }
-        .stagger-7 { animation-delay: 0.7s; }
 
         .decorative-line {
             position: relative;
@@ -175,6 +174,11 @@
             background: linear-gradient(135deg, rgba(232, 221, 208, 0.1) 0%, rgba(232, 221, 208, 0.05) 100%);
             border-color: rgba(212, 175, 55, 0.4);
             transform: translateY(-4px);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
         }
 
         .status-modern {
@@ -229,7 +233,7 @@
         <header class="fixed top-0 w-full z-50 bg-blu-notte/80 backdrop-blur-xl border-b border-beige/20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 md:py-5">
                 <div class="flex justify-between items-center">
-                    <a href="../coming-soon/index.html" class="font-modern text-xl font-medium text-beige tracking-wide hover:text-beige/80 transition-colors">FISCALINI</a>
+                    <a href="index.html" class="font-modern text-xl font-medium text-beige tracking-wide hover:text-beige/80 transition-colors">FISCALINI</a>
                     <div class="flex items-center gap-6">
                         <!-- Language Selector -->
                         <div class="flex items-center">
@@ -270,7 +274,7 @@
                     <!-- Left: Image -->
                     <div class="fade-in-up stagger-1">
                         <div class="hero-image rounded-2xl overflow-hidden aspect-[3/4]">
-                            <img src="../images/people/webp/IMG_6336.webp" alt="Milena Fiscalini">
+                            <img src="../images/people/webp/IMG_6313.webp" alt="Elio Fiscalini">
                         </div>
                     </div>
 
@@ -281,7 +285,7 @@
                                 {{ t.title }}
                             </p>
                             <h1 class="font-serif text-6xl md:text-7xl lg:text-8xl font-bold text-beige leading-none mb-6">
-                                Milena<br>
+                                Elio<br>
                                 <span class="italic">Fiscalini</span>
                             </h1>
                             <div class="decorative-line w-32 my-8"></div>
@@ -289,22 +293,28 @@
 
                         <div class="space-y-6 fade-in-up stagger-3">
                             <p class="text-beige/90 text-lg font-light leading-relaxed">
-                                {{ t.subtitle }}
+                                {{ t.founder }}
                             </p>
                             <div class="flex flex-wrap gap-3">
                                 <span class="px-4 py-2 bg-beige/10 border border-beige/20 rounded-full text-sm font-sans">
                                     {{ t.sinceYear }}
                                 </span>
                                 <span class="px-4 py-2 bg-oro/10 border border-oro/20 rounded-full text-sm font-sans text-oro">
-                                    {{ t.badge }}
+                                    {{ t.founderLabel }}
                                 </span>
                             </div>
                         </div>
 
-                        <div class="fade-in-up stagger-4 pt-6">
-                            <a href="mailto:milena@avv-fiscalini.ch"
+                        <div class="highlight-box rounded-xl p-6 fade-in-up stagger-4">
+                            <p class="text-oro font-serif text-xl leading-relaxed">
+                                {{ t.highlight }}
+                            </p>
+                        </div>
+
+                        <div class="fade-in-up stagger-5 pt-6">
+                            <a href="mailto:elio@avv-fiscalini.ch"
                                class="inline-flex items-center gap-3 text-beige hover:text-oro transition-colors group">
-                                <span class="font-sans text-lg">milena@avv-fiscalini.ch</span>
+                                <span class="font-sans text-lg">elio@avv-fiscalini.ch</span>
                                 <svg class="w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                                 </svg>
@@ -328,7 +338,7 @@
 
                     <div class="md:col-span-2 space-y-8">
                         <div class="timeline-item fade-in-up stagger-2">
-                            <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2006</p>
+                            <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">1971</p>
                             <h3 class="font-serif text-2xl font-semibold text-beige mb-2">
                                 {{ t.formation.degree }}
                             </h3>
@@ -336,14 +346,14 @@
                         </div>
 
                         <div class="timeline-item fade-in-up stagger-3">
-                            <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2009</p>
+                            <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">1973</p>
                             <h3 class="font-serif text-2xl font-semibold text-beige mb-2">
                                 {{ t.formation.lawyer }}
                             </h3>
                         </div>
 
                         <div class="timeline-item fade-in-up stagger-4">
-                            <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2024</p>
+                            <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">1973</p>
                             <h3 class="font-serif text-2xl font-semibold text-beige mb-2">
                                 {{ t.formation.notary }}
                             </h3>
@@ -386,23 +396,24 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <!-- Notary -->
+                    <!-- Legal -->
                     <div class="specialty-card rounded-2xl p-8 fade-in-up stagger-2">
-                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.notary.title }}</h3>
+                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.legal.title }}</h3>
                         <ul class="space-y-3">
-                            <li v-for="(item, index) in t.areas.notary.items" :key="index"
+                            <li v-for="(item, index) in t.areas.legal.items" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
                                 <span class="text-oro mt-1">•</span>
                                 <span>{{ item }}</span>
                             </li>
                         </ul>
+                        <p class="mt-6 text-beige/60 text-sm italic">{{ t.areas.legal.note }}</p>
                     </div>
 
-                    <!-- Legal -->
+                    <!-- Notary -->
                     <div class="specialty-card rounded-2xl p-8 fade-in-up stagger-3">
-                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.legal.title }}</h3>
+                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.notary.title }}</h3>
                         <ul class="space-y-3">
-                            <li v-for="(item, index) in t.areas.legal.items" :key="index"
+                            <li v-for="(item, index) in t.areas.notary.items" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
                                 <span class="text-oro mt-1">•</span>
                                 <span>{{ item }}</span>
@@ -455,7 +466,7 @@
                         <div class="w-24 h-px bg-beige/30"></div>
                     </div>
                     <div class="text-right space-y-4">
-                        <a href="../coming-soon/index.html" class="text-beige font-modern font-medium text-sm uppercase tracking-[0.2em] hover:text-oro transition-colors inline-block">
+                        <a href="index.html" class="text-beige font-modern font-medium text-sm uppercase tracking-[0.2em] hover:text-oro transition-colors inline-block">
                             ← {{ t.backToStudio }}
                         </a>
                         <p class="text-gray-100 text-sm font-light">
@@ -480,51 +491,59 @@
                     it: {
                         inDevelopment: 'IN SVILUPPO',
                         title: 'Avvocato e Notaio',
-                        subtitle: 'Esperienza pluriennale presso il Tribunale d\'appello del Canton Ticino',
-                        sinceYear: 'Dal 2006',
-                        badge: 'Notaio dal 2024',
+                        founder: 'Fondatore dello Studio Legale e Notarile Fiscalini',
+                        sinceYear: 'Dal 1971',
+                        founderLabel: 'Fondatore',
+                        highlight: '25 anni come amministratore di numerose società in Svizzera e all\'estero',
                         formationTitle: 'Formazione',
                         formation: {
                             degree: 'Laurea in Diritto',
-                            university: 'Università di Zurigo',
+                            university: 'Università di Berna',
                             lawyer: 'Brevetto di Avvocato',
                             notary: 'Brevetto di Notaio'
                         },
                         experienceTitle: 'Esperienza',
                         experience: [
                             {
-                                period: 'Agosto 2024 – Oggi',
+                                period: 'Gennaio 2022 – Oggi',
                                 title: 'Avvocato e Notaio dipendente',
                                 location: 'Studio Legale e Notarile Fiscalini, Chiasso'
                             },
                             {
-                                period: 'Settembre 2022 – Luglio 2024',
-                                title: 'Avvocato dipendente',
+                                period: 'Gennaio 1983 – Dicembre 2021',
+                                title: 'Titolare dello Studio',
                                 location: 'Studio Legale e Notarile Fiscalini, Chiasso'
                             },
                             {
-                                period: 'Ottobre 2019 – Agosto 2022',
-                                title: 'Cancelliera',
-                                location: 'Prima Camera civile del Tribunale d\'appello, Lugano'
+                                period: 'Febbraio 1974 – Dicembre 1982',
+                                title: 'Avvocato e Notaio dipendente',
+                                location: 'Studio Legale e Notarile Doninelli, Chiasso'
                             },
                             {
-                                period: 'Gennaio 2015 – Settembre 2019',
-                                title: 'Cancelliera',
-                                location: 'Camera di esecuzione e fallimenti del Tribunale d\'appello, Lugano'
+                                period: 'Gennaio 1972 – Dicembre 1973',
+                                title: 'Praticantato legale',
+                                location: 'Studio Doninelli e Tribunale d\'appello, Lugano'
                             },
                             {
-                                period: 'Ottobre 2011 – Dicembre 2014',
-                                title: 'Cancelliera',
-                                location: 'Prima Camera civile del Tribunale d\'appello, Lugano'
-                            },
-                            {
-                                period: 'Gennaio 2010 – Settembre 2011',
-                                title: 'Avvocato dipendente',
-                                location: 'Studio legale e notarile a Locarno'
+                                period: 'Gennaio 1972 – Dicembre 1973',
+                                title: 'Praticantato notarile',
+                                location: 'Ufficio dei registri, Mendrisio e Studio Doninelli'
                             }
                         ],
                         areasTitle: 'Campi di Attività',
                         areas: {
+                            legal: {
+                                title: 'Legale',
+                                items: [
+                                    'Diritto delle società',
+                                    'Diritto dei contratti',
+                                    'Diritto di famiglia',
+                                    'Diritto successorio',
+                                    'Diritto amministrativo',
+                                    'Diritto esecuzione e fallimenti'
+                                ],
+                                note: 'Con consulenza e patrocinio in ambito giudiziario e extragiudiziario'
+                            },
                             notary: {
                                 title: 'Notariato',
                                 items: [
@@ -534,18 +553,10 @@
                                     'Diritto matrimoniale',
                                     'Autentiche di firme e copie conformi'
                                 ]
-                            },
-                            legal: {
-                                title: 'Legale',
-                                items: [
-                                    'Consulenza successoria',
-                                    'Consulenza matrimoniale',
-                                    'Consulenza contrattuale'
-                                ]
                             }
                         },
                         languagesTitle: 'Lingue',
-                        languages: ['Italiano', 'Schwiizerdütsch', 'Tedesco', 'Francese', 'Inglese'],
+                        languages: ['Italiano', 'Tedesco', 'Francese'],
                         membershipsTitle: 'Affiliazioni',
                         memberships: [
                             'Membro dell\'Ordine degli Avvocati del Canton Ticino',
@@ -559,52 +570,60 @@
                     },
                     de: {
                         inDevelopment: 'IN ENTWICKLUNG',
-                        title: 'Rechtsanwältin und Notarin',
-                        subtitle: 'Langjährige Erfahrung beim Obergericht des Kantons Tessin',
-                        sinceYear: 'Seit 2006',
-                        badge: 'Notarin seit 2024',
+                        title: 'Rechtsanwalt und Notar',
+                        founder: 'Gründer der Rechtsanwalts- und Notariatskanzlei Fiscalini',
+                        sinceYear: 'Seit 1971',
+                        founderLabel: 'Gründer',
+                        highlight: '25 Jahre als Verwalter zahlreicher Gesellschaften in der Schweiz und im Ausland',
                         formationTitle: 'Ausbildung',
                         formation: {
                             degree: 'Studienabschluss in Rechtswissenschaft',
-                            university: 'Universität Zürich',
+                            university: 'Universität Bern',
                             lawyer: 'Anwaltspatent',
                             notary: 'Notariatspatent'
                         },
                         experienceTitle: 'Erfahrung',
                         experience: [
                             {
-                                period: 'August 2024 – Heute',
-                                title: 'Rechtsanwältin und Notarin',
+                                period: 'Januar 2022 – Heute',
+                                title: 'Rechtsanwalt und Notar',
                                 location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso'
                             },
                             {
-                                period: 'September 2022 – Juli 2024',
-                                title: 'Rechtsanwältin',
+                                period: 'Januar 1983 – Dezember 2021',
+                                title: 'Inhaber der Kanzlei',
                                 location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso'
                             },
                             {
-                                period: 'Oktober 2019 – August 2022',
-                                title: 'Gerichtsschreiberin',
-                                location: 'Erste Zivilkammer des Obergerichts, Lugano'
+                                period: 'Februar 1974 – Dezember 1982',
+                                title: 'Rechtsanwalt und Notar',
+                                location: 'Rechtsanwalts- und Notariatskanzlei Doninelli, Chiasso'
                             },
                             {
-                                period: 'Januar 2015 – September 2019',
-                                title: 'Gerichtsschreiberin',
-                                location: 'Schuldbetreibungs- und Konkurskammer des Obergerichts, Lugano'
+                                period: 'Januar 1972 – Dezember 1973',
+                                title: 'Rechtspraktikum',
+                                location: 'Kanzlei Doninelli und Obergericht, Lugano'
                             },
                             {
-                                period: 'Oktober 2011 – Dezember 2014',
-                                title: 'Gerichtsschreiberin',
-                                location: 'Erste Zivilkammer des Obergerichts, Lugano'
-                            },
-                            {
-                                period: 'Januar 2010 – September 2011',
-                                title: 'Rechtsanwältin',
-                                location: 'Rechtsanwalts- und Notariatskanzlei in Locarno'
+                                period: 'Januar 1972 – Dezember 1973',
+                                title: 'Notariatspraktikum',
+                                location: 'Registeramt, Mendrisio und Kanzlei Doninelli'
                             }
                         ],
                         areasTitle: 'Tätigkeitsbereiche',
                         areas: {
+                            legal: {
+                                title: 'Rechtsgebiete',
+                                items: [
+                                    'Gesellschaftsrecht',
+                                    'Vertragsrecht',
+                                    'Familienrecht',
+                                    'Erbrecht',
+                                    'Verwaltungsrecht',
+                                    'Schuldbetreibungs- und Konkursrecht'
+                                ],
+                                note: 'Mit Beratung und Vertretung in gerichtlichen und außergerichtlichen Angelegenheiten'
+                            },
                             notary: {
                                 title: 'Notariat',
                                 items: [
@@ -614,18 +633,10 @@
                                     'Eherecht',
                                     'Beglaubigungen von Unterschriften'
                                 ]
-                            },
-                            legal: {
-                                title: 'Rechtsgebiete',
-                                items: [
-                                    'Beratung in Erbschaftsangelegenheiten',
-                                    'Beratung in Eheangelegenheiten',
-                                    'Beratung in Vertragsangelegenheiten'
-                                ]
                             }
                         },
                         languagesTitle: 'Sprachen',
-                        languages: ['Italienisch', 'Schwiizerdütsch', 'Deutsch', 'Französisch', 'Englisch'],
+                        languages: ['Italienisch', 'Deutsch', 'Französisch'],
                         membershipsTitle: 'Mitgliedschaften',
                         memberships: [
                             'Mitglied des Anwaltsverbandes des Kantons Tessins',
@@ -640,51 +651,59 @@
                     en: {
                         inDevelopment: 'IN DEVELOPMENT',
                         title: 'Lawyer and Notary Public',
-                        subtitle: 'Extensive experience at the Superior Court of Canton Ticino',
-                        sinceYear: 'Since 2006',
-                        badge: 'Notary since 2024',
+                        founder: 'Founder of the Law and Notary Office Fiscalini',
+                        sinceYear: 'Since 1971',
+                        founderLabel: 'Founder',
+                        highlight: '25 years as administrator of numerous companies in Switzerland and abroad',
                         formationTitle: 'Education',
                         formation: {
                             degree: 'Graduated in Law',
-                            university: 'University of Zurich',
+                            university: 'University of Berne',
                             lawyer: 'Admitted to the Bar',
                             notary: 'Notary License'
                         },
                         experienceTitle: 'Experience',
                         experience: [
                             {
-                                period: 'August 2024 – Today',
+                                period: 'January 2022 – Today',
                                 title: 'Lawyer and Notary Public',
                                 location: 'Law and Notary Office Fiscalini, Chiasso'
                             },
                             {
-                                period: 'September 2022 – July 2024',
-                                title: 'Lawyer',
+                                period: 'January 1983 – December 2021',
+                                title: 'Owner of the Office',
                                 location: 'Law and Notary Office Fiscalini, Chiasso'
                             },
                             {
-                                period: 'October 2019 – August 2022',
-                                title: 'Law Clerk',
-                                location: 'First Civil Division of the Superior Court, Lugano'
+                                period: 'February 1974 – December 1982',
+                                title: 'Lawyer and Notary Public',
+                                location: 'Law and Notary Office Doninelli, Chiasso'
                             },
                             {
-                                period: 'January 2015 – September 2019',
-                                title: 'Law Clerk',
-                                location: 'Division of Debt Enforcement and Bankruptcy, Lugano'
+                                period: 'January 1972 – December 1973',
+                                title: 'Legal Internship',
+                                location: 'Office Doninelli and Superior Court, Lugano'
                             },
                             {
-                                period: 'October 2011 – December 2014',
-                                title: 'Law Clerk',
-                                location: 'First Civil Division of the Superior Court, Lugano'
-                            },
-                            {
-                                period: 'January 2010 – September 2011',
-                                title: 'Lawyer',
-                                location: 'Law and Notary Office in Locarno'
+                                period: 'January 1972 – December 1973',
+                                title: 'Notarial Internship',
+                                location: 'Registry Office, Mendrisio and Office Doninelli'
                             }
                         ],
                         areasTitle: 'Areas of Activity',
                         areas: {
+                            legal: {
+                                title: 'Areas of Law',
+                                items: [
+                                    'Corporate Law',
+                                    'Contract Law',
+                                    'Family Law',
+                                    'Inheritance Law',
+                                    'Administrative Law',
+                                    'Debt Enforcement and Bankruptcy Law'
+                                ],
+                                note: 'With advice and representation in judicial and extrajudicial matters'
+                            },
                             notary: {
                                 title: 'Notary\'s Office',
                                 items: [
@@ -694,18 +713,10 @@
                                     'Marital Law',
                                     'Authentications of signatures'
                                 ]
-                            },
-                            legal: {
-                                title: 'Areas of Law',
-                                items: [
-                                    'Counseling on inheritance matters',
-                                    'Counseling on marriage matters',
-                                    'Counseling on contractual matters'
-                                ]
                             }
                         },
                         languagesTitle: 'Languages',
-                        languages: ['Italian', 'Schwiizerdütsch', 'German', 'French', 'English'],
+                        languages: ['Italian', 'German', 'French'],
                         membershipsTitle: 'Memberships',
                         memberships: [
                             'Member of the Bar Association of the Canton of Ticino',

@@ -369,9 +369,44 @@
             z-index: 99;
             transition: opacity 0.3s ease;
         }
+
+        /* Cinematic Curtain */
+        .cinematic-curtain {
+            position: fixed;
+            inset: 0;
+            background: #003166;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: curtainUp 1.5s ease-out forwards;
+        }
+
+        @keyframes curtainUp {
+            0% { clip-path: inset(0 0 0 0); }
+            100% { clip-path: inset(0 0 100% 0); pointer-events: none; }
+        }
+
+        .curtain-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: #E8DDD0;
+            letter-spacing: 0.3em;
+            opacity: 0;
+            animation: logoFade 1s ease-in-out;
+        }
+
+        @keyframes logoFade {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
+    <div class="cinematic-curtain">
+        <div class="curtain-logo">FISCALINI</div>
+    </div>
     <div class="grain"></div>
     <div class="cursor-glow" id="cursorGlow"></div>
 

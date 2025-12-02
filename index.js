@@ -111,34 +111,49 @@ app.use(morgan('combined'));
 
 
 // Fiscalini
-// const fiscaliniPath = "/fiscalini";
-// const fiscaliniPathRoot = "./fiscalini/";
+const fiscaliniPath = "/fiscalini";
+const fiscaliniPathRoot = "./fiscalini/";
 
-// app.use(`${fiscaliniPath}/images`, express.static(`${fiscaliniPathRoot}images/`));
+app.use(`${fiscaliniPath}/images`, express.static(`${fiscaliniPathRoot}images/`));
 
-// const fiscaliniVersions = fs.readdirSync(fiscaliniPathRoot).filter(item => {
-//   const itemPath = path.join(fiscaliniPathRoot, item);
-//   return fs.statSync(itemPath).isDirectory() && !item.startsWith('.');
-// });
+const fiscaliniVersions = fs.readdirSync(fiscaliniPathRoot).filter(item => {
+  const itemPath = path.join(fiscaliniPathRoot, item);
+  return fs.statSync(itemPath).isDirectory() && !item.startsWith('.');
+});
 
-// fiscaliniVersions.forEach(version => {
-//   // Skip the images folder from being served as a version
-//   // if (version === 'images' || version.startsWith('v')) return;
-//   if (['images', 'docs'].includes(version)) return;
+fiscaliniVersions.forEach(version => {
+  // Skip the images folder from being served as a version
+  if (['images', 'docs'].includes(version)) return;
 
-//   const versionPath = `${fiscaliniPath}/${version}`;
-//   const versionRoot = `${fiscaliniPathRoot}${version}/`;
+  const versionPath = `${fiscaliniPath}/${version}`;
+  const versionRoot = `${fiscaliniPathRoot}${version}/`;
 
-//   app.use(versionPath, express.static(versionRoot));
-//   app.get(versionPath, (req, res) => {
-//     res.sendFile('index.html', { root: versionRoot });
-//   });
-// });
+  app.use(versionPath, express.static(versionRoot));
+  app.get(versionPath, (req, res) => {
+    res.sendFile('index.html', { root: versionRoot });
+  });
 
-// app.use(fiscaliniPath, express.static(fiscaliniPathRoot));
-// app.get(fiscaliniPath, (req, res) => {
-//   res.sendFile('index.html', { root: fiscaliniPathRoot });
-// });
+  // Check for sub-versions (like demo/v1, demo/v2)
+  const subVersions = fs.readdirSync(versionRoot).filter(item => {
+    const itemPath = path.join(versionRoot, item);
+    return fs.statSync(itemPath).isDirectory() && (item.startsWith('v') || item === 'v1' || item === 'v2');
+  });
+
+  subVersions.forEach(subVersion => {
+    const subVersionPath = `${versionPath}/${subVersion}`;
+    const subVersionRoot = `${versionRoot}${subVersion}/`;
+
+    app.use(subVersionPath, express.static(subVersionRoot));
+    app.get(subVersionPath, (req, res) => {
+      res.sendFile('index.html', { root: subVersionRoot });
+    });
+  });
+});
+
+app.use(fiscaliniPath, express.static(fiscaliniPathRoot));
+app.get(fiscaliniPath, (req, res) => {
+  res.sendFile('index.html', { root: fiscaliniPathRoot });
+});
 
 // FreccePath
 const freccePath = ["/lefrecce", "/frecce"];

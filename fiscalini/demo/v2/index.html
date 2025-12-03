@@ -183,15 +183,74 @@
             pointer-events: none;
         }
 
-        .profile-item:hover .profile-bg-image {
-            opacity: 0.18;
-            transform: scale(1.05);
-            filter: grayscale(0.3) blur(2px);
+        @media (hover: hover) {
+            .profile-item:hover .profile-bg-image {
+                opacity: 0.18;
+                transform: scale(1.05);
+                filter: grayscale(0.3) blur(2px);
+            }
+        }
+
+        .profile-name {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-name::after {
+            content: '→';
+            position: absolute;
+            right: -1.8rem;
+            top: 50%;
+            transform: translate(0, -50%);
+            opacity: 0.4;
+            color: #E8DDD0;
+            font-size: 1.2rem;
+            font-weight: 300;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (hover: hover) {
+            .profile-item:hover .profile-name::after {
+                opacity: 1;
+                transform: translate(0.3rem, -50%);
+            }
+        }
+
+        .profile-cta {
+            opacity: 0.5;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: #E8DDD0;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        @media (hover: hover) {
+            .profile-item:hover .profile-cta {
+                opacity: 0.9;
+            }
         }
 
         @media (max-width: 768px) {
             .profile-bg-image {
                 display: none;
+            }
+
+            .profile-name::after {
+                font-size: 1rem;
+                right: -1.5rem;
+                opacity: 0.6;
+            }
+
+            .profile-item {
+                padding: 1.5rem;
+                margin: -1.5rem;
+            }
+
+            .profile-cta {
+                font-size: 0.65rem;
+                margin-top: 0.5rem;
             }
         }
     </style>
@@ -291,7 +350,7 @@
                             <div class="profile-bg-image" style="background-image: url(/fiscalini/images/people/webp/IMG_6276.webp);"></div>
                             <div class="asymmetric-grid">
                                 <div class="space-y-4 animate-fade-in">
-                                    <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+                                    <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight profile-name">
                                         Massimiliano<br>
                                         <span class="text-beige">Fiscalini</span>
                                     </h3>
@@ -304,8 +363,10 @@
                                     <span class="text-gray-100 hover:text-beige transition-colors text-lg font-light leading-relaxed block">
                                         massimiliano@avv-fiscalini.ch
                                     </span>
-                                    <div class="flex justify-end">
-                                        <div class="w-16 h-px bg-beige/40"></div>
+                                    <div class="flex justify-end items-center gap-3">
+                                        <div class="w-10 h-px bg-beige/40"></div>
+                                        <p class="profile-cta font-modern uppercase">Scopri il profilo</p>
+                                        <div class="w-10 h-px bg-beige/40"></div>
                                     </div>
                                 </div>
                             </div>
@@ -315,7 +376,7 @@
                             <div class="profile-bg-image" style="background-image: url(/fiscalini/images/people/webp/IMG_6336.webp);"></div>
                             <div class="asymmetric-grid">
                                 <div class="space-y-4 animate-fade-in">
-                                    <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+                                    <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight profile-name">
                                         Milena<br>
                                         <span class="text-beige">Fiscalini</span>
                                     </h3>
@@ -328,8 +389,10 @@
                                     <span class="text-gray-100 hover:text-beige transition-colors text-lg font-light leading-relaxed block">
                                         milena@avv-fiscalini.ch
                                     </span>
-                                    <div class="flex justify-end">
-                                        <div class="w-16 h-px bg-beige/40"></div>
+                                    <div class="flex justify-end items-center gap-3">
+                                        <div class="w-10 h-px bg-beige/40"></div>
+                                        <p class="profile-cta font-modern uppercase">Scopri il profilo</p>
+                                        <div class="w-10 h-px bg-beige/40"></div>
                                     </div>
                                 </div>
                             </div>
@@ -339,7 +402,7 @@
                             <div class="profile-bg-image" style="background-image: url(/fiscalini/images/people/webp/IMG_6313.webp);"></div>
                             <div class="asymmetric-grid">
                                 <div class="space-y-4 animate-fade-in">
-                                    <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+                                    <h3 class="font-modern text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight profile-name">
                                         Elio<br>
                                         <span class="text-beige">Fiscalini</span>
                                     </h3>
@@ -352,8 +415,10 @@
                                     <span class="text-gray-100 hover:text-beige transition-colors text-lg font-light leading-relaxed block">
                                         elio@avv-fiscalini.ch
                                     </span>
-                                    <div class="flex justify-end">
-                                        <div class="w-16 h-px bg-beige/40"></div>
+                                    <div class="flex justify-end items-center gap-3">
+                                        <div class="w-10 h-px bg-beige/40"></div>
+                                        <p class="profile-cta font-modern uppercase">Scopri il profilo</p>
+                                        <div class="w-10 h-px bg-beige/40"></div>
                                     </div>
                                 </div>
                             </div>

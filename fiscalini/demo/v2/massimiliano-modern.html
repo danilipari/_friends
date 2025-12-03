@@ -22,7 +22,6 @@
                     colors: {
                         'blu-notte': '#003166',
                         'beige': '#E8DDD0',
-                        'oro': '#D4AF37',
                     },
                     fontFamily: {
                         'serif': ['Cormorant Garamond', 'Georgia', 'serif'],
@@ -154,7 +153,7 @@
             top: 0;
             width: 2px;
             height: 0%;
-            background: linear-gradient(180deg, #D4AF37 0%, #E8DDD0 100%);
+            background: linear-gradient(180deg, #E8DDD0 0%, #E8DDD0 100%);
             transition: height 0.3s ease-out;
         }
 
@@ -185,7 +184,7 @@
         }
 
         .timeline-item-modern.revealed .timeline-dot {
-            background: #D4AF37;
+            background: #E8DDD0;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
             transform: scale(1.2);
         }
@@ -265,7 +264,7 @@
             top: -3px;
             width: 8px;
             height: 8px;
-            background: #D4AF37;
+            background: #E8DDD0;
             border-radius: 50%;
             animation: shine 3s ease-in-out infinite;
         }
@@ -455,7 +454,7 @@
             <div class="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-32">
                 <div class="max-w-3xl">
                     <div class="fade-in stagger-1" :class="{ 'revealed': heroRevealed }">
-                        <p class="text-oro text-sm uppercase tracking-[0.3em] font-sans font-medium mb-6">
+                        <p class="text-beige text-sm uppercase tracking-[0.3em] font-sans font-medium mb-6">
                             {{ t.title }}
                         </p>
                     </div>
@@ -482,7 +481,7 @@
                             <span class="px-6 py-3 bg-beige/10 border border-beige/20 rounded-full text-sm font-sans backdrop-blur-sm">
                                 {{ t.sinceYear }}
                             </span>
-                            <span class="px-6 py-3 bg-oro/10 border border-oro/20 rounded-full text-sm font-sans text-oro backdrop-blur-sm">
+                            <span class="px-6 py-3 bg-oro/10 border border-oro/20 rounded-full text-sm font-sans text-beige backdrop-blur-sm">
                                 {{ t.owner }}
                             </span>
                         </div>
@@ -490,7 +489,7 @@
 
                     <div class="fade-in stagger-5" :class="{ 'revealed': heroRevealed }">
                         <a href="mailto:massimiliano@avv-fiscalini.ch"
-                           class="inline-flex items-center gap-3 text-beige hover:text-oro transition-all duration-300 group text-lg">
+                           class="inline-flex items-center gap-3 text-beige hover:text-beige transition-all duration-300 group text-lg">
                             <span class="font-sans">massimiliano@avv-fiscalini.ch</span>
                             <svg class="w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -529,20 +528,20 @@
 
                                     <div class="timeline-item-modern" :class="{ 'revealed': timelineItems[0] }">
                                         <div class="timeline-dot"></div>
-                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2004</p>
+                                        <p class="text-beige font-sans text-sm uppercase tracking-wider mb-2">2004</p>
                                         <h3 class="font-serif text-2xl font-semibold text-beige mb-2">{{ t.formation.degree }}</h3>
                                         <p class="text-beige/70">{{ t.formation.degreeDetail }}</p>
                                     </div>
 
                                     <div class="timeline-item-modern" :class="{ 'revealed': timelineItems[1] }">
                                         <div class="timeline-dot"></div>
-                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2007</p>
+                                        <p class="text-beige font-sans text-sm uppercase tracking-wider mb-2">2007</p>
                                         <h3 class="font-serif text-2xl font-semibold text-beige mb-2">{{ t.formation.lawyer }}</h3>
                                     </div>
 
                                     <div class="timeline-item-modern" :class="{ 'revealed': timelineItems[2] }">
                                         <div class="timeline-dot"></div>
-                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">2010</p>
+                                        <p class="text-beige font-sans text-sm uppercase tracking-wider mb-2">2010</p>
                                         <h3 class="font-serif text-2xl font-semibold text-beige mb-2">{{ t.formation.notary }}</h3>
                                     </div>
                                 </div>
@@ -565,7 +564,7 @@
                                          class="timeline-item-modern"
                                          :class="{ 'revealed': experienceItems[index] }">
                                         <div class="timeline-dot"></div>
-                                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-3">{{ exp.period }}</p>
+                                        <p class="text-beige font-sans text-sm uppercase tracking-wider mb-3">{{ exp.period }}</p>
                                         <h3 class="font-serif text-2xl font-semibold text-beige mb-3">{{ exp.title }}</h3>
                                         <p class="text-beige/70 leading-relaxed">{{ exp.location }}</p>
                                     </div>
@@ -588,22 +587,22 @@
 
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     <div class="card-3d fade-in" :class="{ 'revealed': cardsRevealed[0] }">
-                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.notary.title }}</h3>
+                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.notary.title }}</h3>
                         <ul class="space-y-3">
                             <li v-for="(item, index) in t.areas.notary.items" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
-                                <span class="text-oro mt-1">•</span>
+                                <span class="text-beige mt-1">•</span>
                                 <span>{{ item }}</span>
                             </li>
                         </ul>
                     </div>
 
                     <div class="card-3d fade-in stagger-2" :class="{ 'revealed': cardsRevealed[1] }">
-                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.legal.title }}</h3>
+                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.legal.title }}</h3>
                         <ul class="space-y-3">
                             <li v-for="(item, index) in t.areas.legal.items" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
-                                <span class="text-oro mt-1">•</span>
+                                <span class="text-beige mt-1">•</span>
                                 <span>{{ item }}</span>
                             </li>
                         </ul>
@@ -631,7 +630,7 @@
                         <ul class="space-y-4">
                             <li v-for="(member, index) in t.memberships" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
-                                <span class="text-oro mt-1">✦</span>
+                                <span class="text-beige mt-1">✦</span>
                                 <span>{{ member }}</span>
                             </li>
                         </ul>
@@ -654,7 +653,7 @@
                         <div class="w-24 h-px bg-beige/30"></div>
                     </div>
                     <div class="text-right space-y-4">
-                        <a href="index.html" class="text-beige font-modern font-medium text-sm uppercase tracking-[0.2em] hover:text-oro transition-colors inline-block">
+                        <a href="index.html" class="text-beige font-modern font-medium text-sm uppercase tracking-[0.2em] hover:text-beige transition-colors inline-block">
                             ← {{ t.backToStudio }}
                         </a>
                         <p class="text-gray-100 text-sm font-light">

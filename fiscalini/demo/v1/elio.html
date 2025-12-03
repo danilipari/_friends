@@ -22,7 +22,6 @@
                     colors: {
                         'blu-notte': '#003166',
                         'beige': '#E8DDD0',
-                        'oro': '#D4AF37',
                     },
                     fontFamily: {
                         'serif': ['Cormorant Garamond', 'Georgia', 'serif'],
@@ -115,11 +114,11 @@
         }
 
         .timeline-item:hover {
-            border-left-color: #D4AF37;
+            border-left-color: #E8DDD0;
         }
 
         .timeline-item:hover::before {
-            background: #D4AF37;
+            background: #E8DDD0;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
             transform: scale(1.3);
         }
@@ -160,7 +159,7 @@
             top: -3px;
             width: 8px;
             height: 8px;
-            background: #D4AF37;
+            background: #E8DDD0;
             border-radius: 50%;
         }
 
@@ -281,7 +280,7 @@
                     <!-- Right: Title -->
                     <div class="space-y-8">
                         <div class="fade-in-up stagger-2">
-                            <p class="text-oro text-sm uppercase tracking-[0.3em] font-sans font-medium mb-6">
+                            <p class="text-beige text-sm uppercase tracking-[0.3em] font-sans font-medium mb-6">
                                 {{ t.title }}
                             </p>
                             <h1 class="font-serif text-6xl md:text-7xl lg:text-8xl font-bold text-beige leading-none mb-6">
@@ -299,21 +298,21 @@
                                 <span class="px-4 py-2 bg-beige/10 border border-beige/20 rounded-full text-sm font-sans">
                                     {{ t.sinceYear }}
                                 </span>
-                                <span class="px-4 py-2 bg-oro/10 border border-oro/20 rounded-full text-sm font-sans text-oro">
+                                <span class="px-4 py-2 bg-oro/10 border border-oro/20 rounded-full text-sm font-sans text-beige">
                                     {{ t.founderLabel }}
                                 </span>
                             </div>
                         </div>
 
                         <div class="highlight-box rounded-xl p-6 fade-in-up stagger-4">
-                            <p class="text-oro font-serif text-xl leading-relaxed">
+                            <p class="text-beige font-serif text-xl leading-relaxed">
                                 {{ t.highlight }}
                             </p>
                         </div>
 
                         <div class="fade-in-up stagger-5 pt-6">
                             <a href="mailto:elio@avv-fiscalini.ch"
-                               class="inline-flex items-center gap-3 text-beige hover:text-oro transition-colors group">
+                               class="inline-flex items-center gap-3 text-beige hover:text-beige transition-colors group">
                                 <span class="font-sans text-lg">elio@avv-fiscalini.ch</span>
                                 <svg class="w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -338,7 +337,7 @@
 
                     <div class="md:col-span-2 space-y-8">
                         <div class="timeline-item fade-in-up stagger-2">
-                            <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">1971</p>
+                            <p class="text-beige font-sans text-sm uppercase tracking-wider mb-2">1971</p>
                             <h3 class="font-serif text-2xl font-semibold text-beige mb-2">
                                 {{ t.formation.degree }}
                             </h3>
@@ -346,14 +345,14 @@
                         </div>
 
                         <div class="timeline-item fade-in-up stagger-3">
-                            <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">1973</p>
+                            <p class="text-beige font-sans text-sm uppercase tracking-wider mb-2">1973</p>
                             <h3 class="font-serif text-2xl font-semibold text-beige mb-2">
                                 {{ t.formation.lawyer }}
                             </h3>
                         </div>
 
                         <div class="timeline-item fade-in-up stagger-4">
-                            <p class="text-oro font-sans text-sm uppercase tracking-wider mb-2">1973</p>
+                            <p class="text-beige font-sans text-sm uppercase tracking-wider mb-2">1973</p>
                             <h3 class="font-serif text-2xl font-semibold text-beige mb-2">
                                 {{ t.formation.notary }}
                             </h3>
@@ -377,7 +376,7 @@
                     <div v-for="(exp, index) in t.experience" :key="index"
                          class="timeline-item fade-in-up"
                          :class="'stagger-' + (index + 2)">
-                        <p class="text-oro font-sans text-sm uppercase tracking-wider mb-3">{{ exp.period }}</p>
+                        <p class="text-beige font-sans text-sm uppercase tracking-wider mb-3">{{ exp.period }}</p>
                         <h3 class="font-serif text-2xl font-semibold text-beige mb-3">{{ exp.title }}</h3>
                         <p class="text-beige/70 leading-relaxed">{{ exp.location }}</p>
                     </div>
@@ -398,11 +397,11 @@
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     <!-- Legal -->
                     <div class="specialty-card rounded-2xl p-8 fade-in-up stagger-2">
-                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.legal.title }}</h3>
+                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.legal.title }}</h3>
                         <ul class="space-y-3">
                             <li v-for="(item, index) in t.areas.legal.items" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
-                                <span class="text-oro mt-1">•</span>
+                                <span class="text-beige mt-1">•</span>
                                 <span>{{ item }}</span>
                             </li>
                         </ul>
@@ -411,11 +410,11 @@
 
                     <!-- Notary -->
                     <div class="specialty-card rounded-2xl p-8 fade-in-up stagger-3">
-                        <h3 class="font-serif text-3xl font-bold text-oro mb-6">{{ t.areas.notary.title }}</h3>
+                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.notary.title }}</h3>
                         <ul class="space-y-3">
                             <li v-for="(item, index) in t.areas.notary.items" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
-                                <span class="text-oro mt-1">•</span>
+                                <span class="text-beige mt-1">•</span>
                                 <span>{{ item }}</span>
                             </li>
                         </ul>
@@ -443,7 +442,7 @@
                         <ul class="space-y-4">
                             <li v-for="(member, index) in t.memberships" :key="index"
                                 class="flex items-start gap-3 text-beige/80">
-                                <span class="text-oro mt-1">✦</span>
+                                <span class="text-beige mt-1">✦</span>
                                 <span>{{ member }}</span>
                             </li>
                         </ul>
@@ -466,7 +465,7 @@
                         <div class="w-24 h-px bg-beige/30"></div>
                     </div>
                     <div class="text-right space-y-4">
-                        <a href="index.html" class="text-beige font-modern font-medium text-sm uppercase tracking-[0.2em] hover:text-oro transition-colors inline-block">
+                        <a href="index.html" class="text-beige font-modern font-medium text-sm uppercase tracking-[0.2em] hover:text-beige transition-colors inline-block">
                             ← {{ t.backToStudio }}
                         </a>
                         <p class="text-gray-100 text-sm font-light">

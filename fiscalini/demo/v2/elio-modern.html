@@ -546,6 +546,17 @@
                             </div>
                         </div>
 
+                        <!-- Languages after Formation -->
+                        <div class="mt-16">
+                            <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.languagesTitle }}</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span v-for="lang in t.languages" :key="lang"
+                                      class="px-5 py-2 bg-beige/10 border border-beige/20 rounded-full text-beige font-sans text-sm">
+                                    {{ lang }}
+                                </span>
+                            </div>
+                        </div>
+
                         <!-- Experience -->
                         <div class="reveal-section" :class="{ 'revealed': sectionsRevealed.experience }">
                             <span class="section-number" style="top: -2rem; left: -2rem;" :class="{ 'active': sectionsRevealed.experience }">02</span>
@@ -586,11 +597,15 @@
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     <div class="card-3d fade-in" :class="{ 'revealed': cardsRevealed[0] }">
                         <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.legal.title }}</h3>
-                        <ul class="space-y-3 mb-6">
-                            <li v-for="(item, index) in t.areas.legal.items" :key="index"
-                                class="flex items-start gap-3 text-beige/80">
-                                <span class="text-beige mt-1">•</span>
-                                <span>{{ item }}</span>
+                        <ul class="space-y-4 mb-6">
+                            <li v-for="(item, index) in t.areas.legal.items" :key="index" class="text-beige/80">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-beige mt-1">•</span>
+                                    <div>
+                                        <span class="font-medium text-beige">{{ item.title }}</span>
+                                        <p v-if="item.details" class="text-sm text-beige/60 mt-1">{{ item.details }}</p>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                         <p class="text-beige/60 text-sm italic">{{ t.areas.legal.note }}</p>
@@ -598,11 +613,15 @@
 
                     <div class="card-3d fade-in stagger-2" :class="{ 'revealed': cardsRevealed[1] }">
                         <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.notary.title }}</h3>
-                        <ul class="space-y-3">
-                            <li v-for="(item, index) in t.areas.notary.items" :key="index"
-                                class="flex items-start gap-3 text-beige/80">
-                                <span class="text-beige mt-1">•</span>
-                                <span>{{ item }}</span>
+                        <ul class="space-y-4">
+                            <li v-for="(item, index) in t.areas.notary.items" :key="index" class="text-beige/80">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-beige mt-1">•</span>
+                                    <div>
+                                        <span class="font-medium text-beige">{{ item.title }}</span>
+                                        <p v-if="item.details" class="text-sm text-beige/60 mt-1">{{ item.details }}</p>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -610,21 +629,11 @@
             </div>
         </section>
 
-        <!-- Languages & Memberships -->
+        <!-- Memberships -->
         <section class="relative py-32 border-t border-beige/10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                <div class="grid md:grid-cols-2 gap-16">
-                    <div class="fade-in" :class="{ 'revealed': sectionsRevealed.languages }">
-                        <h2 class="font-serif text-4xl font-bold text-beige mb-8">{{ t.languagesTitle }}</h2>
-                        <div class="flex flex-wrap gap-3">
-                            <span v-for="lang in t.languages" :key="lang"
-                                  class="px-6 py-3 bg-beige/10 border border-beige/20 rounded-full text-beige font-sans hover:bg-beige/15 transition-colors">
-                                {{ lang }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="fade-in stagger-2" :class="{ 'revealed': sectionsRevealed.memberships }">
+                <div class="max-w-2xl mx-auto">
+                    <div class="fade-in" :class="{ 'revealed': sectionsRevealed.memberships }">
                         <h2 class="font-serif text-4xl font-bold text-beige mb-8">{{ t.membershipsTitle }}</h2>
                         <ul class="space-y-4">
                             <li v-for="(member, index) in t.memberships" :key="index"
@@ -682,7 +691,6 @@
                     formation: false,
                     experience: false,
                     areas: false,
-                    languages: false,
                     memberships: false
                 });
                 const timelineItems = ref([false, false, false]);
@@ -705,24 +713,37 @@
                             lawyer: 'Brevetto di Avvocato',
                             notary: 'Brevetto di Notaio'
                         },
-                        experienceTitle: 'Esperienza',
+                        experienceTitle: 'Esperienza professionale',
                         experience: [
                             { period: 'Gennaio 2022 – Oggi', title: 'Avvocato e Notaio', location: 'Studio Legale e Notarile Fiscalini, Chiasso' },
-                            { period: 'Gennaio 1983 – Dicembre 2021', title: 'Titolare dello Studio', location: 'Studio Legale e Notarile Fiscalini, Chiasso' },
+                            { period: 'Gennaio 1983 – Dicembre 2021', title: 'Avvocato e Notaio, titolare dello studio', location: 'Studio Legale e Notarile Fiscalini, Chiasso' },
                             { period: 'Febbraio 1974 – Dicembre 1982', title: 'Avvocato e Notaio', location: 'Studio Legale e Notarile Doninelli, Chiasso' },
-                            { period: 'Gennaio 1972 – Dicembre 1973', title: 'Praticantato legale', location: 'Studio Doninelli e Tribunale d\'appello, Lugano' },
-                            { period: 'Gennaio 1972 – Dicembre 1973', title: 'Praticantato notarile', location: 'Ufficio dei registri, Mendrisio e Studio Doninelli' }
+                            { period: 'Gennaio 1972 – Dicembre 1973', title: 'Praticantato legale', location: 'Studio Legale e Notarile Doninelli, Chiasso e Tribunale d\'appello, Lugano' },
+                            { period: 'Gennaio 1972 – Dicembre 1973', title: 'Praticantato notarile', location: 'Ufficio dei registri, Mendrisio e Studio Legale e Notarile Doninelli, Chiasso' }
                         ],
                         areasTitle: 'Campi di Attività',
                         areas: {
                             legal: {
                                 title: 'Legale',
-                                items: ['Diritto delle società', 'Diritto dei contratti', 'Diritto di famiglia', 'Diritto successorio', 'Diritto amministrativo', 'Diritto esecuzione e fallimenti'],
+                                items: [
+                                    { title: 'Diritto delle società', details: null },
+                                    { title: 'Diritto dei contratti', details: null },
+                                    { title: 'Diritto di famiglia', details: null },
+                                    { title: 'Diritto successorio', details: null },
+                                    { title: 'Diritto amministrativo', details: null },
+                                    { title: 'Diritto esecuzione e fallimenti', details: null }
+                                ],
                                 note: 'Con consulenza e patrocinio in ambito giudiziario e extragiudiziario'
                             },
                             notary: {
                                 title: 'Notariato',
-                                items: ['Diritto immobiliare e fondiario', 'Diritto societario', 'Diritto successorio', 'Diritto matrimoniale', 'Autentiche di firme e copie conformi']
+                                items: [
+                                    { title: 'Diritto immobiliare e fondiario', details: 'compravendite, diritti di compera, emissioni di cartelle ipotecarie, donazioni, costituzioni di proprietà per piani, usufrutti, diritti di abitazione, costituzioni di servitù, diritti di superficie, riunioni particellari, frazionamenti' },
+                                    { title: 'Diritto societario', details: 'costituzioni di società anonime e di società a garanzia limitata, verbali assembleari, aumenti e riduzioni di capitale, liquidazioni, fusioni, scissioni, trasferimenti di patrimonio, trasformazioni societarie, cessioni di pacchetti azionari e di quote sociali' },
+                                    { title: 'Diritto successorio', details: 'redazione e deposito di testamenti e contratti successori, pubblicazioni testamentarie e successorie, esecuzioni testamentarie, divisioni ereditarie' },
+                                    { title: 'Diritto matrimoniale', details: 'redazione di convenzioni matrimoniali, quali gli atti di separazione dei beni' },
+                                    { title: 'Autentiche di firme e copie conformi di documenti', details: null }
+                                ]
                             }
                         },
                         languagesTitle: 'Lingue',
@@ -746,24 +767,37 @@
                             lawyer: 'Anwaltspatent',
                             notary: 'Notariatspatent'
                         },
-                        experienceTitle: 'Erfahrung',
+                        experienceTitle: 'Berufliche Erfahrung',
                         experience: [
                             { period: 'Januar 2022 – Heute', title: 'Rechtsanwalt und Notar', location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso' },
-                            { period: 'Januar 1983 – Dezember 2021', title: 'Inhaber der Kanzlei', location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso' },
+                            { period: 'Januar 1983 – Dezember 2021', title: 'Rechtsanwalt und Notar, Inhaber der Kanzlei', location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso' },
                             { period: 'Februar 1974 – Dezember 1982', title: 'Rechtsanwalt und Notar', location: 'Rechtsanwalts- und Notariatskanzlei Doninelli, Chiasso' },
-                            { period: 'Januar 1972 – Dezember 1973', title: 'Rechtspraktikum', location: 'Kanzlei Doninelli und Obergericht, Lugano' },
-                            { period: 'Januar 1972 – Dezember 1973', title: 'Notariatspraktikum', location: 'Registeramt, Mendrisio und Kanzlei Doninelli' }
+                            { period: 'Januar 1972 – Dezember 1973', title: 'Rechtspraktikum', location: 'Rechtsanwalts- und Notariatskanzlei Doninelli, Chiasso und im Obergericht, Lugano' },
+                            { period: 'Januar 1972 – Dezember 1973', title: 'Notariatspraktikum', location: 'Registeramt, Mendrisio und Rechtsanwalts- und Notariatskanzlei Doninelli, Chiasso' }
                         ],
                         areasTitle: 'Tätigkeitsbereiche',
                         areas: {
                             legal: {
                                 title: 'Rechtsgebiete',
-                                items: ['Gesellschaftsrecht', 'Vertragsrecht', 'Familienrecht', 'Erbrecht', 'Verwaltungsrecht', 'Schuldbetreibungs- und Konkursrecht'],
+                                items: [
+                                    { title: 'Gesellschaftsrecht', details: null },
+                                    { title: 'Vertragsrecht', details: null },
+                                    { title: 'Familienrecht', details: null },
+                                    { title: 'Erbrecht', details: null },
+                                    { title: 'Verwaltungsrecht', details: null },
+                                    { title: 'Schuldbetreibungs- und Konkursrecht', details: null }
+                                ],
                                 note: 'Mit Beratung und Vertretung in gerichtlichen und außergerichtlichen Angelegenheiten'
                             },
                             notary: {
                                 title: 'Notariat',
-                                items: ['Immobilien- und Grundstücksrecht', 'Gesellschaftsrecht', 'Erbrecht', 'Eherecht', 'Beglaubigungen von Unterschriften']
+                                items: [
+                                    { title: 'Immobilien- und Grundstücksrecht', details: 'Grundstückskaufverträge, Kaufsrechte, Errichtung von Schuldbriefen, Schenkungen, Begründungen von Stockwerkeigentum, Nutzniessungen, Wohnrechten, Begründungen von Dienstbarkeiten, Baurechten, Vereinigungen und Teilungen von Grundstücken' },
+                                    { title: 'Gesellschaftsrecht', details: 'Gründungen von Aktiengesellschaften und von Gesellschaften mit beschränkter Haftung, Versammlungsprotokolle, Kapitalerhöhungen und -herabsetzungen, Liquidationen, Fusionen, Spaltungen, Vermögensübertragungen, Umwandlungen von Gesellschaften, Abtretungen von Aktienpaketen und Stammanteilen' },
+                                    { title: 'Erbrecht', details: 'Erstellung und Hinterlegung von Testamenten und Erbverträgen, Testaments- und Erbschaftseröffnungen, Willensvollstreckungen, Erbteilungen' },
+                                    { title: 'Eherecht', details: 'Erstellung von Eheverträgen, wie z.B. Urkunden der Gütertrennung' },
+                                    { title: 'Beglaubigungen von Unterschriften und beglaubigte Kopien von Dokumenten', details: null }
+                                ]
                             }
                         },
                         languagesTitle: 'Sprachen',
@@ -787,24 +821,37 @@
                             lawyer: 'Admitted to the Bar',
                             notary: 'Notary License'
                         },
-                        experienceTitle: 'Experience',
+                        experienceTitle: 'Professional Experience',
                         experience: [
-                            { period: 'January 2022 – Today', title: 'Lawyer and Notary Public', location: 'Law and Notary Office Fiscalini, Chiasso' },
-                            { period: 'January 1983 – December 2021', title: 'Owner of the Office', location: 'Law and Notary Office Fiscalini, Chiasso' },
-                            { period: 'February 1974 – December 1982', title: 'Lawyer and Notary Public', location: 'Law and Notary Office Doninelli, Chiasso' },
-                            { period: 'January 1972 – December 1973', title: 'Legal Internship', location: 'Office Doninelli and Superior Court, Lugano' },
-                            { period: 'January 1972 – December 1973', title: 'Notarial Internship', location: 'Registry Office, Mendrisio and Office Doninelli' }
+                            { period: 'January 2022 – Today', title: 'Lawyer and Notary public', location: 'Law and Notary Office Fiscalini, Chiasso' },
+                            { period: 'January 1983 – December 2021', title: 'Lawyer and Notary public, Owner of the Office', location: 'Law and Notary Office Fiscalini, Chiasso' },
+                            { period: 'February 1974 – December 1982', title: 'Lawyer and Notary public', location: 'Law and Notary Office Doninelli, Chiasso' },
+                            { period: 'January 1972 – December 1973', title: 'Legal internship', location: 'Law and Notary Office Doninelli, Chiasso at the Superior Court, Lugano' },
+                            { period: 'January 1972 – December 1973', title: 'Notarial internship', location: 'Registry Office, Mendrisio and Law and Notary Office Doninelli, Chiasso' }
                         ],
                         areasTitle: 'Areas of Activity',
                         areas: {
                             legal: {
                                 title: 'Areas of Law',
-                                items: ['Corporate Law', 'Contract Law', 'Family Law', 'Inheritance Law', 'Administrative Law', 'Debt Enforcement and Bankruptcy Law'],
+                                items: [
+                                    { title: 'Corporate Law', details: null },
+                                    { title: 'Contract Law', details: null },
+                                    { title: 'Family Law', details: null },
+                                    { title: 'Inheritance Law', details: null },
+                                    { title: 'Administrative Law', details: null },
+                                    { title: 'Debt Enforcement and Bankruptcy Law', details: null }
+                                ],
                                 note: 'With advice and representation in judicial and extrajudicial matters'
                             },
                             notary: {
                                 title: 'Notary\'s Office',
-                                items: ['Real Estate and Property Law', 'Corporate Law', 'Inheritance Law', 'Marital Law', 'Authentications of signatures']
+                                items: [
+                                    { title: 'Real Estate and Property Law', details: 'Real estate purchase agreements, rights of purchase, establishment of mortgage certificates, gifts, establishment of Condominium co-ownership, usufructs, rights of residence, establishment of easements, building rights, consolidation of parcels of land and division of property' },
+                                    { title: 'Corporate Law', details: 'foundation of Companies Limited by Shares and of The Limited Liability Companies, meeting minutes, capital increases and reductions, liquidations, mergers, divisions, asset transfers, transformations of companies, assignments of block of shares and of a capital contribution' },
+                                    { title: 'Inheritance Law', details: 'Drafting and deposit of last wills and of contracts of succession, reading of last wills and commencement of the succession process, executing of last wills, division of estates' },
+                                    { title: 'Marital Law', details: 'Drafting of marital agreements, such as notarial instruments of separation of property' },
+                                    { title: 'Authentications of signatures and certified copies of documents', details: null }
+                                ]
                             }
                         },
                         languagesTitle: 'Languages',
@@ -865,9 +912,7 @@
                                     }
                                 }
                                 if (target.classList.contains('fade-in')) {
-                                    if (target.querySelector('h2')?.textContent.includes(t.value.languagesTitle)) {
-                                        sectionsRevealed.value.languages = true;
-                                    } else if (target.querySelector('h2')?.textContent.includes(t.value.membershipsTitle)) {
+                                    if (target.querySelector('h2')?.textContent.includes(t.value.membershipsTitle)) {
                                         sectionsRevealed.value.memberships = true;
                                     }
                                 }

@@ -123,7 +123,7 @@ const fiscaliniVersions = fs.readdirSync(fiscaliniPathRoot).filter(item => {
 
 fiscaliniVersions.forEach(version => {
   // Skip the images folder from being served as a version
-  if (['images', 'docs'].includes(version)) return;
+  if (['images', 'docs'].includes(version) || version.startsWith('_')) return;
 
   const versionPath = `${fiscaliniPath}/${version}`;
   const versionRoot = `${fiscaliniPathRoot}${version}/`;

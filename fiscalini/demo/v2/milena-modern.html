@@ -538,6 +538,17 @@
                             </div>
                         </div>
 
+                        <!-- Languages after Formation -->
+                        <div class="mt-16">
+                            <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.languagesTitle }}</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span v-for="lang in t.languages" :key="lang"
+                                      class="px-5 py-2 bg-beige/10 border border-beige/20 rounded-full text-beige font-sans text-sm">
+                                    {{ lang }}
+                                </span>
+                            </div>
+                        </div>
+
                         <!-- Experience -->
                         <div class="reveal-section" :class="{ 'revealed': sectionsRevealed.experience }">
                             <span class="section-number" style="top: -2rem; left: -2rem;" :class="{ 'active': sectionsRevealed.experience }">02</span>
@@ -577,24 +588,31 @@
 
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     <div class="card-3d fade-in" :class="{ 'revealed': cardsRevealed[0] }">
-                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.legal.title }}</h3>
-                        <ul class="space-y-3 mb-6">
-                            <li v-for="(item, index) in t.areas.legal.items" :key="index"
-                                class="flex items-start gap-3 text-beige/80">
-                                <span class="text-beige mt-1">•</span>
-                                <span>{{ item }}</span>
+                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.notary.title }}</h3>
+                        <ul class="space-y-4">
+                            <li v-for="(item, index) in t.areas.notary.items" :key="index" class="text-beige/80">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-beige mt-1">•</span>
+                                    <div>
+                                        <span class="font-medium text-beige">{{ item.title }}</span>
+                                        <p v-if="item.details" class="text-sm text-beige/60 mt-1">{{ item.details }}</p>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
-                        <p class="text-beige/60 text-sm italic">{{ t.areas.legal.note }}</p>
                     </div>
 
                     <div class="card-3d fade-in stagger-2" :class="{ 'revealed': cardsRevealed[1] }">
-                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.notary.title }}</h3>
-                        <ul class="space-y-3">
-                            <li v-for="(item, index) in t.areas.notary.items" :key="index"
-                                class="flex items-start gap-3 text-beige/80">
-                                <span class="text-beige mt-1">•</span>
-                                <span>{{ item }}</span>
+                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.legal.title }}</h3>
+                        <ul class="space-y-4">
+                            <li v-for="(item, index) in t.areas.legal.items" :key="index" class="text-beige/80">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-beige mt-1">•</span>
+                                    <div>
+                                        <span class="font-medium text-beige">{{ item.title }}</span>
+                                        <p v-if="item.details" class="text-sm text-beige/60 mt-1">{{ item.details }}</p>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -602,21 +620,11 @@
             </div>
         </section>
 
-        <!-- Languages & Memberships -->
+        <!-- Memberships -->
         <section class="relative py-32 border-t border-beige/10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                <div class="grid md:grid-cols-2 gap-16">
-                    <div class="fade-in" :class="{ 'revealed': sectionsRevealed.languages }">
-                        <h2 class="font-serif text-4xl font-bold text-beige mb-8">{{ t.languagesTitle }}</h2>
-                        <div class="flex flex-wrap gap-3">
-                            <span v-for="lang in t.languages" :key="lang"
-                                  class="px-6 py-3 bg-beige/10 border border-beige/20 rounded-full text-beige font-sans hover:bg-beige/15 transition-colors">
-                                {{ lang }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="fade-in stagger-2" :class="{ 'revealed': sectionsRevealed.memberships }">
+                <div class="max-w-2xl mx-auto">
+                    <div class="fade-in" :class="{ 'revealed': sectionsRevealed.memberships }">
                         <h2 class="font-serif text-4xl font-bold text-beige mb-8">{{ t.membershipsTitle }}</h2>
                         <ul class="space-y-4">
                             <li v-for="(member, index) in t.memberships" :key="index"
@@ -674,7 +682,6 @@
                     formation: false,
                     experience: false,
                     areas: false,
-                    languages: false,
                     memberships: false
                 });
                 const timelineItems = ref([false, false, false]);
@@ -696,7 +703,7 @@
                             lawyer: 'Brevetto di Avvocato',
                             notary: 'Brevetto di Notaio'
                         },
-                        experienceTitle: 'Esperienza',
+                        experienceTitle: 'Esperienza professionale',
                         experience: [
                             { period: 'Agosto 2024 – Oggi', title: 'Avvocato e Notaio', location: 'Studio Legale e Notarile Fiscalini, Chiasso' },
                             { period: 'Settembre 2022 – Luglio 2024', title: 'Avvocato', location: 'Studio Legale e Notarile Fiscalini, Chiasso' },
@@ -713,11 +720,19 @@
                         areas: {
                             notary: {
                                 title: 'Notariato',
-                                items: ['Diritto immobiliare e fondiario', 'Diritto societario', 'Diritto successorio', 'Diritto matrimoniale', 'Autentiche di firme e copie conformi']
+                                items: [
+                                    { title: 'Diritto immobiliare e fondiario', details: 'compravendite, diritti di compera, emissioni di cartelle ipotecarie, donazioni, costituzioni di proprietà per piani, usufrutti, diritti di abitazione, costituzioni di servitù, diritti di superficie, riunioni particellari, frazionamenti' },
+                                    { title: 'Diritto societario', details: 'costituzioni di società anonime e di società a garanzia limitata, verbali assembleari, aumenti e riduzioni di capitale, liquidazioni, fusioni, scissioni, trasferimenti di patrimonio, trasformazioni societarie, cessioni di pacchetti azionari e di quote sociali' },
+                                    { title: 'Diritto successorio', details: 'redazione e deposito di testamenti e contratti successori, pubblicazioni testamentarie e successorie, esecuzioni testamentarie, divisioni ereditarie' },
+                                    { title: 'Diritto matrimoniale', details: 'redazione di convenzioni matrimoniali, quali gli atti di separazione dei beni' },
+                                    { title: 'Autentiche di firme e copie conformi di documenti', details: null }
+                                ]
                             },
                             legal: {
                                 title: 'Legale',
-                                items: ['Consulenza successoria', 'Consulenza matrimoniale', 'Consulenza contrattuale']
+                                items: [
+                                    { title: 'Consulenza successoria, matrimoniale e contrattuale', details: null }
+                                ]
                             }
                         },
                         languagesTitle: 'Lingue',
@@ -730,7 +745,7 @@
                     },
                     de: {
                         title: 'Rechtsanwalt und Notar',
-                        subtitle: 'Langjährige Erfahrung beim Appellationsgericht des Kantons Tessin',
+                        subtitle: 'Langjährige Erfahrung beim Obergericht des Kantons Tessin',
                         sinceYear: 'Seit 2006',
                         badge: 'Notar seit 2024',
                         formationTitle: 'Ausbildung',
@@ -740,16 +755,16 @@
                             lawyer: 'Anwaltspatent',
                             notary: 'Notariatspatent'
                         },
-                        experienceTitle: 'Erfahrung',
+                        experienceTitle: 'Berufliche Erfahrung',
                         experience: [
-                            { period: 'August 2024 – Heute', title: 'Angestellte Rechtsanwältin und Notarin', location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso' },
-                            { period: 'September 2022 – Juli 2024', title: 'Angestellte Rechtsanwältin', location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso' },
-                            { period: 'Oktober 2019 – August 2022', title: 'Gerichtsschreiberin', location: 'Erste Zivilkammer des Appellationsgerichts, Lugano' },
-                            { period: 'Januar 2015 – September 2019', title: 'Gerichtsschreiberin', location: 'Schuldbetreibungs- und Konkurskammer des Appellationsgerichts, Lugano' },
-                            { period: 'Oktober 2011 – Dezember 2014', title: 'Gerichtsschreiberin', location: 'Erste Zivilkammer des Appellationsgerichts, Lugano' },
+                            { period: 'August 2024 – Heute', title: 'Rechtsanwältin und Notarin', location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso' },
+                            { period: 'September 2022 – Juli 2024', title: 'Rechtsanwältin', location: 'Rechtsanwalts- und Notariatskanzlei Fiscalini, Chiasso' },
+                            { period: 'Oktober 2019 – August 2022', title: 'Gerichtsschreiberin', location: 'Erste Zivilkammer des Obergerichts, Lugano' },
+                            { period: 'Januar 2015 – September 2019', title: 'Gerichtsschreiberin', location: 'Schuldbetreibungs- und Konkurskammer des Obergerichts, Lugano' },
+                            { period: 'Oktober 2011 – Dezember 2014', title: 'Gerichtsschreiberin', location: 'Erste Zivilkammer des Obergerichts, Lugano' },
                             { period: 'März 2010', title: 'Notarielles Praktikum', location: 'Handelsregisteramt, Lugano' },
                             { period: 'Februar 2010', title: 'Notarielles Praktikum', location: 'Grundbuchamt, Locarno' },
-                            { period: 'Januar 2010 – September 2011', title: 'Angestellte Rechtsanwältin', location: 'Rechtsanwalts- und Notariatskanzlei in Locarno' },
+                            { period: 'Januar 2010 – September 2011', title: 'Rechtsanwältin', location: 'Rechtsanwalts- und Notariatskanzlei in Locarno' },
                             { period: 'Oktober 2007 – Dezember 2007', title: 'Gerichtspraktikum', location: 'Bezirksgericht Locarno-Stadt' },
                             { period: 'Mai 2007 – Dezember 2009', title: 'Rechts- und Notariatspraktikum', location: 'Rechtsanwalts- und Notariatskanzlei in Locarno' }
                         ],
@@ -757,11 +772,19 @@
                         areas: {
                             notary: {
                                 title: 'Notariat',
-                                items: ['Immobilien- und Grundstücksrecht', 'Gesellschaftsrecht', 'Erbrecht', 'Eherecht', 'Beglaubigungen von Unterschriften und Kopien']
+                                items: [
+                                    { title: 'Immobilien- und Grundstücksrecht', details: 'Grundstückskaufverträge, Kaufsrechte, Errichtung von Schuldbriefen, Schenkungen, Begründungen von Stockwerkeigentum, Nutzniessungen, Wohnrechten, Begründungen von Dienstbarkeiten, Baurechten, Vereinigungen und Teilungen von Grundstücken' },
+                                    { title: 'Gesellschaftsrecht', details: 'Gründungen von Aktiengesellschaften und von Gesellschaften mit beschränkter Haftung, Versammlungsprotokolle, Kapitalerhöhungen und -herabsetzungen, Liquidationen, Fusionen, Spaltungen, Vermögensübertragungen, Umwandlungen von Gesellschaften, Abtretungen von Aktienpaketen und Stammanteilen' },
+                                    { title: 'Erbrecht', details: 'Erstellung und Hinterlegung von Testamenten und Erbverträgen, Testaments- und Erbschaftseröffnungen, Willensvollstreckungen, Erbteilungen' },
+                                    { title: 'Eherecht', details: 'Erstellung von Eheverträgen, wie z.B. Urkunden der Gütertrennung' },
+                                    { title: 'Beglaubigungen von Unterschriften und beglaubigte Kopien von Dokumenten', details: null }
+                                ]
                             },
                             legal: {
                                 title: 'Rechtsgebiete',
-                                items: ['Erbrechtliche Beratung', 'Eherecht Beratung', 'Vertragsrechtliche Beratung']
+                                items: [
+                                    { title: 'Beratung in Erbschafts-, Ehe- und Vertragsangelegenheiten', details: null }
+                                ]
                             }
                         },
                         languagesTitle: 'Sprachen',
@@ -774,7 +797,7 @@
                     },
                     en: {
                         title: 'Lawyer and Notary Public',
-                        subtitle: 'Extensive experience at the Court of Appeal of Canton Ticino',
+                        subtitle: 'Extensive experience at the Superior Court of Canton Ticino',
                         sinceYear: 'Since 2006',
                         badge: 'Notary since 2024',
                         formationTitle: 'Education',
@@ -784,28 +807,36 @@
                             lawyer: 'Admitted to the Bar',
                             notary: 'Notary License'
                         },
-                        experienceTitle: 'Experience',
+                        experienceTitle: 'Professional Experience',
                         experience: [
-                            { period: 'August 2024 – Today', title: 'Employed Lawyer and Notary Public', location: 'Law and Notary Office Fiscalini, Chiasso' },
-                            { period: 'September 2022 – July 2024', title: 'Employed Lawyer', location: 'Law and Notary Office Fiscalini, Chiasso' },
-                            { period: 'October 2019 – August 2022', title: 'Court Clerk', location: 'First Civil Chamber of the Court of Appeal, Lugano' },
-                            { period: 'January 2015 – September 2019', title: 'Court Clerk', location: 'Debt Enforcement and Bankruptcy Chamber of the Court of Appeal, Lugano' },
-                            { period: 'October 2011 – December 2014', title: 'Court Clerk', location: 'First Civil Chamber of the Court of Appeal, Lugano' },
-                            { period: 'March 2010', title: 'Notarial Internship', location: 'Commercial Register Office, Lugano' },
-                            { period: 'February 2010', title: 'Notarial Internship', location: 'Land Registry Office, Locarno' },
-                            { period: 'January 2010 – September 2011', title: 'Employed Lawyer', location: 'Law and Notary Office in Locarno' },
-                            { period: 'October 2007 – December 2007', title: 'Court Internship', location: 'District Court of Locarno-City' },
-                            { period: 'May 2007 – December 2009', title: 'Legal and Notarial Internship', location: 'Law and Notary Office in Locarno' }
+                            { period: 'August 2024 – Today', title: 'Lawyer and Notary public', location: 'Law and Notary Office Fiscalini, Chiasso' },
+                            { period: 'September 2022 – July 2024', title: 'Lawyer', location: 'Law and Notary Office Fiscalini, Chiasso' },
+                            { period: 'October 2019 – August 2022', title: 'Law Clerk', location: 'First Civil Division of the Superior Court, Lugano' },
+                            { period: 'January 2015 – September 2019', title: 'Law Clerk', location: 'Division of Debt Enforcement and Bankruptcy of the Superior Court, Lugano' },
+                            { period: 'October 2011 – December 2014', title: 'Law Clerk', location: 'First Civil Division of the Superior Court, Lugano' },
+                            { period: 'March 2010', title: 'Notarial internship', location: 'Commercial Register Office, Lugano' },
+                            { period: 'February 2010', title: 'Notarial internship', location: 'Land Registry Office, Locarno' },
+                            { period: 'January 2010 – September 2011', title: 'Lawyer', location: 'Law and Notary Office in Locarno' },
+                            { period: 'October 2007 – December 2007', title: 'Court internship', location: 'District Court of Locarno-City' },
+                            { period: 'May 2007 – December 2009', title: 'Legal and notarial internship', location: 'Law and Notary Office in Locarno' }
                         ],
                         areasTitle: 'Areas of Activity',
                         areas: {
                             notary: {
                                 title: 'Notary\'s Office',
-                                items: ['Real Estate and Property Law', 'Corporate Law', 'Inheritance Law', 'Marital Law', 'Authentications of signatures and certified copies']
+                                items: [
+                                    { title: 'Real Estate and Property Law', details: 'Real estate purchase agreements, rights of purchase, establishment of mortgage certificates, gifts, establishment of Condominium co-ownership, usufructs, rights of residence, establishment of easements, building rights, consolidation of parcels of land and division of property' },
+                                    { title: 'Corporate Law', details: 'foundation of Companies Limited by Shares and of The Limited Liability Companies, meeting minutes, capital increases and reductions, liquidations, mergers, divisions, asset transfers, transformations of companies, assignments of block of shares and of a capital contribution' },
+                                    { title: 'Inheritance Law', details: 'Drafting and deposit of last wills and of contracts of succession, reading of last wills and commencement of the succession process, executing of last wills, division of estates' },
+                                    { title: 'Marital Law', details: 'Drafting of marital agreements, such as notarial instruments of separation of property' },
+                                    { title: 'Authentications of signatures and certified copies of documents', details: null }
+                                ]
                             },
                             legal: {
                                 title: 'Areas of Law',
-                                items: ['Inheritance Law Consulting', 'Matrimonial Law Consulting', 'Contract Law Consulting']
+                                items: [
+                                    { title: 'Counseling on inheritance, marriage, and contractual matters', details: null }
+                                ]
                             }
                         },
                         languagesTitle: 'Languages',
@@ -866,9 +897,7 @@
                                     }
                                 }
                                 if (target.classList.contains('fade-in')) {
-                                    if (target.querySelector('h2')?.textContent.includes(t.value.languagesTitle)) {
-                                        sectionsRevealed.value.languages = true;
-                                    } else if (target.querySelector('h2')?.textContent.includes(t.value.membershipsTitle)) {
+                                    if (target.querySelector('h2')?.textContent.includes(t.value.membershipsTitle)) {
                                         sectionsRevealed.value.memberships = true;
                                     }
                                 }

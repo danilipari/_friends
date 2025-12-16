@@ -569,27 +569,11 @@
                     <div class="decorative-line w-24 mx-auto"></div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="max-w-3xl mx-auto">
                     <div class="card-3d fade-in" :class="{ 'revealed': cardsRevealed[0] }">
-                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.notary.title }}</h3>
+                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.title }}</h3>
                         <ul class="space-y-4">
-                            <li v-for="(item, index) in t.areas.notary.items" :key="index"
-                                class="text-beige/80">
-                                <div class="flex items-start gap-3">
-                                    <span class="text-beige mt-1">•</span>
-                                    <div>
-                                        <span class="font-medium text-beige">{{ item.title }}</span>
-                                        <p v-if="item.details" class="text-sm text-beige/60 mt-1">{{ item.details }}</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="card-3d fade-in stagger-2" :class="{ 'revealed': cardsRevealed[1] }">
-                        <h3 class="font-serif text-3xl font-bold text-beige mb-6">{{ t.areas.legal.title }}</h3>
-                        <ul class="space-y-4">
-                            <li v-for="(item, index) in t.areas.legal.items" :key="index"
+                            <li v-for="(item, index) in t.areas.items" :key="index"
                                 class="text-beige/80">
                                 <div class="flex items-start gap-3">
                                     <span class="text-beige mt-1">•</span>
@@ -726,22 +710,15 @@
                         ],
                         areasTitle: 'Campi di Attività',
                         areas: {
-                            notary: {
-                                title: 'Notariato',
-                                items: [
-                                    { title: 'Diritto immobiliare e fondiario', details: 'compravendite, diritti di compera, emissioni di cartelle ipotecarie, donazioni, costituzioni di proprietà per piani, usufrutti, diritti di abitazione, costituzioni di servitù, diritti di superficie, riunioni particellari, frazionamenti' },
-                                    { title: 'Diritto societario', details: 'costituzioni di società anonime e di società a garanzia limitata, verbali assembleari, aumenti e riduzioni di capitale, liquidazioni, fusioni, scissioni, trasferimenti di patrimonio, trasformazioni societarie, cessioni di pacchetti azionari e di quote sociali' },
-                                    { title: 'Diritto successorio', details: 'redazione e deposito di testamenti e contratti successori, pubblicazioni testamentarie e successorie, esecuzioni testamentarie, divisioni ereditarie' },
-                                    { title: 'Diritto matrimoniale', details: 'redazione di convenzioni matrimoniali, quali gli atti di separazione dei beni' },
-                                    { title: 'Autentiche di firme e copie conformi di documenti', details: '' }
-                                ]
-                            },
-                            legal: {
-                                title: 'Legale',
-                                items: [
-                                    { title: 'Consulenza successoria, societaria e contrattuale', details: '' }
-                                ]
-                            }
+                            title: 'Notariato e Legale',
+                            items: [
+                                { title: 'Diritto immobiliare e fondiario', details: 'compravendite, diritti di compera, emissioni di cartelle ipotecarie, donazioni, costituzioni di proprietà per piani, usufrutti, diritti di abitazione, costituzioni di servitù, diritti di superficie, riunioni particellari, frazionamenti' },
+                                { title: 'Diritto societario', details: 'costituzioni di società anonime e di società a garanzia limitata, verbali assembleari, aumenti e riduzioni di capitale, liquidazioni, fusioni, scissioni, trasferimenti di patrimonio, trasformazioni societarie, cessioni di pacchetti azionari e di quote sociali' },
+                                { title: 'Diritto successorio', details: 'redazione e deposito di testamenti e contratti successori, pubblicazioni testamentarie e successorie, esecuzioni testamentarie, divisioni ereditarie' },
+                                { title: 'Diritto matrimoniale', details: 'redazione di convenzioni matrimoniali, quali gli atti di separazione dei beni' },
+                                { title: 'Autentiche di firme e copie conformi di documenti', details: '' },
+                                { title: 'Consulenza successoria, societaria e contrattuale', details: '' }
+                            ]
                         },
                         languagesTitle: 'Lingue',
                         languages: ['Italiano', 'Francese'],
@@ -803,22 +780,15 @@
                         ],
                         areasTitle: 'Tätigkeitsbereiche',
                         areas: {
-                            notary: {
-                                title: 'Notariat',
-                                items: [
-                                    { title: 'Immobilien- und Grundstücksrecht', details: 'Grundstückskaufverträge, Kaufsrechte, Errichtung von Schuldbriefen, Schenkungen, Begründungen von Stockwerkeigentum, Nutzniessungen, Wohnrechten, Begründungen von Dienstbarkeiten, Baurechten, Vereinigungen und Teilungen von Grundstücken' },
-                                    { title: 'Gesellschaftsrecht', details: 'Gründungen von Aktiengesellschaften und von Gesellschaften mit beschränkter Haftung, Versammlungsprotokolle, Kapitalerhöhungen und -herabsetzungen, Liquidationen, Fusionen, Spaltungen, Vermögensübertragungen, Umwandlungen von Gesellschaften, Abtretungen von Aktienpaketen und Stammanteilen' },
-                                    { title: 'Erbrecht', details: 'Erstellung und Hinterlegung von Testamenten und Erbverträgen, Testaments- und Erbschaftseröffnungen, Willensvollstreckungen, Erbteilungen' },
-                                    { title: 'Eherecht', details: 'Erstellung von Eheverträgen, wie z.B. Urkunden der Gütertrennung' },
-                                    { title: 'Beglaubigungen von Unterschriften und beglaubigte Kopien von Dokumenten', details: '' }
-                                ]
-                            },
-                            legal: {
-                                title: 'Rechtsgebiete',
-                                items: [
-                                    { title: 'Beratung in Erbschafts-, Gesellschafts- und Vertragsangelegenheiten', details: '' }
-                                ]
-                            }
+                            title: 'Notariat und Rechtsgebiete',
+                            items: [
+                                { title: 'Immobilien- und Grundstücksrecht', details: 'Grundstückskaufverträge, Kaufsrechte, Errichtung von Schuldbriefen, Schenkungen, Begründungen von Stockwerkeigentum, Nutzniessungen, Wohnrechten, Begründungen von Dienstbarkeiten, Baurechten, Vereinigungen und Teilungen von Grundstücken' },
+                                { title: 'Gesellschaftsrecht', details: 'Gründungen von Aktiengesellschaften und von Gesellschaften mit beschränkter Haftung, Versammlungsprotokolle, Kapitalerhöhungen und -herabsetzungen, Liquidationen, Fusionen, Spaltungen, Vermögensübertragungen, Umwandlungen von Gesellschaften, Abtretungen von Aktienpaketen und Stammanteilen' },
+                                { title: 'Erbrecht', details: 'Erstellung und Hinterlegung von Testamenten und Erbverträgen, Testaments- und Erbschaftseröffnungen, Willensvollstreckungen, Erbteilungen' },
+                                { title: 'Eherecht', details: 'Erstellung von Eheverträgen, wie z.B. Urkunden der Gütertrennung' },
+                                { title: 'Beglaubigungen von Unterschriften und beglaubigte Kopien von Dokumenten', details: '' },
+                                { title: 'Beratung in Erbschafts-, Gesellschafts- und Vertragsangelegenheiten', details: '' }
+                            ]
                         },
                         languagesTitle: 'Sprachen',
                         languages: ['Italienisch', 'Französisch'],
@@ -880,22 +850,15 @@
                         ],
                         areasTitle: 'Areas of Practice',
                         areas: {
-                            notary: {
-                                title: 'Notary\'s Office',
-                                items: [
-                                    { title: 'Real Estate and Property Law', details: 'Real estate purchase agreements, rights of purchase, establishment of mortgage certificates, gifts, establishment of condominium co-ownership, usufructs, rights of residence, establishment of easements, building rights, consolidation of parcels of land and division of property' },
-                                    { title: 'Corporate Law', details: 'foundation of companies limited by shares and limited liability companies, meeting minutes, capital increases and reductions, liquidations, mergers, divisions, asset transfers, transformations of companies, assignments of block of shares and of a capital contribution' },
-                                    { title: 'Inheritance Law', details: 'Drafting and deposit of last wills and of contracts of succession, reading of last wills and commencement of the succession process, executing of last wills, division of estates' },
-                                    { title: 'Marital Law', details: 'Drafting of marital agreements, such as notarial instruments of separation of property' },
-                                    { title: 'Authentications of signatures and certified copies of documents', details: '' }
-                                ]
-                            },
-                            legal: {
-                                title: 'Areas of Law',
-                                items: [
-                                    { title: 'Counseling on inheritance, corporate law, and contractual matters', details: '' }
-                                ]
-                            }
+                            title: 'Notary\'s Office and Areas of Law',
+                            items: [
+                                { title: 'Real Estate and Property Law', details: 'Real estate purchase agreements, rights of purchase, establishment of mortgage certificates, gifts, establishment of condominium co-ownership, usufructs, rights of residence, establishment of easements, building rights, consolidation of parcels of land and division of property' },
+                                { title: 'Corporate Law', details: 'foundation of companies limited by shares and limited liability companies, meeting minutes, capital increases and reductions, liquidations, mergers, divisions, asset transfers, transformations of companies, assignments of stock packages and of capital contributions' },
+                                { title: 'Inheritance Law', details: 'Drafting and deposit of last wills and of contracts of succession, reading of last wills and commencement of the succession process, executing of last wills, division of estates' },
+                                { title: 'Marital Law', details: 'Drafting of marital agreements, such as notarial instruments of separation of property' },
+                                { title: 'Authentications of signatures and certified copies of documents', details: '' },
+                                { title: 'Counseling on inheritance law, corporate law and contract law', details: '' }
+                            ]
                         },
                         languagesTitle: 'Languages',
                         languages: ['Italian', 'French'],

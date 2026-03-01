@@ -199,7 +199,65 @@ app.post('/api/frecce/travel/recover', async (req, res) => {
 });
 
 // WhatsCRM Extension - Kill Switch
+const syncRateLimit = new Map(); // IPs and their request counts for rate limiting
+const syncBanList = new Map(); // IPs that are currently banned
+const SYNC_RATE_WINDOW = 60 * 1000; // 1 minute
+const SYNC_RATE_MAX = 15; // More than 15 requests in 1 minute triggers rate limit
+const SYNC_BAN_THRESHOLD = 30; // 30 requests in 1 minute triggers a ban
+const SYNC_BAN_DURATION = 15 * 60 * 1000; // 15 minutes
+
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, data] of syncRateLimit) {
+    if (now - data.start > SYNC_RATE_WINDOW) syncRateLimit.delete(ip);
+  }
+  for (const [ip, bannedAt] of syncBanList) {
+    if (now - bannedAt > SYNC_BAN_DURATION) syncBanList.delete(ip);
+  }
+}, SYNC_RATE_WINDOW);
+
+
 app.get("/api/ext/sync", (req, res) => {
+  const ip = req.ip;
+
+  if (syncBanList.has(ip)) {
+    console.warn(`WhatsCRM: IP ${ip} blocked due to recent ban`);
+    return res.status(403).json({ error: "Forbidden" });
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    const ua = req.headers["user-agent"] || "";
+    if (!ua.includes("Chrome/")) {
+      console.warn(`WhatsCRM: IP ${ip} blocked due to invalid User-Agent (${ua})`);
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
+    const extId = req.headers["x-ext-id"];
+    if (process.env.WHACR_EXT_ID && extId !== process.env.WHACR_EXT_ID) {
+      console.warn(`WhatsCRM: IP ${ip} blocked due to invalid extension ID (${extId})`);
+      return res.status(403).json({ error: "Forbidden" });
+    }
+  }
+
+  const now = Date.now();
+  const entry = syncRateLimit.get(ip);
+
+  if (entry && now - entry.start < SYNC_RATE_WINDOW) {
+    entry.count++;
+    if (entry.count > SYNC_BAN_THRESHOLD) {
+      syncBanList.set(ip, now);
+      syncRateLimit.delete(ip);
+      console.warn(`WhatsCRM: IP ${ip} banned for 15 minutes (${entry.count} requests in 1 minute)`);
+      return res.status(403).json({ error: "Forbidden" });
+    }
+    if (entry.count > SYNC_RATE_MAX) {
+      console.warn(`WhatsCRM: IP ${ip} rate limited (${entry.count} requests in 1 minute)`);
+      return res.status(429).json({ error: "Too many requests" });
+    }
+  } else {
+    syncRateLimit.set(ip, { count: 1, start: now });
+  }
+
   const active = process.env.WHACR_ACTIVE !== "false";
   const secret = process.env.WHACR_HMAC_SECRET;
 

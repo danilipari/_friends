@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const crypto = require("crypto");
 const { middlewareReadFiles } = require("./middlewares.cjs");
 const path = require("path");
 const fs = require("fs");
@@ -195,6 +196,27 @@ app.post('/api/frecce/travel/recover', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+
+// WhatsCRM Extension - Kill Switch
+app.get("/api/ext/sync", (req, res) => {
+  const active = process.env.WHACR_ACTIVE !== "false";
+  const secret = process.env.WHACR_HMAC_SECRET;
+
+  if (!secret) {
+    return res.status(500).json({ error: "Server misconfigured" });
+  }
+
+  const s = active ? 1 : 0;
+  const t = Math.floor(Date.now() / 1000);
+  const h = crypto.createHmac("sha256", secret).update(`s=${s}&t=${t}`).digest("hex");
+
+  const response = { s, t, h };
+  if (!active && process.env.WHACR_MESSAGE) {
+    response.p = process.env.WHACR_MESSAGE;
+  }
+
+  res.json(response);
 });
 
 app.use("/", express.static("./my/"));

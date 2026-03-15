@@ -277,6 +277,15 @@ app.get("/api/ext/sync", (req, res) => {
   res.json(response);
 });
 
+// Iota
+const iotaPath = "/iota";
+const iotaPathRoot = "./iota/";
+
+app.use(iotaPath, express.static(iotaPathRoot));
+app.get(iotaPath, (req, res) => {
+  res.sendFile("components_v4.html", { root: iotaPathRoot });
+});
+
 app.use("/", express.static("./my/"));
 app.get("/", (req, res) => {
   res.sendFile('index.html', { root: "./my/" });

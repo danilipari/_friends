@@ -283,7 +283,7 @@ const iotaPathRoot = "./iota/";
 
 app.use(iotaPath, express.static(iotaPathRoot));
 app.get(iotaPath, (req, res) => {
-  res.sendFile("components_v4.html", { root: iotaPathRoot });
+  res.sendFile("index.html", { root: iotaPathRoot });
 });
 
 app.use("/", express.static("./my/"));

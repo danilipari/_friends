@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dead Man's Switch -- Design System v5</title>
+<title>Dead Man's Switch -- Design System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
@@ -26,17 +26,7 @@
 
   --glass-card-bg: linear-gradient(145deg, rgba(20, 20, 42, 0.8), rgba(13, 13, 22, 0.9));
   --glass-card-border: 1px solid rgba(255, 255, 255, 0.06);
-  --glass-card-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.2),
-    0 4px 8px rgba(0, 0, 0, 0.15),
-    0 8px 24px rgba(0, 0, 0, 0.1);
-  --glass-card-shadow-elevated:
-    0 2px 4px rgba(0, 0, 0, 0.2),
-    0 8px 16px rgba(0, 0, 0, 0.2),
-    0 24px 48px rgba(0, 0, 0, 0.15);
-  --glass-card-shadow-nested:
-    0 1px 3px rgba(0, 0, 0, 0.15),
-    0 2px 8px rgba(0, 0, 0, 0.1);
+  --glass-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   --glass-card-radius: 16px;
 
   --glass-nav-bg: rgba(13, 13, 22, 0.7);
@@ -69,17 +59,7 @@
 
   --glass-card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(240, 240, 248, 0.9));
   --glass-card-border: 1px solid rgba(0, 0, 0, 0.06);
-  --glass-card-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 4px 8px rgba(0, 0, 0, 0.04),
-    0 12px 32px rgba(0, 0, 0, 0.04);
-  --glass-card-shadow-elevated:
-    0 2px 4px rgba(0, 0, 0, 0.04),
-    0 8px 16px rgba(0, 0, 0, 0.06),
-    0 24px 48px rgba(0, 0, 0, 0.06);
-  --glass-card-shadow-nested:
-    0 1px 3px rgba(0, 0, 0, 0.03),
-    0 2px 8px rgba(0, 0, 0, 0.03);
+  --glass-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 
   --glass-nav-bg: rgba(255, 255, 255, 0.7);
   --glass-nav-border: 1px solid rgba(0, 0, 0, 0.06);
@@ -138,6 +118,8 @@ body {
   background-repeat: repeat;
   background-size: 256px 256px;
 }
+
+/* Header (removed - brand is now in sidebar) */
 
 /* Theme toggle */
 .theme-toggle {
@@ -379,39 +361,13 @@ body {
 }
 
 .glass-card:hover {
-  box-shadow: var(--glass-card-shadow-elevated);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   border-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
 
 [data-theme="light"] .glass-card:hover {
-  box-shadow: var(--glass-card-shadow-elevated);
-  border-color: rgba(0, 0, 0, 0.1);
-}
-
-/* Solid Card variant */
-.solid-card {
-  background: var(--color-surface);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--glass-card-radius);
-  box-shadow: var(--glass-card-shadow);
-  padding: 24px;
-  transition: all 0.3s ease;
-}
-
-.solid-card:hover {
-  box-shadow: var(--glass-card-shadow-elevated);
-  border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
-
-[data-theme="light"] .solid-card {
-  background: var(--color-surface);
-  border-color: rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .solid-card:hover {
-  box-shadow: var(--glass-card-shadow-elevated);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -1366,10 +1322,7 @@ select.form-input {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.04),
-    0 8px 16px rgba(0, 0, 0, 0.06),
-    0 24px 48px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 [data-theme="light"] .custom-select-option:hover {
@@ -1391,7 +1344,7 @@ select.form-input {
 
 .contact-card:hover {
   transform: translateY(-2px);
-  box-shadow: var(--glass-card-shadow-elevated);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .contact-avatar {
@@ -1631,10 +1584,7 @@ select.form-input {
 }
 
 [data-theme="light"] .modal-mock {
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.04),
-    0 8px 16px rgba(0, 0, 0, 0.06),
-    0 24px 48px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 .modal-mock:hover {
@@ -1971,681 +1921,11 @@ select.form-input {
   color: var(--color-text-primary);
 }
 
-[data-theme="light"] .btn-copy {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .btn-copy:hover {
-  background: rgba(0, 0, 0, 0.06);
-}
-
 /* Divider */
 .card-divider {
   height: 1px;
   background: rgba(255, 255, 255, 0.06);
   margin: 16px 0;
-}
-
-[data-theme="light"] .card-divider {
-  background: rgba(0, 0, 0, 0.06);
-}
-
-/* ===== V5 NEW COMPONENTS ===== */
-
-/* Modal Overlay */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s;
-}
-
-.modal-overlay.modal-visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-overlay .modal-content {
-  background: var(--glass-card-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--glass-card-radius);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
-  padding: 32px;
-  max-width: 440px;
-  width: calc(100% - 48px);
-  transform: scale(0.92);
-  opacity: 0;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-}
-
-.modal-overlay.modal-visible .modal-content {
-  transform: scale(1);
-  opacity: 1;
-}
-
-[data-theme="light"] .modal-overlay {
-  background: rgba(0, 0, 0, 0.35);
-}
-
-[data-theme="light"] .modal-overlay .modal-content {
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.04),
-    0 12px 24px rgba(0, 0, 0, 0.08),
-    0 32px 80px rgba(0, 0, 0, 0.12);
-}
-
-/* Tab Navigation */
-.tab-nav {
-  display: flex;
-  gap: 0;
-  background: var(--glass-card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: var(--glass-card-border);
-  border-radius: 12px;
-  padding: 4px;
-  overflow-x: auto;
-}
-
-.tab-item {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text-tertiary);
-  padding: 10px 20px;
-  cursor: pointer;
-  border: none;
-  background: none;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.tab-item:hover {
-  color: var(--color-text-secondary);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.tab-item.tab-active {
-  color: var(--color-accent-red);
-  background: rgba(231, 76, 60, 0.08);
-  font-weight: 600;
-  box-shadow: 0 0 12px rgba(231, 76, 60, 0.1);
-}
-
-.tab-nav--compact .tab-item {
-  font-size: 11px;
-  padding: 8px 14px;
-}
-
-[data-theme="light"] .tab-item:hover {
-  background: rgba(0, 0, 0, 0.03);
-}
-
-[data-theme="light"] .tab-item.tab-active {
-  background: rgba(231, 76, 60, 0.04);
-}
-
-.tab-panel {
-  display: none;
-  padding: 20px 0 0;
-}
-
-.tab-panel.tab-panel-active {
-  display: block;
-}
-
-/* Tooltip */
-.tooltip-wrap {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip-bubble {
-  position: absolute;
-  background: linear-gradient(145deg, rgba(20, 20, 42, 0.95), rgba(13, 13, 22, 0.98));
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--color-text-primary);
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 500;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-}
-
-.tooltip-bubble::after {
-  content: '';
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(145deg, rgba(20, 20, 42, 0.95), rgba(13, 13, 22, 0.98));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transform: rotate(45deg);
-}
-
-.tooltip-bubble--top {
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-}
-
-.tooltip-bubble--top::after {
-  bottom: -5px;
-  left: 50%;
-  margin-left: -4px;
-  border-top: none;
-  border-left: none;
-}
-
-.tooltip-bubble--bottom {
-  top: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%) translateY(-4px);
-}
-
-.tooltip-bubble--bottom::after {
-  top: -5px;
-  left: 50%;
-  margin-left: -4px;
-  border-bottom: none;
-  border-right: none;
-}
-
-.tooltip-bubble--left {
-  right: calc(100% + 10px);
-  top: 50%;
-  transform: translateY(-50%) translateX(4px);
-}
-
-.tooltip-bubble--left::after {
-  right: -5px;
-  top: 50%;
-  margin-top: -4px;
-  border-bottom: none;
-  border-left: none;
-}
-
-.tooltip-bubble--right {
-  left: calc(100% + 10px);
-  top: 50%;
-  transform: translateY(-50%) translateX(-4px);
-}
-
-.tooltip-bubble--right::after {
-  left: -5px;
-  top: 50%;
-  margin-top: -4px;
-  border-top: none;
-  border-right: none;
-}
-
-.tooltip-wrap:hover .tooltip-bubble--top {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-.tooltip-wrap:hover .tooltip-bubble--bottom {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-.tooltip-wrap:hover .tooltip-bubble--left {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-}
-
-.tooltip-wrap:hover .tooltip-bubble--right {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-}
-
-[data-theme="light"] .tooltip-bubble {
-  background: rgba(26, 26, 46, 0.92);
-  border-color: rgba(0, 0, 0, 0.15);
-  color: #E8E8F0;
-}
-
-[data-theme="light"] .tooltip-bubble::after {
-  background: rgba(26, 26, 46, 0.92);
-  border-color: rgba(0, 0, 0, 0.15);
-}
-
-/* Progress Bar */
-.progress-bar-track {
-  width: 100%;
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.06);
-  overflow: hidden;
-  position: relative;
-}
-
-[data-theme="light"] .progress-bar-track {
-  background: rgba(0, 0, 0, 0.06);
-}
-
-.progress-bar-fill {
-  height: 100%;
-  border-radius: 2px;
-  transition: width 0.4s ease;
-}
-
-.progress-bar-fill--red {
-  background: var(--color-accent-red);
-  box-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
-}
-
-.progress-bar-fill--green {
-  background: var(--color-accent-green);
-  box-shadow: 0 0 8px rgba(0, 212, 170, 0.4);
-}
-
-.progress-bar-fill--amber {
-  background: var(--color-accent-amber);
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
-}
-
-.progress-bar-fill--blue {
-  background: var(--color-accent-blue);
-  box-shadow: 0 0 8px rgba(74, 142, 255, 0.4);
-}
-
-@keyframes progress-indeterminate {
-  0% { left: -30%; width: 30%; }
-  50% { left: 50%; width: 30%; }
-  100% { left: 100%; width: 30%; }
-}
-
-.progress-bar-fill--indeterminate {
-  position: absolute;
-  width: 30%;
-  animation: progress-indeterminate 1.5s ease-in-out infinite;
-}
-
-/* Dropdown Menu */
-.dropdown-wrap {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-trigger {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  cursor: pointer;
-  color: var(--color-text-secondary);
-  font-family: var(--font-mono);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  transition: all 0.2s;
-}
-
-.dropdown-trigger:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-text-primary);
-}
-
-[data-theme="light"] .dropdown-trigger {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .dropdown-trigger:hover {
-  background: rgba(0, 0, 0, 0.06);
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
-  min-width: 180px;
-  background: linear-gradient(145deg, rgba(20, 20, 42, 0.95), rgba(13, 13, 22, 0.98));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 6px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-8px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-  z-index: 200;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-}
-
-.dropdown-wrap.dropdown-open .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-}
-
-.dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--color-text-primary);
-}
-
-.dropdown-item--danger {
-  color: var(--color-accent-red);
-}
-
-.dropdown-item--danger:hover {
-  background: rgba(231, 76, 60, 0.1);
-  color: var(--color-accent-red);
-}
-
-.dropdown-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.06);
-  margin: 4px 0;
-}
-
-[data-theme="light"] .dropdown-menu {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.04),
-    0 8px 16px rgba(0, 0, 0, 0.06),
-    0 24px 48px rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .dropdown-item:hover {
-  background: rgba(0, 0, 0, 0.04);
-}
-
-[data-theme="light"] .dropdown-item--danger:hover {
-  background: rgba(231, 76, 60, 0.06);
-}
-
-[data-theme="light"] .dropdown-divider {
-  background: rgba(0, 0, 0, 0.06);
-}
-
-/* Avatar Group */
-.avatar-group {
-  display: flex;
-  align-items: center;
-}
-
-.avatar-group .contact-avatar {
-  border: 2px solid var(--color-bg);
-  margin-left: -8px;
-}
-
-.avatar-group .contact-avatar:first-child {
-  margin-left: 0;
-}
-
-.avatar-group--sm .contact-avatar {
-  width: 24px;
-  height: 24px;
-  font-size: 9px;
-}
-
-.avatar-group--md .contact-avatar {
-  width: 32px;
-  height: 32px;
-  font-size: 11px;
-}
-
-.avatar-group--lg .contact-avatar {
-  width: 44px;
-  height: 44px;
-  font-size: 14px;
-}
-
-.avatar-group-more {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 2px solid var(--color-bg);
-  margin-left: -8px;
-  background: var(--color-surface-elevated);
-  font-family: var(--font-mono);
-  font-weight: 600;
-  color: var(--color-text-secondary);
-}
-
-.avatar-group--sm .avatar-group-more {
-  width: 24px;
-  height: 24px;
-  font-size: 8px;
-}
-
-.avatar-group--md .avatar-group-more {
-  width: 32px;
-  height: 32px;
-  font-size: 10px;
-}
-
-.avatar-group--lg .avatar-group-more {
-  width: 44px;
-  height: 44px;
-  font-size: 12px;
-}
-
-/* Copy Button with Feedback */
-.copy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  cursor: pointer;
-  color: var(--color-text-secondary);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.copy-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-text-primary);
-}
-
-.copy-btn.copy-btn--copied {
-  background: rgba(0, 212, 170, 0.1);
-  border-color: rgba(0, 212, 170, 0.2);
-  color: var(--color-accent-green);
-}
-
-.copy-btn .copy-icon-check {
-  display: none;
-}
-
-.copy-btn.copy-btn--copied .copy-icon-copy {
-  display: none;
-}
-
-.copy-btn.copy-btn--copied .copy-icon-check {
-  display: inline;
-}
-
-[data-theme="light"] .copy-btn {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .copy-btn:hover {
-  background: rgba(0, 0, 0, 0.06);
-}
-
-/* Offline Banner */
-.offline-banner {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-  border-radius: 12px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--color-accent-amber);
-}
-
-.offline-banner-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-accent-amber);
-  animation: offline-pulse 2s ease-in-out infinite;
-  flex-shrink: 0;
-}
-
-@keyframes offline-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-.offline-dimmed {
-  opacity: 0.4;
-  pointer-events: none;
-  filter: grayscale(0.3);
-}
-
-.cached-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--color-text-tertiary);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 3px 10px;
-  border-radius: 6px;
-}
-
-[data-theme="light"] .cached-indicator {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.06);
-}
-
-/* 404 / Error Page */
-.error-page {
-  text-align: center;
-  padding: 48px 24px;
-}
-
-.error-page-code {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 96px;
-  line-height: 1;
-  color: var(--color-accent-red);
-  text-shadow: 0 0 40px rgba(231, 76, 60, 0.2);
-  margin-bottom: 8px;
-}
-
-.error-page-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 24px;
-  color: var(--color-text-primary);
-  margin-bottom: 12px;
-}
-
-.error-page-desc {
-  font-size: 14px;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  max-width: 400px;
-  margin: 0 auto 28px;
-}
-
-/* Settings Page */
-.settings-section {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding-bottom: 24px;
-  margin-bottom: 24px;
-}
-
-.settings-section:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.settings-section-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--color-text-primary);
-  margin-bottom: 16px;
-}
-
-[data-theme="light"] .settings-section {
-  border-bottom-color: rgba(0, 0, 0, 0.06);
-}
-
-.danger-zone {
-  background: rgba(231, 76, 60, 0.05);
-  border: 1px solid rgba(231, 76, 60, 0.15);
-  border-radius: 12px;
-  padding: 20px;
-}
-
-.danger-zone-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--color-accent-red);
-  margin-bottom: 8px;
-}
-
-.danger-zone-desc {
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  line-height: 1.5;
-  margin-bottom: 16px;
 }
 
 </style>
@@ -2654,18 +1934,6 @@ select.form-input {
 
 <div class="top-bar"></div>
 <div class="noise-overlay"></div>
-
-<!-- Modal Overlay (live demo) -->
-<div class="modal-overlay" id="demoModal" onclick="if(event.target===this)closeDemoModal()">
-  <div class="modal-content">
-    <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--color-text-primary); margin-bottom: 8px;">Confirm Check-in</h3>
-    <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 20px;">Are you sure you want to reset the dead man's switch timer? This will extend your check-in deadline by the configured interval.</p>
-    <div class="btn-group" style="justify-content: flex-end;">
-      <button class="btn btn-ghost" onclick="closeDemoModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="closeDemoModal()">Confirm Reset</button>
-    </div>
-  </div>
-</div>
 
 <!-- Sidebar Navigation -->
 <aside class="sidebar">
@@ -2686,12 +1954,6 @@ select.form-input {
     <a href="#toasts" class="sidebar-link">Notifications</a>
     <a href="#stepper" class="sidebar-link">Stepper</a>
     <a href="#data" class="sidebar-link">Data Display</a>
-    <a href="#tabs" class="sidebar-link">Tabs</a>
-    <a href="#tooltips" class="sidebar-link">Tooltip</a>
-    <a href="#progress" class="sidebar-link">Progress Bar</a>
-    <a href="#dropdown" class="sidebar-link">Dropdown</a>
-    <a href="#avatar-group" class="sidebar-link">Avatar Group</a>
-    <a href="#copy-button" class="sidebar-link">Copy Button</a>
 
     <span class="sidebar-group-label">Features</span>
     <a href="#emergency-contacts" class="sidebar-link">Emergency Contacts</a>
@@ -2704,13 +1966,10 @@ select.form-input {
     <span class="sidebar-group-label">States</span>
     <a href="#loading-empty" class="sidebar-link">Loading / Empty</a>
     <a href="#error-validation" class="sidebar-link">Error / Validation</a>
-    <a href="#error-pages" class="sidebar-link">404 / Error</a>
-    <a href="#offline" class="sidebar-link">Offline</a>
 
     <span class="sidebar-group-label">Pages</span>
     <a href="#landing-page" class="sidebar-link">Landing Page</a>
     <a href="#verification" class="sidebar-link">Verification</a>
-    <a href="#settings" class="sidebar-link">Settings</a>
   </div>
 
   <div class="sidebar-footer">
@@ -2991,41 +2250,6 @@ select.form-input {
         <div class="alert-card-content">
           <div class="alert-card-title">Switch Expiration Warning</div>
           <div class="alert-card-text">Your dead man's switch has not been reset in 23 hours. Automated notifications will trigger in 1 hour if no action is taken.</div>
-        </div>
-      </div>
-
-      <!-- J. Solid Card Variant -->
-      <div class="subsection-label mt-24">Glass vs Solid</div>
-      <div class="grid-2">
-        <div>
-          <p style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Glass Card</p>
-          <div class="glass-card package-card">
-            <div class="package-card-header">
-              <div class="package-card-title-group">
-                <div class="status-dot status-dot--active"></div>
-                <span class="package-card-title">Glass Variant</span>
-              </div>
-            </div>
-            <div class="package-card-meta">
-              <span>backdrop-filter: blur(12px)</span>
-            </div>
-            <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; margin-top: 4px;">Semi-transparent background with glass blur effect. Used for elevated surfaces and overlays.</p>
-          </div>
-        </div>
-        <div>
-          <p style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Solid Card</p>
-          <div class="solid-card package-card">
-            <div class="package-card-header">
-              <div class="package-card-title-group">
-                <div class="status-dot status-dot--active"></div>
-                <span class="package-card-title">Solid Variant</span>
-              </div>
-            </div>
-            <div class="package-card-meta">
-              <span>background: var(--color-surface)</span>
-            </div>
-            <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; margin-top: 4px;">Opaque background with no blur. Used for content-heavy cards where performance matters.</p>
-          </div>
         </div>
       </div>
     </div>
@@ -3357,242 +2581,6 @@ select.form-input {
     </div>
   </section>
 
-  <!-- Tabs -->
-  <section id="tabs" class="section reveal">
-    <div class="section-label">
-      <span class="section-label-text">Tab Navigation</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="stack">
-      <div class="subsection-label">Regular Tabs</div>
-      <div class="glass-card">
-        <div class="tab-nav" id="demoTabs">
-          <button class="tab-item tab-active" onclick="switchTab(this, 'tab-overview')">Overview</button>
-          <button class="tab-item" onclick="switchTab(this, 'tab-activity')">Activity</button>
-          <button class="tab-item" onclick="switchTab(this, 'tab-recipients')">Recipients</button>
-          <button class="tab-item" onclick="switchTab(this, 'tab-settings')">Settings</button>
-        </div>
-        <div class="tab-panel tab-panel-active" id="tab-overview">
-          <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.5;">Overview panel content. This tab shows general information about the selected package or vault.</p>
-        </div>
-        <div class="tab-panel" id="tab-activity">
-          <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.5;">Activity log with recent check-ins, state changes, and notifications.</p>
-        </div>
-        <div class="tab-panel" id="tab-recipients">
-          <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.5;">Recipient list and their confirmation status.</p>
-        </div>
-        <div class="tab-panel" id="tab-settings">
-          <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.5;">Package settings: interval, grace period, notifications.</p>
-        </div>
-      </div>
-
-      <div class="subsection-label mt-24">Compact Tabs</div>
-      <div class="glass-card">
-        <div class="tab-nav tab-nav--compact">
-          <button class="tab-item tab-active">All</button>
-          <button class="tab-item">Active</button>
-          <button class="tab-item">Warning</button>
-          <button class="tab-item">Released</button>
-          <button class="tab-item">Revoked</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tooltips -->
-  <section id="tooltips" class="section reveal">
-    <div class="section-label">
-      <span class="section-label-text">Tooltip</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="glass-card">
-      <div class="subsection-label">Tooltip Positions</div>
-      <div style="display: flex; gap: 40px; justify-content: center; align-items: center; padding: 48px 0; flex-wrap: wrap;">
-        <div class="tooltip-wrap">
-          <button class="btn btn-secondary btn-sm">Hover -- Top</button>
-          <div class="tooltip-bubble tooltip-bubble--top">Tooltip on top</div>
-        </div>
-        <div class="tooltip-wrap">
-          <button class="btn btn-secondary btn-sm">Hover -- Bottom</button>
-          <div class="tooltip-bubble tooltip-bubble--bottom">Tooltip on bottom</div>
-        </div>
-        <div class="tooltip-wrap">
-          <button class="btn btn-secondary btn-sm">Hover -- Left</button>
-          <div class="tooltip-bubble tooltip-bubble--left">Tooltip on left</div>
-        </div>
-        <div class="tooltip-wrap">
-          <button class="btn btn-secondary btn-sm">Hover -- Right</button>
-          <div class="tooltip-bubble tooltip-bubble--right">Tooltip on right</div>
-        </div>
-      </div>
-      <p style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); text-align: center;">CSS-only. Hover over each button to see the tooltip.</p>
-    </div>
-  </section>
-
-  <!-- Progress Bar -->
-  <section id="progress" class="section reveal">
-    <div class="section-label">
-      <span class="section-label-text">Progress Bar</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="glass-card">
-      <div class="subsection-label">Contextual Variants</div>
-      <div style="display: flex; flex-direction: column; gap: 24px;">
-        <div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary);">Upload Progress</span>
-            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-accent-green);">75%</span>
-          </div>
-          <div class="progress-bar-track">
-            <div class="progress-bar-fill progress-bar-fill--green" style="width: 75%;"></div>
-          </div>
-        </div>
-        <div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary);">Check-in Deadline</span>
-            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-accent-amber);">45%</span>
-          </div>
-          <div class="progress-bar-track">
-            <div class="progress-bar-fill progress-bar-fill--amber" style="width: 45%;"></div>
-          </div>
-        </div>
-        <div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary);">Time Remaining</span>
-            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-accent-red);">12%</span>
-          </div>
-          <div class="progress-bar-track">
-            <div class="progress-bar-fill progress-bar-fill--red" style="width: 12%;"></div>
-          </div>
-        </div>
-        <div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary);">Syncing with Tangle</span>
-            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-accent-blue);">...</span>
-          </div>
-          <div class="progress-bar-track">
-            <div class="progress-bar-fill progress-bar-fill--blue progress-bar-fill--indeterminate"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Dropdown -->
-  <section id="dropdown" class="section reveal">
-    <div class="section-label">
-      <span class="section-label-text">Dropdown Menu</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="glass-card">
-      <div class="subsection-label">Context Menu</div>
-      <div style="display: flex; align-items: center; gap: 16px;">
-        <span style="font-family: var(--font-mono); font-size: 13px; color: var(--color-text-secondary);">Package Actions:</span>
-        <div class="dropdown-wrap" id="demoDropdown">
-          <button class="dropdown-trigger" onclick="toggleDropdown('demoDropdown')">...</button>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" onclick="toggleDropdown('demoDropdown')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              Edit
-            </button>
-            <button class="dropdown-item" onclick="toggleDropdown('demoDropdown')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-              Duplicate
-            </button>
-            <button class="dropdown-item" onclick="toggleDropdown('demoDropdown')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 8v13H3V8"/><rect x="1" y="3" width="22" height="5" rx="1"/></svg>
-              Archive
-            </button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item dropdown-item--danger" onclick="toggleDropdown('demoDropdown')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Avatar Group -->
-  <section id="avatar-group" class="section reveal">
-    <div class="section-label">
-      <span class="section-label-text">Avatar Group</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="glass-card">
-      <div class="subsection-label">Recipient Avatars</div>
-      <div style="display: flex; flex-direction: column; gap: 28px;">
-        <div>
-          <p style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Small (24px)</p>
-          <div class="avatar-group avatar-group--sm">
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #E74C3C, #c0392b);">ML</div>
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #4A8EFF, #2563eb);">SC</div>
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #A78BFA, #7c3aed);">AR</div>
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #00D4AA, #00a88a);">FG</div>
-            <div class="avatar-group-more">+3</div>
-          </div>
-        </div>
-        <div>
-          <p style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Medium (32px)</p>
-          <div class="avatar-group avatar-group--md">
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #E74C3C, #c0392b);">ML</div>
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #4A8EFF, #2563eb);">SC</div>
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #A78BFA, #7c3aed);">AR</div>
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #00D4AA, #00a88a);">FG</div>
-            <div class="avatar-group-more">+3</div>
-          </div>
-        </div>
-        <div>
-          <p style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Large (44px)</p>
-          <div class="avatar-group avatar-group--lg">
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #E74C3C, #c0392b);">ML</div>
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #4A8EFF, #2563eb);">SC</div>
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #A78BFA, #7c3aed);">AR</div>
-            <div class="contact-avatar" style="background: linear-gradient(145deg, #00D4AA, #00a88a);">FG</div>
-            <div class="avatar-group-more">+3</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Copy Button -->
-  <section id="copy-button" class="section reveal">
-    <div class="section-label">
-      <span class="section-label-text">Copy Button</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="glass-card">
-      <div class="subsection-label">Copy with Feedback</div>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary);">did:iota:0x8f3a7b...2c4d9e1f</span>
-          <button class="copy-btn" onclick="handleCopy(this, 'did:iota:0x8f3a7b2c4d9e1f')">
-            <svg class="copy-icon-copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            <svg class="copy-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span class="copy-btn-label">Copy</span>
-          </button>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary);">0x7a8b9c3f2d...e4a1b6</span>
-          <button class="copy-btn" onclick="handleCopy(this, '0x7a8b9c3f2d')">
-            <svg class="copy-icon-copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            <svg class="copy-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span class="copy-btn-label">Copy</span>
-          </button>
-        </div>
-      </div>
-      <p style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); margin-top: 16px;">Click a copy button to see the "Copied!" feedback animation.</p>
-    </div>
-  </section>
-
   <!-- Emergency Contacts -->
   <section id="emergency-contacts" class="section reveal">
     <div class="section-label">
@@ -3866,13 +2854,7 @@ select.form-input {
     </div>
 
     <div class="stack">
-      <div class="subsection-label">Live Modal Demo</div>
-      <div class="glass-card" style="text-align: center; padding: 32px;">
-        <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 16px;">Click the button to open a live modal overlay with backdrop blur and animation.</p>
-        <button class="btn btn-primary" onclick="openDemoModal()">Show Modal</button>
-      </div>
-
-      <div class="subsection-label mt-24">Confirmation Modal</div>
+      <div class="subsection-label">Confirmation Modal</div>
       <div class="glass-card modal-mock">
         <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--color-text-primary); margin-bottom: 8px;">Delete Package?</h3>
         <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 20px;">This action cannot be undone. The encrypted data and all associated on-chain records will be permanently removed.</p>
@@ -4105,89 +3087,6 @@ select.form-input {
     </div>
   </section>
 
-  <!-- 404 / Error Pages -->
-  <section id="error-pages" class="section reveal">
-    <div class="section-label">
-      <span class="section-label-text">404 / Error Pages</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="stack">
-      <div class="subsection-label">404 Not Found</div>
-      <div class="glass-card error-page">
-        <svg width="64" height="64" viewBox="0 0 48 48" fill="none" style="opacity: 0.15; margin-bottom: 16px;" xmlns="http://www.w3.org/2000/svg"><path d="M23.9998 4C15.5998 4 8.7998 10.8 8.7998 19.2C8.7998 22.8 9.9998 26 11.9998 28.4V33.6C11.9998 34.48 12.7198 35.2 13.5998 35.2H18.3998V38.4C18.3998 39.28 19.1198 40 19.9998 40H27.9998C28.8798 40 29.5998 39.28 29.5998 38.4V35.2H34.3998C35.2798 35.2 35.9998 34.48 35.9998 33.6V28.4C37.9998 26 39.1998 22.8 39.1998 19.2C39.1998 10.8 32.3998 4 23.9998 4V4" stroke="#E74C3C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.2002 19.2C15.2002 20.5246 16.2756 21.6 17.6002 21.6C18.9248 21.6 20.0002 20.5246 20.0002 19.2C20.0002 17.8754 18.9248 16.8 17.6002 16.8C16.2756 16.8 15.2002 17.8754 15.2002 19.2V19.2" stroke="#E74C3C" stroke-width="1.2"/><path d="M28 19.2C28 20.5246 29.0754 21.6 30.4 21.6C31.7246 21.6 32.8 20.5246 32.8 19.2C32.8 17.8754 31.7246 16.8 30.4 16.8C29.0754 16.8 28 17.8754 28 19.2V19.2" stroke="#E74C3C" stroke-width="1.2"/><path d="M20 28C20 28 21.6 29.6 24 29.6C26.4 29.6 28 28 28 28" stroke="#E74C3C" stroke-width="1.2" stroke-linecap="round"/></svg>
-        <div class="error-page-code">404</div>
-        <div class="error-page-title">Page Not Found</div>
-        <div class="error-page-desc">The page you are looking for does not exist or has been moved. Check the URL and try again.</div>
-        <button class="btn btn-primary">Go Home</button>
-      </div>
-
-      <div class="subsection-label mt-24">500 Server Error</div>
-      <div class="glass-card error-page glass-card--red-tint">
-        <div class="error-page-code">500</div>
-        <div class="error-page-title">Server Error</div>
-        <div class="error-page-desc">Something went wrong on our end. The issue has been logged and we are working on a fix.</div>
-        <div class="btn-group" style="justify-content: center;">
-          <button class="btn btn-primary">Retry</button>
-          <button class="btn btn-ghost">Go Home</button>
-        </div>
-      </div>
-
-      <div class="subsection-label mt-24">Network Error</div>
-      <div class="glass-card error-page">
-        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-amber)" stroke-width="1.5"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0119 12.55M5 12.55a10.94 10.94 0 015.17-2.39M10.71 5.05A16 16 0 0122.56 9M1.42 9a15.91 15.91 0 014.7-2.88M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
-        </div>
-        <div class="error-page-title" style="font-size: 20px;">No Network Connection</div>
-        <div class="error-page-desc">Unable to connect to the IOTA network. Check your internet connection and try again.</div>
-        <button class="btn btn-secondary">Retry Connection</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Offline State -->
-  <section id="offline" class="section reveal">
-    <div class="section-label">
-      <span class="section-label-text">Offline State (PWA)</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="stack">
-      <div class="subsection-label">Offline Banner</div>
-      <div class="offline-banner">
-        <div class="offline-banner-dot"></div>
-        <span>You are offline. Some features may be unavailable.</span>
-      </div>
-
-      <div class="subsection-label mt-24">Dimmed Content with Cached Indicator</div>
-      <div class="glass-card" style="position: relative;">
-        <div class="offline-banner" style="margin-bottom: 16px;">
-          <div class="offline-banner-dot"></div>
-          <span>You are offline. Some features may be unavailable.</span>
-        </div>
-        <div class="offline-dimmed">
-          <div class="grid-2">
-            <div class="glass-card stat-card" style="padding: 20px;">
-              <div class="stat-card-value stat-card-value--green" style="font-size: 28px;">3</div>
-              <div class="stat-card-desc">Packages</div>
-            </div>
-            <div class="glass-card stat-card" style="padding: 20px;">
-              <div class="stat-card-value stat-card-value--blue" style="font-size: 28px;">2</div>
-              <div class="stat-card-desc">Contacts</div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px;">
-          <span class="cached-indicator">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
-            Cached Data
-          </span>
-          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary);">Last synced: 2h ago</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Landing Page Components -->
   <section id="landing-page" class="section reveal">
     <div class="section-label">
@@ -4324,95 +3223,14 @@ select.form-input {
     </div>
   </section>
 
-  <!-- Settings Page -->
-  <section id="settings" class="section reveal">
-    <div class="section-label">
-      <span class="section-label-text">Settings Page</span>
-      <div class="section-label-line"></div>
-    </div>
-
-    <div class="stack">
-      <div class="subsection-label">Settings / Profile Page</div>
-      <div class="glass-card">
-        <!-- Profile Header -->
-        <div class="settings-section">
-          <div style="display: flex; gap: 20px; align-items: center;">
-            <div class="profile-avatar-ring" style="width: 64px; height: 64px;">
-              <div class="contact-avatar" style="background: linear-gradient(145deg, #1a1a2e, #14142A); font-size: 20px;">DL</div>
-            </div>
-            <div style="flex: 1;">
-              <h3 style="font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--color-text-primary); margin-bottom: 4px;">Dani Lipari</h3>
-              <p style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">did:iota:0x8f3a7b...2c4d9e1f</p>
-              <p style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary);">lipari.assistenza@gmail.com</p>
-            </div>
-            <button class="btn btn-secondary btn-sm">Edit</button>
-          </div>
-        </div>
-
-        <!-- Notification Settings -->
-        <div class="settings-section">
-          <div class="settings-section-title">Notifications</div>
-          <div style="display: flex; flex-direction: column; gap: 16px;">
-            <label class="toggle-wrap">
-              <input type="checkbox" checked>
-              <div class="toggle-track">
-                <div class="toggle-thumb"></div>
-              </div>
-              <span class="toggle-label">Email notifications</span>
-            </label>
-            <label class="toggle-wrap">
-              <input type="checkbox" checked>
-              <div class="toggle-track">
-                <div class="toggle-thumb"></div>
-              </div>
-              <span class="toggle-label">Push notifications</span>
-            </label>
-            <label class="toggle-wrap">
-              <input type="checkbox">
-              <div class="toggle-track">
-                <div class="toggle-thumb"></div>
-              </div>
-              <span class="toggle-label">Check-in reminders (24h before)</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Check-in Config -->
-        <div class="settings-section">
-          <div class="settings-section-title">Check-in Configuration</div>
-          <div class="grid-2">
-            <div class="form-group" style="margin-bottom: 0;">
-              <label class="form-label">Default Interval</label>
-              <input type="text" class="form-input" value="7 days">
-            </div>
-            <div class="form-group" style="margin-bottom: 0;">
-              <label class="form-label">Grace Period</label>
-              <input type="text" class="form-input" value="48 hours">
-            </div>
-          </div>
-        </div>
-
-        <!-- Danger Zone -->
-        <div class="settings-section" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
-          <div class="settings-section-title" style="color: var(--color-accent-red);">Danger Zone</div>
-          <div class="danger-zone">
-            <div class="danger-zone-title">Delete Account</div>
-            <div class="danger-zone-desc">Permanently delete your account, identity, and all associated packages. This action is irreversible.</div>
-            <button class="btn btn-danger btn-sm">Delete Account</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 </main>
 </div>
 
 <script>
 (function() {
-  var toggle = document.getElementById('themeToggle');
-  var html = document.documentElement;
-  var stored = localStorage.getItem('dms-theme');
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const stored = localStorage.getItem('dms-theme');
 
   if (stored === 'light') {
     html.setAttribute('data-theme', 'light');
@@ -4420,12 +3238,12 @@ select.form-input {
   }
 
   toggle.addEventListener('change', function() {
-    var theme = this.checked ? 'light' : 'dark';
+    const theme = this.checked ? 'light' : 'dark';
     html.setAttribute('data-theme', theme);
     localStorage.setItem('dms-theme', theme);
   });
 
-  var navLinks = document.querySelectorAll('.sidebar-link');
+  const navLinks = document.querySelectorAll('.sidebar-link');
   navLinks.forEach(function(link) {
     link.addEventListener('click', function() {
       navLinks.forEach(function(l) { l.classList.remove('active'); });
@@ -4433,7 +3251,7 @@ select.form-input {
     });
   });
 
-  var observer = new IntersectionObserver(function(entries) {
+  const observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -4445,11 +3263,11 @@ select.form-input {
     observer.observe(el);
   });
 
-  var sections = document.querySelectorAll('.section');
-  var navObserver = new IntersectionObserver(function(entries) {
+  const sections = document.querySelectorAll('.section');
+  const navObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        var id = entry.target.getAttribute('id');
+        const id = entry.target.getAttribute('id');
         navLinks.forEach(function(link) {
           link.classList.toggle('active', link.getAttribute('href') === '#' + id);
         });
@@ -4483,9 +3301,6 @@ document.addEventListener('click', function(e) {
   document.querySelectorAll('.custom-select.open').forEach(function(s) {
     if (!s.contains(e.target)) s.classList.remove('open');
   });
-  document.querySelectorAll('.dropdown-wrap.dropdown-open').forEach(function(d) {
-    if (!d.contains(e.target)) d.classList.remove('dropdown-open');
-  });
 });
 
 function togglePassword(btn) {
@@ -4512,43 +3327,6 @@ function toggleFaq(item) {
   if (!wasOpen) {
     item.classList.add('faq-open');
   }
-}
-
-function openDemoModal() {
-  document.getElementById('demoModal').classList.add('modal-visible');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeDemoModal() {
-  document.getElementById('demoModal').classList.remove('modal-visible');
-  document.body.style.overflow = '';
-}
-
-function switchTab(tabBtn, panelId) {
-  var nav = tabBtn.closest('.glass-card');
-  nav.querySelectorAll('.tab-item').forEach(function(t) { t.classList.remove('tab-active'); });
-  nav.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('tab-panel-active'); });
-  tabBtn.classList.add('tab-active');
-  var panel = document.getElementById(panelId);
-  if (panel) panel.classList.add('tab-panel-active');
-}
-
-function toggleDropdown(id) {
-  var wrap = document.getElementById(id);
-  wrap.classList.toggle('dropdown-open');
-}
-
-function handleCopy(btn, text) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text);
-  }
-  btn.classList.add('copy-btn--copied');
-  var label = btn.querySelector('.copy-btn-label');
-  if (label) label.textContent = 'Copied!';
-  setTimeout(function() {
-    btn.classList.remove('copy-btn--copied');
-    if (label) label.textContent = 'Copy';
-  }, 2000);
 }
 </script>
 

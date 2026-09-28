@@ -3,6 +3,7 @@ dotenv.config();
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
+const compression = require("compression");
 const morgan = require("morgan");
 const crypto = require("crypto");
 const { middlewareReadFiles } = require("./middlewares.cjs");
@@ -40,6 +41,24 @@ app.use(helmet.contentSecurityPolicy({
 
 app.use(cors());
 app.set('trust proxy', true);
+app.use(compression());
+
+app.use((req, res, next) => {
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  next();
+});
+
+if (process.env.NODE_ENV === "production") {
+  app.use((req, res, next) => {
+    if (req.hostname === "lipari.dev") {
+      return res.redirect(301, `https://www.lipari.dev${req.originalUrl}`);
+    }
+    if (req.hostname === "www.lipari.dev" && req.protocol !== "https") {
+      return res.redirect(301, `https://www.lipari.dev${req.originalUrl}`);
+    }
+    next();
+  });
+}
 app.use(morgan('combined'));
 
 // Livia project
@@ -286,8 +305,19 @@ app.get(iotaPath, (req, res) => {
   res.sendFile("index.html", { root: iotaPathRoot });
 });
 
-app.use("/", express.static("./my/"));
+app.use("/", express.static("./my/", {
+  setHeaders: (res, filePath) => {
+    if (filePath.includes(`${path.sep}_astro${path.sep}`)) {
+      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    } else if (filePath.endsWith(".html")) {
+      res.setHeader("Cache-Control", "no-cache");
+    } else {
+      res.setHeader("Cache-Control", "public, max-age=3600");
+    }
+  },
+}));
 app.get("/", (req, res) => {
+  res.setHeader("Cache-Control", "no-cache");
   res.sendFile('index.html', { root: "./my/" });
 });
 

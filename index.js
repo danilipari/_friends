@@ -40,7 +40,7 @@ app.use(helmet.contentSecurityPolicy({
 }));
 
 app.use(cors());
-app.set('trust proxy', true);
+app.set('trust proxy', 1);
 app.use(compression());
 
 app.use((req, res, next) => {
